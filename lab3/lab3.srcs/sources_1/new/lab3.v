@@ -40,29 +40,21 @@ module lab3 (
 
   reg [ 5:0] led_data_addr;
   reg [63:0] led_disp_data;
-  parameter LED_DATA_NUM = 19;
+  parameter LED_DATA_NUM = 10;
 
-  reg [63:0] LED_DATA[18:0];
+  reg [63:0] LED_DATA[10:0];
   initial begin
-    LED_DATA[0]  = 64'hc6f6f6f0c6f6f6f0;
-    LED_DATA[1]  = 64'hf9f6f6cff9f6f6cf;
-    LED_DATA[2]  = 64'hFFC6F0FFFFC6F0FF;
-    LED_DATA[3]  = 64'hFFC0FFFFFFC0FFFF;
-    LED_DATA[4]  = 64'hFFA3FFFFFFA3FFFF;
-    LED_DATA[5]  = 64'hFFFFA3FFFFFFA3FF;
-    LED_DATA[6]  = 64'hFFFF9CFFFFFF9CFF;
-    LED_DATA[7]  = 64'hFF9EBCFFFF9EBCFF;
-    LED_DATA[8]  = 64'hFF9CFFFFFF9CFFFF;
-    LED_DATA[9]  = 64'hFFC0FFFFFFC0FFFF;
-    LED_DATA[10] = 64'hFFA3FFFFFFA3FFFF;
-    LED_DATA[11] = 64'hFFA7B3FFFFA7B3FF;
-    LED_DATA[12] = 64'hFFC6F0FFFFC6F0FF;
-    LED_DATA[13] = 64'hF9F6F6CFF9F6F6CF;
-    LED_DATA[14] = 64'h9EBEBEBC9EBEBEBC;
-    LED_DATA[15] = 64'h2737373327373733;
-    LED_DATA[16] = 64'h505454EC505454EC;
-    LED_DATA[17] = 64'h744454F8744454F8;
-    LED_DATA[18] = 64'h0062080000620800;
+    LED_DATA[0]  = 64'hfffffffefefefefe;
+    LED_DATA[1]  = 64'hfffefefefefeffff;
+    LED_DATA[2]  = 64'hdefefefeffffffff;
+    LED_DATA[3]  = 64'hcefefeffffffffff;
+    LED_DATA[4]  = 64'hc2ffffffffffffff;
+    LED_DATA[5]  = 64'hc1feffffffffffff;
+    LED_DATA[6]  = 64'hf1fcffffffffffff;
+    LED_DATA[7]  = 64'hfdf8f7ffffffffff;
+    LED_DATA[8]  = 64'hfff8f3ffffffffff;
+    LED_DATA[9]  = 64'hfffbf1feffffffff;
+    LED_DATA[10] = 64'hfffff9f8ffffffff;
   end
 
   always @(posedge clk_cpu or negedge rstn) begin
