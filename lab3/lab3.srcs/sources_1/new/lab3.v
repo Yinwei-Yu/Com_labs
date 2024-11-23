@@ -62,7 +62,7 @@ module lab3 (
     LED_DATA[15] = 64'h2737373327373733;
     LED_DATA[16] = 64'h505454EC505454EC;
     LED_DATA[17] = 64'h744454F8744454F8;
-    LED_DATA[18] = 64'h9662880000620888;
+    LED_DATA[18] = 64'h0062080000620800;
   end
 
   always @(posedge clk_cpu or negedge rstn) begin

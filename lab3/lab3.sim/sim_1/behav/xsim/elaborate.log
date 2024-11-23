@@ -1,0 +1,14 @@
+Vivado Simulator 2018.3
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: E:/StudyApps/Vivado_2018_3/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto f6034aed124a4eda9fc80e50a455c027 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot lab3_behav xil_defaultlib.lab3 xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v" Line 23. Module seg7x16 doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.seg7x16
+Compiling module xil_defaultlib.lab3
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot lab3_behav

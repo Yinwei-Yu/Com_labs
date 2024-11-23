@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Sun Nov 17 21:44:18 2024
+| Date             : Sat Nov 23 14:56:51 2024
 | Host             : Zero running 64-bit major release  (build 9200)
 | Command          : report_power -file lab3_power_routed.rpt -pb lab3_power_summary_routed.pb -rpx lab3_power_routed.rpx
 | Design           : lab3
@@ -53,13 +53,15 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |       53 |       --- |             --- |
-|   LUT as Logic |    <0.001 |       11 |     63400 |            0.02 |
-|   Register     |    <0.001 |       26 |    126800 |            0.02 |
-|   CARRY4       |    <0.001 |        4 |     15850 |            0.03 |
-|   Others       |     0.000 |        3 |       --- |             --- |
-| Signals        |    <0.001 |       41 |       --- |             --- |
-| I/O            |     0.003 |       18 |       210 |            8.57 |
+| Slice Logic    |    <0.001 |      361 |       --- |             --- |
+|   LUT as Logic |    <0.001 |      137 |     63400 |            0.22 |
+|   F7/F8 Muxes  |    <0.001 |       42 |     63400 |            0.07 |
+|   Register     |    <0.001 |      127 |    126800 |            0.10 |
+|   CARRY4       |    <0.001 |       11 |     15850 |            0.07 |
+|   Others       |     0.000 |        6 |       --- |             --- |
+| Signals        |    <0.001 |      254 |       --- |             --- |
+| Block RAM      |    <0.001 |        1 |       135 |            0.74 |
+| I/O            |     0.003 |       20 |       210 |            9.52 |
 | Static Power   |     0.097 |          |           |                 |
 | Total          |     0.100 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
