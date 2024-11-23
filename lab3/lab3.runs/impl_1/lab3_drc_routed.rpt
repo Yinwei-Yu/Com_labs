@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Sat Nov 23 15:19:45 2024
+| Date         : Sat Nov 23 16:36:17 2024
 | Host         : Zero running 64-bit major release  (build 9200)
 | Command      : report_drc -file lab3_drc_routed.rpt -pb lab3_drc_routed.pb -rpx lab3_drc_routed.rpx
 | Design       : lab3
@@ -24,14 +24,12 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 3
-+-------------+----------+-------------------------------------------------------------+------------+
-| Rule        | Severity | Description                                                 | Violations |
-+-------------+----------+-------------------------------------------------------------+------------+
-| CFGBVS-1    | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties         | 1          |
-| PDRC-153    | Warning  | Gated clock check                                           | 1          |
-| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 1          |
-+-------------+----------+-------------------------------------------------------------+------------+
+             Violations found: 1
++----------+----------+-----------------------------------------------------+------------+
+| Rule     | Severity | Description                                         | Violations |
++----------+----------+-----------------------------------------------------+------------+
+| CFGBVS-1 | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1          |
++----------+----------+-----------------------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
@@ -46,17 +44,6 @@ Neither the CFGBVS nor CONFIG_VOLTAGE voltage property is set in the current_des
  #where value2 is the voltage provided to configuration bank 0
 
 Refer to the device configuration user guide for more information.
-Related violations: <none>
-
-PDRC-153#1 Warning
-Gated clock check  
-Net clk_cpu is a gated clock net sourced by a combinational pin led_disp_data[61]_i_2/O, cell led_disp_data[61]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
-Related violations: <none>
-
-PLHOLDVIO-2#1 Warning
-Non-Optimal connections which could lead to hold violations  
-A LUT led_disp_data[61]_i_2 is driving clock pin of 23 cells. This could lead to large hold time violations. Involved cells are:
-led_data_addr_reg[0], led_data_addr_reg[1], led_data_addr_reg[2], led_data_addr_reg[3], led_data_addr_reg[4], led_data_addr_reg[5], led_disp_data_reg[0], led_disp_data_reg[16], led_disp_data_reg[32], led_disp_data_reg[34], led_disp_data_reg[40], led_disp_data_reg[41], led_disp_data_reg[42], led_disp_data_reg[48], led_disp_data_reg[49] (the first 15 of 23 listed)
 Related violations: <none>
 
 

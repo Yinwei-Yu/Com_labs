@@ -71,6 +71,21 @@ module lab3 (
     end else led_data_addr = led_data_addr;
   end
 
+  reg [31:0] rom_addr;
+  parameter ROM_MAX = 12;
+  always @(posedge clk_cpu or negedge rstn) begin
+    if (!rstn) begin
+      rom_addr = 32'b0;
+    end else begin
+      if (rom_addr == ROM_MAX) begin
+        rom_addr = 32'b0;
+      end else begin
+        rom_addr = rom_addr + 1'b1;
+      end
+    end
+  end
+
+
   wire [31:0] instr;
   reg  [31:0] reg_data;
   reg  [31:0] alu_disp_data;
@@ -91,6 +106,11 @@ module lab3 (
       display_data = led_disp_data;
     end
   end
+
+  dist_mem_gen_0 u_IM (
+      .a  (rom_addr),
+      .spo(instr)
+  );
 
   seg7x16 u_seg7x16 (
       .clk(clk),

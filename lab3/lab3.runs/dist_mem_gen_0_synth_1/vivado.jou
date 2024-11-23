@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Sat Nov 23 16:22:17 2024
+# Process ID: 9916
+# Current directory: E:/Works/com_labs/lab3/lab3.runs/dist_mem_gen_0_synth_1
+# Command line: vivado.exe -log dist_mem_gen_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dist_mem_gen_0.tcl
+# Log file: E:/Works/com_labs/lab3/lab3.runs/dist_mem_gen_0_synth_1/dist_mem_gen_0.vds
+# Journal file: E:/Works/com_labs/lab3/lab3.runs/dist_mem_gen_0_synth_1\vivado.jou
+#-----------------------------------------------------------
+source dist_mem_gen_0.tcl -notrace
