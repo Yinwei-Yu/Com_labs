@@ -57,6 +57,7 @@ module lab3 (
     LED_DATA[10] = 64'hfffff9f8ffffffff;
   end
 
+  //led_lab no use
   always @(posedge clk_cpu or negedge rstn) begin
     if (!rstn) begin
       led_data_addr <= 6'b0;
@@ -71,6 +72,7 @@ module lab3 (
     end else led_data_addr = led_data_addr;
   end
 
+  //rom data display
   reg [31:0] rom_addr;
   parameter ROM_MAX = 12;
   always @(posedge clk_cpu or negedge rstn) begin
@@ -85,6 +87,22 @@ module lab3 (
     end
   end
 
+  //RF data display
+
+  reg [4:0] reg_addr;
+  parameter RFMAX = 32;
+  always @(posedge clk_cpu or negedge rstn) begin
+    if (!rstn) begin
+      reg_addr = 0;
+    end else begin
+      if (reg_addr == RFMAX) begin
+        reg_addr = 0;
+      end else if (sw_i[13] == 1'b1) begin
+        reg_addr = reg_addr + 1'b1;
+        reg_data = u_rf.rf[reg_addr];
+      end
+    end
+  end
 
   wire [31:0] instr;
   reg  [31:0] reg_data;
@@ -120,5 +138,35 @@ module lab3 (
       .o_seg(disp_seg_o),
       .o_sel(disp_an_o)
   );
+
+  reg RegWrite;
+  reg [4:0] rs1;
+  reg [4:0] rs2;
+  reg [4:0] rd;
+  reg [31:0] WD;
+  wire [31:0] RD1;
+  wire [31:0] RD2;
+  always @(posedge clk) begin
+    if (sw_i[13] == 1'b1) begin
+      rd = 3;
+      RegWrite = sw_i[3];
+      WD = sw_i[10:6];
+    end
+  end
+
+  RF u_rf (
+      .clk (clk_cpu),
+      .rst (rstn),
+      .RFWr(RegWrite),
+      .sw_i(sw_i),
+      .A1  (rs1),
+      .A2  (rs2),
+      .A3  (rd),
+      .WD  (WD),
+      .RD1 (RD1),
+      .RD2 (RD2)
+  );
+
+
 
 endmodule

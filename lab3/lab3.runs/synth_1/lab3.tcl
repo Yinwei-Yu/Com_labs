@@ -18,7 +18,6 @@ proc create_report { reportName command } {
   }
 }
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -31,12 +30,13 @@ set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property ip_output_repo e:/Works/com_labs/lab3/lab3.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-add_files e:/Works/com_labs/IM.coe
+add_files E:/Works/com_labs/IM.coe
 read_verilog -library xil_defaultlib {
+  E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v
   E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v
   E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v
 }
-read_ip -quiet e:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci
+read_ip -quiet E:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci
 set_property used_in_implementation false [get_files -all e:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being

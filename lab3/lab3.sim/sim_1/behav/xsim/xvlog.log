@@ -1,6 +1,10 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/sim/dist_mem_gen_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dist_mem_gen_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RF
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module seg7x16
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module lab3
-INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module glbl
+WARNING: [VRFC 10-3380] identifier 'reg_data' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:100]
+WARNING: [VRFC 10-3380] identifier 'reg_data' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:103]

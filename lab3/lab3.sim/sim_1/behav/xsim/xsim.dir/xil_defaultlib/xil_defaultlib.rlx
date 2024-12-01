@@ -3,5 +3,7 @@
 Dec  7 2018
 00:33:28
 E:/Works/com_labs/lab3/lab3.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
-E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v,1732344835,verilog,,,,lab3,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/sim/dist_mem_gen_0.v,1732350134,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v,,dist_mem_gen_0,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v,1733054507,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v,,RF,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v,1733053647,verilog,,,,lab3,,,,,,,,
 E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v,1732343804,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v,,seg7x16,,,,,,,,
