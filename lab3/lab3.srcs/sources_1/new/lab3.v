@@ -88,7 +88,6 @@ module lab3 (
   end
 
   //RF data display
-
   reg [4:0] reg_addr;
   parameter RFMAX = 32;
   always @(posedge clk_cpu or negedge rstn) begin
@@ -139,6 +138,7 @@ module lab3 (
       .o_sel(disp_an_o)
   );
 
+  // RF
   reg RegWrite;
   reg [4:0] rs1;
   reg [4:0] rs2;
@@ -148,10 +148,10 @@ module lab3 (
   wire [31:0] RD2;
   always @(posedge clk) begin
     if (sw_i[13] == 1'b1) begin
-      rd = 3;
-      RegWrite = sw_i[3];
-      WD = sw_i[10:6];
-    end
+      //rd = 3;
+      //RegWrite = sw_i[3];
+      //WD = sw_i[10:6];
+      end
   end
 
   RF u_rf (
@@ -167,6 +167,50 @@ module lab3 (
       .RD2 (RD2)
   );
 
+  //ALU
+  reg [31:0] A;
+  reg [31:0] B;
+  wire [31:0] C;
+  reg [4:0] ALUop;
+  wire Zero;
+  reg [2:0] alu_addr;
+  always @(posedge clk) begin
+    if (sw_i[12] == 1'b1) begin
+      if (sw_i[2] == 1'b0) begin
+        rs1 = sw_i[10:8];
+        rs2 = sw_i[7:5];
+        A   = RD1;
+        B   = RD2;
+      end else begin
+        rd = sw_i[10:8];
+        WD = {{28{sw_i[7]}}, sw_i[7:5]};
+      end
+      RegWrite = sw_i[2];
+      ALUop = sw_i[4:3];
+    end
+  end
 
+  ALU u_alu (
+      .A(A),
+      .B(B),
+      .ALUop(ALUop),
+      .C(C),
+      .Zero(Zero)
+  );
+
+  always @(posedge clk_cpu or negedge rstn) begin
+    if (!rstn) begin
+      alu_addr = 3'b000;
+    end else begin
+      alu_addr = alu_addr + 1'b1;
+      case (alu_addr)
+        3'b001:  alu_disp_data = u_alu.A;
+        3'b010:  alu_disp_data = u_alu.B;
+        3'b011:  alu_disp_data = u_alu.C;
+        3'b100:  alu_disp_data = u_alu.Zero;
+        default: alu_disp_data = 32'hFFFFFFFF;
+      endcase
+    end
+  end
 
 endmodule
