@@ -129,6 +129,48 @@ module lab3 (
       .spo(instr)
   );
 
+  //instuction decode
+  reg Op;
+  reg Funct7;
+  reg Funct3;
+  reg [4:0] rs1_addr;
+  reg [4:0] rs2_addr;
+  reg [4:0] rd_addr;
+  reg [31:0] imm;
+  always @(*) begin
+    Op = instr[6:0];
+    rd_addr = instr[11:7];
+    Funct3 = instr[14:12];
+    rs1_addr = instr[19:15];
+    rs2_addr = instr[24:20];
+    Funct7 = instr[31:25];
+  end
+
+
+
+  //EXT
+  wire [ 5:0] EXTOp;
+  wire [31:0] immout;
+  // reg [4:0] imm_shamt=instr[24:20];
+  // reg [11:0] iimm=instr[31:20];
+  // reg [11:0] simm={instr[31:25],instr[11:7]};
+  // reg [11:0] bimm={instr[31],instr[7],instr[30:25],instr[11:8]};
+  // reg [19:0] uimm=instr[31:12];
+  // reg [19:0] jimm={instr[31],instr[19:12],instr[20],instr[30:21]}; 
+
+  EXT u_ext (
+      .iimm_shamt(instr[24:20]),
+      .iimm(instr[31:20]),
+      .simm({instr[31:25], instr[11:7]}),
+      .bimm({instr[31], instr[7], instr[30:25], instr[11:8]}),
+      .uimm(instr[31:12]),
+      .jimm({instr[31], instr[19:12], instr[20], instr[30:21]}),
+      .EXTOp(EXTOp),
+      .immout(immout)
+  );
+
+
+
   seg7x16 u_seg7x16 (
       .clk(clk),
       .rstn(rstn),
@@ -139,7 +181,7 @@ module lab3 (
   );
 
   // RF
-  reg RegWrite;
+  wire RegWrite;
   reg [4:0] rs1;
   reg [4:0] rs2;
   reg [4:0] rd;
@@ -151,7 +193,7 @@ module lab3 (
       //rd = 3;
       //RegWrite = sw_i[3];
       //WD = sw_i[10:6];
-      end
+    end
   end
 
   RF u_rf (
@@ -171,9 +213,11 @@ module lab3 (
   reg [31:0] A;
   reg [31:0] B;
   wire [31:0] C;
-  reg [4:0] ALUop;
+  wire [4:0] ALUop;
   wire Zero;
   reg [2:0] alu_addr;
+  wire ALUSrc;
+  wire [1:0] WDSel;
   always @(posedge clk) begin
     if (sw_i[12] == 1'b1) begin
       if (sw_i[2] == 1'b0) begin
@@ -185,8 +229,8 @@ module lab3 (
         rd = sw_i[10:8];
         WD = {{28{sw_i[7]}}, sw_i[7:5]};
       end
-      RegWrite = sw_i[2];
-      ALUop = sw_i[4:3];
+      //RegWrite = sw_i[2];
+      //ALUop = sw_i[4:3];
     end
   end
 
@@ -212,5 +256,57 @@ module lab3 (
       endcase
     end
   end
+
+  //DM
+  wire DMWr;
+  reg [5:0] addr;
+  reg [31:0] din;
+  wire [2:0] DMType;
+  wire [31:0] dout;
+  always @(posedge clk) begin
+    if (sw_i[11] == 1'b1) begin
+      //DMWr   = 0;
+      //DMType = sw_i[10:8];
+    end
+  end
+
+  DM u_dm (
+      .clk(clk_cpu),
+      .DMWr(DMWr),
+      .addr(addr),
+      .din(din),
+      .DMType(DMType),
+      .sw_i(sw_i),
+      .dout(dout)
+  );
+
+  //DM content display
+  parameter DM_MAX = 16;
+  always @(posedge clk_cpu or negedge rstn) begin
+    if (!rstn) begin
+      addr = 6'b0;
+    end else begin
+      if (addr == DM_MAX) begin
+        addr = 6'b0;
+      end else begin
+        addr = addr + 1'b1;
+        dmem_data = u_dm.dmem[addr][7:0];
+      end
+    end
+  end
+
+  Ctrl u_ctrl (
+      .Op(Op),
+      .Funct3(Funct3),
+      .Funct7(Funct7),
+      .Zero(Zero),
+      .RegWrite(RegWrite),
+      .MemWrite(DMWr),
+      .EXTOp(EXTOp),
+      .ALUOp(ALUop),
+      .ALUSrc(ALUSrc),
+      .DMType(DMType),
+      .WDSel(WDSel)
+  );
 
 endmodule

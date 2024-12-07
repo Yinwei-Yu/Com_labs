@@ -33,6 +33,9 @@ set_property ip_cache_permissions {read write} [current_project]
 add_files E:/Works/com_labs/IM.coe
 read_verilog -library xil_defaultlib {
   E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/ALU.v
+  E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/Ctrl.v
+  E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/DM.v
+  E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/EXT.v
   E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v
   E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v
   E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v
