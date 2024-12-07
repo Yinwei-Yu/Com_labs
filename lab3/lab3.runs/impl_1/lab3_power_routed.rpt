@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Sat Dec  7 17:43:29 2024
+| Date             : Sat Dec  7 23:05:29 2024
 | Host             : Zero running 64-bit major release  (build 9200)
 | Command          : report_power -file lab3_power_routed.rpt -pb lab3_power_summary_routed.pb -rpx lab3_power_routed.rpx
 | Design           : lab3
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.101        |
+| Total On-Chip Power (W)  | 0.100        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.004        |
+| Dynamic (W)              | 0.003        |
 | Device Static (W)        | 0.097        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.5         |
@@ -53,18 +53,18 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |     3072 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |      831 |     63400 |            1.31 |
-|   Register               |    <0.001 |     1850 |    126800 |            1.46 |
-|   F7/F8 Muxes            |    <0.001 |      292 |     63400 |            0.46 |
+| Slice Logic              |    <0.001 |     7878 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |     5208 |     63400 |            8.21 |
+|   F7/F8 Muxes            |    <0.001 |      696 |     63400 |            1.10 |
+|   Register               |    <0.001 |     1768 |    126800 |            1.39 |
 |   CARRY4                 |    <0.001 |       27 |     15850 |            0.17 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
-|   Others                 |     0.000 |       11 |       --- |             --- |
-|   LUT as Distributed RAM |     0.000 |       32 |     19000 |            0.17 |
-| Signals                  |    <0.001 |     2274 |       --- |             --- |
-| I/O                      |     0.002 |       31 |       210 |           14.76 |
+|   Others                 |     0.000 |       12 |       --- |             --- |
+|   LUT as Distributed RAM |     0.000 |       64 |     19000 |            0.34 |
+| Signals                  |    <0.001 |     4930 |       --- |             --- |
+| I/O                      |     0.002 |       25 |       210 |           11.90 |
 | Static Power             |     0.097 |          |           |                 |
-| Total                    |     0.101 |          |           |                 |
+| Total                    |     0.100 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -76,7 +76,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Vccint    |       1.000 |     0.017 |       0.002 |      0.015 |
 | Vccaux    |       1.800 |     0.018 |       0.000 |      0.018 |
-| Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |
+| Vcco33    |       3.300 |     0.004 |       0.000 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -143,7 +143,7 @@ Table of Contents
 +------+-----------+
 | Name | Power (W) |
 +------+-----------+
-| lab3 |     0.004 |
+| lab3 |     0.003 |
 +------+-----------+
 
 

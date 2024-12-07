@@ -30,6 +30,10 @@ module lab3 (
   reg [31:0] clkdiv;
   wire clk_cpu;
 
+  `define WDSel_FromALU 2'b00
+  `define WDSel_FromMEM 2'b01
+  `define WDSel_FromPC 2'b10
+
   always @(posedge clk or negedge rstn) begin
     if (!rstn) clkdiv <= 0;
     else clkdiv <= clkdiv + 1'b1;
@@ -37,7 +41,6 @@ module lab3 (
   assign clk_cpu = (sw_i[15]) ? clkdiv[27] : clkdiv[25];
 
   reg [63:0] display_data;
-
   reg [ 5:0] led_data_addr;
   reg [63:0] led_disp_data;
   parameter LED_DATA_NUM = 10;
@@ -57,22 +60,29 @@ module lab3 (
     LED_DATA[10] = 64'hfffff9f8ffffffff;
   end
 
-  //led_lab no use
-  always @(posedge clk_cpu or negedge rstn) begin
-    if (!rstn) begin
-      led_data_addr <= 6'b0;
-      led_disp_data = 64'b1;
-    end else if (sw_i[0] == 1'b1) begin
-      if (led_data_addr == LED_DATA_NUM) begin
-        led_data_addr = 6'b0;
-        led_disp_data = 64'b1;
-      end
-      led_disp_data = LED_DATA[led_data_addr];
-      led_data_addr = led_data_addr + 1'b1;
-    end else led_data_addr = led_data_addr;
+  //data display
+  wire [31:0] ac_instr;
+  reg  [31:0] reg_data;
+  reg  [31:0] alu_disp_data;
+  reg  [31:0] dmem_data;
+
+  //choose display source data
+
+  always @(sw_i) begin
+    if (sw_i[0] == 0) begin
+      case (sw_i[14:11])
+        4'b1000: display_data = ac_instr;
+        4'b0100: display_data = reg_data;
+        4'b0010: display_data = alu_disp_data;
+        4'b0001: display_data = dmem_data;
+        default: display_data = instr;
+      endcase
+    end else begin
+      display_data = led_disp_data;
+    end
   end
 
-  //rom data display
+  //rom data(instrs) display
   reg [31:0] rom_addr;
   parameter ROM_MAX = 12;
   always @(posedge clk_cpu or negedge rstn) begin
@@ -82,10 +92,17 @@ module lab3 (
       if (rom_addr == ROM_MAX) begin
         rom_addr = 32'b0;
       end else begin
-        rom_addr = rom_addr + 1'b1;
+        if (sw_i[1] == 1'b0) begin
+          rom_addr = rom_addr + 1'b1;
+        end
       end
     end
   end
+
+  dist_mem_gen_0 u_IM (
+      .a  (rom_addr),
+      .spo(ac_instr)
+  );
 
   //RF data display
   reg [4:0] reg_addr;
@@ -103,52 +120,103 @@ module lab3 (
     end
   end
 
-  wire [31:0] instr;
-  reg  [31:0] reg_data;
-  reg  [31:0] alu_disp_data;
-  reg  [31:0] dmem_data;
-
-  //choose display source data
-
-  always @(sw_i) begin
-    if (sw_i[0] == 0) begin
-      case (sw_i[14:11])
-        4'b1000: display_data = instr;
-        4'b0100: display_data = reg_data;
-        4'b0010: display_data = alu_disp_data;
-        4'b0001: display_data = dmem_data;
-        default: display_data = instr;
-      endcase
+  reg [2:0] alu_addr;
+  //ALU content display
+  always @(posedge clk_cpu or negedge rstn) begin
+    if (!rstn) begin
+      alu_addr = 3'b000;
     end else begin
-      display_data = led_disp_data;
+      alu_addr = alu_addr + 1'b1;
+      case (alu_addr)
+        3'b001:  alu_disp_data = u_alu.A;
+        3'b010:  alu_disp_data = u_alu.B;
+        3'b011:  alu_disp_data = u_alu.ALUout;
+        3'b100:  alu_disp_data = u_alu.Zero;
+        default: alu_disp_data = 32'hFFFFFFFF;
+      endcase
     end
   end
 
-  dist_mem_gen_0 u_IM (
-      .a  (rom_addr),
+  reg [5:0] dm_addr;
+  //DM content display
+  parameter DM_MAX = 16;
+  always @(posedge clk_cpu or negedge rstn) begin
+    if (!rstn) begin
+      dm_addr = 6'b0;
+    end else begin
+      if (dm_addr == DM_MAX) begin
+        dm_addr = 6'b0;
+      end else begin
+        dm_addr   = dm_addr + 1'b1;
+        dmem_data = u_dm.dmem[dm_addr][7:0];
+      end
+    end
+  end
+
+  seg7x16 u_seg7x16 (
+      .clk(clk),
+      .rstn(rstn),
+      .i_data(display_data),
+      .disp_mode(sw_i[0]),
+      .o_seg(disp_seg_o),
+      .o_sel(disp_an_o)
+  );
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  //THE TRUE CPU HERE
+
+  //PC update
+  reg  [31:0] PC;
+  wire [31:0] instr;
+
+  always @(posedge clk_cpu or negedge rstn) begin
+    if (!rstn) begin
+      PC = 32'h0;
+    end else begin
+      PC = (PC + 32'h4) / 4;  //common sense /4 because of IM
+    end
+  end
+
+  dist_mem_gen_0 u_im (
+      .a  (PC),
       .spo(instr)
   );
 
+  //led_lab no use
+  // always @(posedge clk_cpu or negedge rstn) begin
+  //   if (!rstn) begin
+  //     led_data_addr <= 6'b0;
+  //     led_disp_data = 64'b1;
+  //   end else if (sw_i[0] == 1'b1) begin
+  //     if (led_data_addr == LED_DATA_NUM) begin
+  //       led_data_addr = 6'b0;
+  //       led_disp_data = 64'b1;
+  //     end
+  //     led_disp_data = LED_DATA[led_data_addr];
+  //     led_data_addr = led_data_addr + 1'b1;
+  //   end else led_data_addr = led_data_addr;
+  // end
+
+
+
   //instuction decode
-  reg Op;
-  reg Funct7;
-  reg Funct3;
-  reg [4:0] rs1_addr;
-  reg [4:0] rs2_addr;
-  reg [4:0] rd_addr;
-  reg [31:0] imm;
-  always @(*) begin
-    Op = instr[6:0];
-    rd_addr = instr[11:7];
-    Funct3 = instr[14:12];
-    rs1_addr = instr[19:15];
-    rs2_addr = instr[24:20];
-    Funct7 = instr[31:25];
-  end
+  wire [6:0] Op;
+  wire [4:0] rd_addr;
+  wire [6:0] Funct7;
+  wire [2:0] Funct3;
+  wire [4:0] rs1_addr;
+  wire [4:0] rs2_addr;
 
+  //reg [31:0] imm;
+  assign Op = instr[6:0];
+  assign rd_addr = instr[11:7];
+  assign Funct3 = instr[14:12];
+  assign rs1_addr = instr[19:15];
+  assign rs2_addr = instr[24:20];
+  assign Funct7 = instr[31:25];
 
-
-  //EXT
+  //EXT imm extend unit
   wire [ 5:0] EXTOp;
   wire [31:0] immout;
   // reg [4:0] imm_shamt=instr[24:20];
@@ -169,31 +237,34 @@ module lab3 (
       .immout(immout)
   );
 
-
-
-  seg7x16 u_seg7x16 (
-      .clk(clk),
-      .rstn(rstn),
-      .i_data(display_data),
-      .disp_mode(sw_i[0]),
-      .o_seg(disp_seg_o),
-      .o_sel(disp_an_o)
-  );
-
   // RF
   wire RegWrite;
-  reg [4:0] rs1;
-  reg [4:0] rs2;
-  reg [4:0] rd;
+  wire [4:0] rs1;
+  wire [4:0] rs2;
+  wire [4:0] rd;
   reg [31:0] WD;
   wire [31:0] RD1;
   wire [31:0] RD2;
-  always @(posedge clk) begin
-    if (sw_i[13] == 1'b1) begin
-      //rd = 3;
-      //RegWrite = sw_i[3];
-      //WD = sw_i[10:6];
-    end
+
+  assign rs1 = rs1_addr;
+  assign rs2 = rs2_addr;
+  assign rd  = rd_addr;
+
+  // always @(posedge clk) begin
+  //   if (sw_i[13] == 1'b1) begin
+  //     //rd = 3;
+  //     //RegWrite = sw_i[3];
+  //     //WD = sw_i[10:6];
+  //   end
+  // end
+
+  //Write Data to reg select
+  always @(*) begin
+    case (WDSel)
+      `WDSel_FromALU: WD = ALUout;
+      `WDSel_FromMEM: WD = dout;
+      `WDSel_FromPC:  WD = PC + 4;
+    endcase
   end
 
   RF u_rf (
@@ -210,65 +281,57 @@ module lab3 (
   );
 
   //ALU
-  reg [31:0] A;
-  reg [31:0] B;
-  wire [31:0] C;
+  wire [31:0] A;
+  wire [31:0] B;
+  wire [31:0] ALUout;
   wire [4:0] ALUop;
   wire Zero;
-  reg [2:0] alu_addr;
   wire ALUSrc;
   wire [1:0] WDSel;
-  always @(posedge clk) begin
-    if (sw_i[12] == 1'b1) begin
-      if (sw_i[2] == 1'b0) begin
-        rs1 = sw_i[10:8];
-        rs2 = sw_i[7:5];
-        A   = RD1;
-        B   = RD2;
-      end else begin
-        rd = sw_i[10:8];
-        WD = {{28{sw_i[7]}}, sw_i[7:5]};
-      end
-      //RegWrite = sw_i[2];
-      //ALUop = sw_i[4:3];
-    end
-  end
+  assign B = (ALUSrc) ? immout : RD2;
+  assign A = RD1;
+
+  // always @(posedge clk) begin
+  //   if (sw_i[12] == 1'b1) begin
+  //     if (sw_i[2] == 1'b0) begin
+  //       rs1 = sw_i[10:8];
+  //       rs2 = sw_i[7:5];
+  //       A   = RD1;
+  //       B   = RD2;
+  //     end else begin
+  //       rd = sw_i[10:8];
+  //       WD = {{28{sw_i[7]}}, sw_i[7:5]};
+  //     end
+  //     //RegWrite = sw_i[2];
+  //     //ALUop = sw_i[4:3];
+  //   end
+  // end
 
   ALU u_alu (
       .A(A),
       .B(B),
       .ALUop(ALUop),
-      .C(C),
+      .ALUout(ALUout),
       .Zero(Zero)
   );
 
-  always @(posedge clk_cpu or negedge rstn) begin
-    if (!rstn) begin
-      alu_addr = 3'b000;
-    end else begin
-      alu_addr = alu_addr + 1'b1;
-      case (alu_addr)
-        3'b001:  alu_disp_data = u_alu.A;
-        3'b010:  alu_disp_data = u_alu.B;
-        3'b011:  alu_disp_data = u_alu.C;
-        3'b100:  alu_disp_data = u_alu.Zero;
-        default: alu_disp_data = 32'hFFFFFFFF;
-      endcase
-    end
-  end
+
 
   //DM
   wire DMWr;
-  reg [5:0] addr;
-  reg [31:0] din;
+  wire [5:0] addr;
+  wire [31:0] din;
   wire [2:0] DMType;
   wire [31:0] dout;
-  always @(posedge clk) begin
-    if (sw_i[11] == 1'b1) begin
-      //DMWr   = 0;
-      //DMType = sw_i[10:8];
-    end
-  end
+  // always @(posedge clk) begin
+  //   if (sw_i[11] == 1'b1) begin
+  //     //DMWr   = 0;
+  //     //DMType = sw_i[10:8];
+  //   end
+  // end
+
+  assign addr = ALUout;
+  assign din  = RD2;
 
   DM u_dm (
       .clk(clk_cpu),
@@ -280,21 +343,8 @@ module lab3 (
       .dout(dout)
   );
 
-  //DM content display
-  parameter DM_MAX = 16;
-  always @(posedge clk_cpu or negedge rstn) begin
-    if (!rstn) begin
-      addr = 6'b0;
-    end else begin
-      if (addr == DM_MAX) begin
-        addr = 6'b0;
-      end else begin
-        addr = addr + 1'b1;
-        dmem_data = u_dm.dmem[addr][7:0];
-      end
-    end
-  end
 
+  //Control Unit
   Ctrl u_ctrl (
       .Op(Op),
       .Funct3(Funct3),
