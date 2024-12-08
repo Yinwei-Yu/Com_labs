@@ -67,15 +67,26 @@ module Ctrl (
   // `define ALUOp_sra 5'b10001
   assign ALUOp[0] = i_add | i_addi | stype | itype_l;
   assign ALUOp[1] = i_add | i_addi | stype | itype_l;
+  assign ALUOp[4:2] = 3'b0;
 
-  assign EXTOp[0] = stype;
-  assign EXTOp[1] = itype_l | itype_r;
+
+  // `define EXT_CTRL_ITYPE_SHAMT 6'b100000
+  // `define EXT_CTRL_ITYPE 6'b010000
+  // `define EXT_CTRL_STYPE 6'b001000
+  // `define EXT_CTRL_BTYPE 6'b000100
+  // `define EXT_CTRL_UTYPE 6'b000010
+  // `define EXT_CTRL_JTYPE 6'b000001
+  
   //assign EXTOp[5] = i_slli | i_srai | i_srli;
-  //assign EXTOp[4] = (itype_l | itype_r) & ~i_slli & ~i_srai & ~i_srli;
+  assign EXTOp[5] = 0;
+  assign EXTOp[4] = (itype_l | itype_r);  //& ~i_slli & ~i_srai & ~i_srli;
   assign EXTOp[3] = stype;
+  assign EXTOp[2] = 0;
   //assign EXTOp[2] = sbtype;
   //assign EXTOp[1] = i_lui | i_auipc;
+  assign EXTOp[1] = 0;
   //assign EXTOp[0] = i_jal;
+  assign EXTOp[0] = 0;
 
   // dm_word 3'b000
   //dm_halfword 3'b001

@@ -1,15 +1,10 @@
 Vivado Simulator 2018.3
 Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
-Running: E:/StudyApps/Vivado_2018_3/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto f6034aed124a4eda9fc80e50a455c027 --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_12 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot lab3_behav xil_defaultlib.lab3 xil_defaultlib.glbl -log elaborate.log 
+Running: E:/StudyApps/Vivado_2018_3/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto f6034aed124a4eda9fc80e50a455c027 --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_12 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot tb_lab3_behav xil_defaultlib.tb_lab3 xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 6 for port 'a' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:130]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 5 for port 'A1' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:155]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 5 for port 'A2' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:156]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 5 for port 'A3' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'WD' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:158]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'RD1' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:159]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'RD2' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:160]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 6 for port 'a' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:103]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 6 for port 'a' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:184]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
@@ -17,7 +12,12 @@ Time Resolution for simulation is 1ps
 Compiling module dist_mem_gen_v8_0_12.dist_mem_gen_v8_0_12(C_FAMILY="a...
 Compiling module xil_defaultlib.dist_mem_gen_0
 Compiling module xil_defaultlib.seg7x16
+Compiling module xil_defaultlib.EXT
 Compiling module xil_defaultlib.RF
+Compiling module xil_defaultlib.ALU
+Compiling module xil_defaultlib.DM
+Compiling module xil_defaultlib.Ctrl
 Compiling module xil_defaultlib.lab3
+Compiling module xil_defaultlib.tb_lab3
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot lab3_behav
+Built simulation snapshot tb_lab3_behav

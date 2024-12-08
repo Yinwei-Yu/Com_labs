@@ -75,7 +75,7 @@ module lab3 (
         4'b0100: display_data = reg_data;
         4'b0010: display_data = alu_disp_data;
         4'b0001: display_data = dmem_data;
-        default: display_data = instr;
+        default: display_data = ac_instr;
       endcase
     end else begin
       display_data = led_disp_data;
@@ -170,16 +170,18 @@ module lab3 (
   reg  [31:0] PC;
   wire [31:0] instr;
 
-  always @(posedge clk_cpu or negedge rstn) begin
+  always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
-      PC = 32'h0;
+      PC = 32'b0;
     end else begin
-      PC = (PC + 32'h4) / 4;  //common sense /4 because of IM
+      if (sw_i[1] == 1'b0) begin
+        PC = PC + 4;
+      end
     end
   end
 
   dist_mem_gen_0 u_im (
-      .a  (PC),
+      .a  (PC / 4),
       .spo(instr)
   );
 
@@ -268,7 +270,7 @@ module lab3 (
   end
 
   RF u_rf (
-      .clk (clk_cpu),
+      .clk (clk),
       .rst (rstn),
       .RFWr(RegWrite),
       .sw_i(sw_i),
@@ -334,7 +336,7 @@ module lab3 (
   assign din  = RD2;
 
   DM u_dm (
-      .clk(clk_cpu),
+      .clk(clk),
       .DMWr(DMWr),
       .addr(addr),
       .din(din),

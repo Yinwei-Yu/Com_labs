@@ -3,7 +3,12 @@
 Dec  7 2018
 00:33:28
 E:/Works/com_labs/lab3/lab3.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
-E:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/sim/dist_mem_gen_0.v,1732350134,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v,,dist_mem_gen_0,,,,,,,,
-E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v,1733054507,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v,,RF,,,,,,,,
-E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v,1733053647,verilog,,,,lab3,,,,,,,,
-E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v,1732343804,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v,,seg7x16,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sim_1/new/cpu.v,1733635653,verilog,,,,tb_lab3,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/sim/dist_mem_gen_0.v,1733592086,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/ALU.v,,dist_mem_gen_0,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/ALU.v,1733583805,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/Ctrl.v,,ALU,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/Ctrl.v,1733590147,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/DM.v,,Ctrl,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/DM.v,1733634751,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/EXT.v,,DM,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/EXT.v,1733562021,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v,,EXT,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/RF.v,1733055924,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v,,RF,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v,1733635351,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v,,lab3,,,,,,,,
+E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v,1732343804,verilog,,E:/Works/com_labs/lab3/lab3.srcs/sim_1/new/cpu.v,,seg7x16,,,,,,,,

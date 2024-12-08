@@ -22,7 +22,7 @@ module DM (
   integer i;
   initial begin
     for (i = 0; i < 128; i = i + 1) begin
-      dmem[i] = i;
+      dmem[i] = 0;
     end
   end
 
