@@ -3,11 +3,14 @@ module Ctrl (
     input [2:0] Funct3,
     input [6:0] Funct7,
     input Zero,  //Zero Flag
+    input BrLt, //Branch Less Than
+    output BrUn, //Branch Unsigned
     output RegWrite,  //Register Write
     output MemWrite,  //Memory Write
     output [5:0] EXTOp,  //Extend Operation
     output [4:0] ALUOp,  //ALU Operation
-    output ALUSrc,  //ALU B Source
+    output ASel, //ALU A Source
+    output BSel,  //ALU B Source
     output [2:0] DMType,  //Data Memory Type
     output [1:0] WDSel,  //Memory Write Data Select
     output PCSel  //PC Select
@@ -77,7 +80,8 @@ module Ctrl (
   //signal
   assign RegWrite = rtype | itype_r | itype_l | u_auipc | u_lui | i_jalr | j_jal;  // register write
   assign MemWrite = stype;  // memory write
-  assign ALUSrc = ~rtype;  // ALU B is from instruction immediate
+  assign ASel = u_auipc;  // ALU A is from register or PC 
+  assign BSel = ~rtype;  // ALU B is from instruction immediate
 
 
   // `define WDSel_FromALU 2'b00
@@ -134,9 +138,12 @@ module Ctrl (
   assign DMType[1] = i_lb | s_sb | i_lhu;
   assign DMType[0] = i_lh | s_sh | i_lb | s_sb;
 
+  //BrUn
+  assign BrUn=b_bltu|b_bgeu;
+
   //PCSel
   wire PC_J = j_jal | i_jalr;
-  wire PC_B = btype & (b_beq & Zero) & (b_bne & ~Zero);
+  wire PC_B = btype & ((b_beq & Zero) | (b_bne & ~Zero) | (b_blt & BrLt) | (b_bltu & BrLt) | (b_bge & ~BrLt) | (b_bgeu & ~BrLt));
   assign PCSel = PC_J | PC_B;
 
 endmodule

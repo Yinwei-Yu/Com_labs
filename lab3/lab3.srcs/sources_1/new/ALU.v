@@ -31,13 +31,8 @@ module ALU (
       `ALUOp_auipc: ALUout <= A + B;
       `ALUOp_add: ALUout <= A + B;
       `ALUOp_sub: ALUout <= A - B;
-      `ALUOp_bne: ALUout <= A != B ? 1 : 0;
-      `ALUOp_blt: ALUout <= A < B ? 1 : 0;
-      `ALUOp_bge: ALUout <= A >= B ? 1 : 0;
-      `ALUOp_bltu: ALUout <= A < B ? 1 : 0;
-      `ALUOp_bgeu: ALUout <= A >= B ? 1 : 0;
       `ALUOp_slt: ALUout <= A < B ? 1 : 0;
-      `ALUOp_sltu: ALUout <= A < B ? 1 : 0;
+      `ALUOp_sltu: ALUout <= $unsigned(A) < $unsigned(B) ? 1 : 0;
       `ALUOp_xor: ALUout <= A ^ B;
       `ALUOp_or: ALUout <= A | B;
       `ALUOp_and: ALUout <= A & B;

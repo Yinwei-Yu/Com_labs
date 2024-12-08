@@ -163,7 +163,7 @@ module lab3 (
   //THE TRUE CPU HERE
 
   //PC update
-  reg  [31:0] PC;
+  reg [31:0] PC;
   wire [31:0] instr;
   wire PCSel;
   always @(posedge clk or negedge rstn) begin
@@ -171,11 +171,10 @@ module lab3 (
       PC = 32'b0;
     end else begin
       if (sw_i[1] == 1'b0) begin
-        if(PCSel==1'b0)begin
-        PC = PC + 4;
-        end
-        else begin
-          PC=PC+immout;
+        if (PCSel == 1'b0) begin
+          PC = PC + 4;
+        end else begin
+          PC = PC + immout;
         end
       end
     end
@@ -206,12 +205,6 @@ module lab3 (
   //EXT imm extend unit
   wire [ 5:0] EXTOp;
   wire [31:0] immout;
-  // reg [4:0] imm_shamt=instr[24:20];
-  // reg [11:0] iimm=instr[31:20];
-  // reg [11:0] simm={instr[31:25],instr[11:7]};
-  // reg [11:0] bimm={instr[31],instr[7],instr[30:25],instr[11:8]};
-  // reg [19:0] uimm=instr[31:12];
-  // reg [19:0] jimm={instr[31],instr[19:12],instr[20],instr[30:21]}; 
 
   EXT u_ext (
       .iimm_shamt(instr[24:20]),
@@ -233,7 +226,7 @@ module lab3 (
   wire [31:0] RD1;
   wire [31:0] RD2;
   wire [1:0] WDSel;
-  
+
   assign rs1 = rs1_addr;
   assign rs2 = rs2_addr;
   assign rd  = rd_addr;
@@ -272,26 +265,11 @@ module lab3 (
   wire [31:0] ALUout;
   wire [4:0] ALUop;
   wire Zero;
-  wire ALUSrc;
+  wire ASel;
+  wire BSel;
 
-  assign B = (ALUSrc) ? immout : RD2;
-  assign A = RD1;
-
-  // always @(posedge clk) begin
-  //   if (sw_i[12] == 1'b1) begin
-  //     if (sw_i[2] == 1'b0) begin
-  //       rs1 = sw_i[10:8];
-  //       rs2 = sw_i[7:5];
-  //       A   = RD1;
-  //       B   = RD2;
-  //     end else begin
-  //       rd = sw_i[10:8];
-  //       WD = {{28{sw_i[7]}}, sw_i[7:5]};
-  //     end
-  //     //RegWrite = sw_i[2];
-  //     //ALUop = sw_i[4:3];
-  //   end
-  // end
+  assign B = (BSel) ? immout : RD2;
+  assign A = ASel ? PC : RD1;
 
   ALU u_alu (
       .A(A),
@@ -300,7 +278,6 @@ module lab3 (
       .ALUout(ALUout),
       .Zero(Zero)
   );
-
 
 
   //DM
@@ -329,6 +306,8 @@ module lab3 (
       .dout(dout)
   );
 
+  wire BrUn;
+  wire BrLt = BrUn ? (RD1 < RD2) : ($signed(RD1) < $signed(RD2));  //less than for blt bltu bge bgeu
 
   //Control Unit
   Ctrl u_ctrl (
@@ -336,11 +315,14 @@ module lab3 (
       .Funct3(Funct3),
       .Funct7(Funct7),
       .Zero(Zero),
+      .BrLt(BrLt),
+      .BrUn(BrUn),
       .RegWrite(RegWrite),
       .MemWrite(DMWr),
       .EXTOp(EXTOp),
       .ALUOp(ALUop),
-      .ALUSrc(ALUSrc),
+      .ASel(ASel),
+      .BSel(BSel),
       .DMType(DMType),
       .WDSel(WDSel),
       .PCSel(PCSel)

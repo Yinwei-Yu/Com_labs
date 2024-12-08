@@ -59,7 +59,7 @@ module tb_lab3;
     sw_i = 16'b0;  // Initialize switch input to 0
     #5 rstn = 1'b1;  // Deassert reset
     // Finish simulation after some time
-    #150;
+    #160;
     $finish;
   end
 
@@ -70,14 +70,30 @@ module tb_lab3;
         $time, clk, uut.PC / 4, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.Funct3,
         uut.Funct7, uut.A, uut.B, uut.ALUout, uut.addr, uut.din, uut.dout);
     $monitor(
-        "Time:%0t | clk:%b | Control | RegWrite:%b | ALUop:%b | ALUsrc:%b | DMType:%b | MemWrite:%b | WDSel:%b | DM1:%h | DM[addr]:%h | DM[addr+1]:%h | DM[addr+2]:%h | DM[addr+3]:%h |",
-        $time, clk, uut.RegWrite, uut.ALUop, uut.ALUSrc, uut.DMType, uut.DMWr, uut.WDSel,
-        u_dm.dmem[1], u_dm.dmem[uut.addr], u_dm.dmem[uut.addr+1], u_dm.dmem[uut.addr+2],
-        u_dm.dmem[uut.addr+3]);
+        "Time:%0t | clk:%b | Control | RegWrite:%b | WDSel:%b | ALUop:%b | ASel:%b | BSel:%b | DMType:%b | MemWrite:%b | WDSel:%b |",
+        $time, clk, uut.RegWrite, uut.WDSel, uut.ALUop, uut.ASel, uut.BSel, uut.DMType, uut.DMWr,
+        uut.WDSel,);
     $monitor(
-        "Time:%0t | clk:%b | Register| x0:%h | x1:%h | x2:%h | x3:%h | x4:%h | x5:%h | x6:%h | x7:%h | x8:%h | x9:%h | x10:%h |",
+        "Time:%0t | clk:%b | DMem | DM[0]:%h | DM[1]:%h | DM[2]:%h | DM[3]:%h | DM[4]:%h | DM[5]:%h | DM[6]:%h | DM[7]:%h | DM[8]:%h | DM[9]:%h | DM[10]:%h | DM[11]:%h | DM[12]:%h | DM[13]:%h | DM[14]:%h | DM[15]:%h |",
+        $time, clk, u_dm.dmem[0], u_dm.dmem[1], u_dm.dmem[2], u_dm.dmem[3], u_dm.dmem[4],
+        u_dm.dmem[5], u_dm.dmem[6], u_dm.dmem[7], u_dm.dmem[8], u_dm.dmem[9], u_dm.dmem[10],
+        u_dm.dmem[11], u_dm.dmem[12], u_dm.dmem[13], u_dm.dmem[14], u_dm.dmem[15]);
+    $monitor(
+        "Time:%0t | clk:%b | DMem | DM[16]:%h | DM[17]:%h | DM[18]:%h | DM[19]:%h | DM[20]:%h | DM[21]:%h | DM[22]:%h | DM[23]:%h | DM[24]:%h | DM[25]:%h | DM[26]:%h | DM[27]:%h | DM[28]:%h | DM[29]:%h | DM[30]:%h | DM[31]:%h |",
+        $time, clk, u_dm.dmem[16], u_dm.dmem[17], u_dm.dmem[18], u_dm.dmem[19], u_dm.dmem[20],
+        u_dm.dmem[21], u_dm.dmem[22], u_dm.dmem[23], u_dm.dmem[24], u_dm.dmem[25], u_dm.dmem[26],
+        u_dm.dmem[27], u_dm.dmem[28], u_dm.dmem[29], u_dm.dmem[30], u_dm.dmem[31]);
+    $monitor(
+        "Time:%0t | clk:%b | Register| x0:%h | x1:%h | x2:%h | x3:%h | x4:%h | x5:%h | x6:%h | x7:%h | x8:%h | x9:%h | x10:%h | x11:%h | x12:%h | x13:%h | x14:%h | x15:%h |",
         $time, clk, u_rf.rf[0], u_rf.rf[1], u_rf.rf[2], u_rf.rf[3], u_rf.rf[4], u_rf.rf[5],
-        u_rf.rf[6], u_rf.rf[7], u_rf.rf[8], u_rf.rf[9], u_rf.rf[10]);
+        u_rf.rf[6], u_rf.rf[7], u_rf.rf[8], u_rf.rf[9], u_rf.rf[10], u_rf.rf[11], u_rf.rf[12],
+        u_rf.rf[13], u_rf.rf[14], u_rf.rf[15]);
+    $monitor(
+        "Time:%0t | clk:%b | Register| x16:%h | x17:%h | x18:%h | x19:%h | x20:%h | x21:%h | x22:%h | x23:%h | x24:%h | x25:%h | x26:%h | x27:%h | x28:%h | x29:%h | x30:%h | x31:%h |\n",
+        $time, clk, u_rf.rf[16], u_rf.rf[17], u_rf.rf[18], u_rf.rf[19], u_rf.rf[20], u_rf.rf[21],
+        u_rf.rf[22], u_rf.rf[23], u_rf.rf[24], u_rf.rf[25], u_rf.rf[26], u_rf.rf[27], u_rf.rf[28],
+        u_rf.rf[29], u_rf.rf[30], u_rf.rf[31]);
+
   end
 
 endmodule
