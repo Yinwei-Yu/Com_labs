@@ -163,18 +163,22 @@ module lab3 (
   //THE TRUE CPU HERE
 
   //PC update
-  reg [31:0] PC;
+  reg  [31:0] PC;
   wire [31:0] instr;
-  wire PCSel;
+  wire [ 1:0] PCSel;
   always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
       PC = 32'b0;
     end else begin
       if (sw_i[1] == 1'b0) begin
-        if (PCSel == 1'b0) begin
+        if (PCSel == 2'b00) begin
           PC = PC + 4;
-        end else begin
+        end else if (PCSel == 2'b01) begin
           PC = PC + immout;
+        end else if (PCSel == 2'b10) begin
+          PC = ALUout;
+        end else begin
+          PC = PC + 4;
         end
       end
     end

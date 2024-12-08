@@ -3,17 +3,17 @@ module Ctrl (
     input [2:0] Funct3,
     input [6:0] Funct7,
     input Zero,  //Zero Flag
-    input BrLt, //Branch Less Than
-    output BrUn, //Branch Unsigned
+    input BrLt,  //Branch Less Than
+    output BrUn,  //Branch Unsigned
     output RegWrite,  //Register Write
     output MemWrite,  //Memory Write
     output [5:0] EXTOp,  //Extend Operation
     output [4:0] ALUOp,  //ALU Operation
-    output ASel, //ALU A Source
+    output ASel,  //ALU A Source
     output BSel,  //ALU B Source
     output [2:0] DMType,  //Data Memory Type
     output [1:0] WDSel,  //Memory Write Data Select
-    output PCSel  //PC Select
+    output [1:0] PCSel  //PC Select
 );
 
   //R type
@@ -81,7 +81,7 @@ module Ctrl (
   assign RegWrite = rtype | itype_r | itype_l | u_auipc | u_lui | i_jalr | j_jal;  // register write
   assign MemWrite = stype;  // memory write
   assign ASel = u_auipc;  // ALU A is from register or PC 
-  assign BSel = ~rtype;  // ALU B is from instruction immediate
+  assign BSel = itype_l | itype_r | u_auipc | stype | i_jalr;  // ALU B is from instruction immediate
 
 
   // `define WDSel_FromALU 2'b00
@@ -94,8 +94,9 @@ module Ctrl (
   // `define ALUOp_nop 5'b00000
   // `define ALUOp_lui 5'b00001
   // `define ALUOp_auipc 5'b00010
-  // `define ALUOp_add 5'b00011 //stype itype_l 
+  // `define ALUOp_add 5'b00011 //stype itype_l jalr  
   // `define ALUOp_sub 5'b00100
+  // `define ALUOp_beq 5'b00101
   // `define ALUOp_bne 5'b00101
   // `define ALUOp_blt 5'b00110
   // `define ALUOp_bge 5'b00111
@@ -109,9 +110,9 @@ module Ctrl (
   // `define ALUOp_sll 5'b01111
   // `define ALUOp_srl 5'b10000
   // `define ALUOp_sra 5'b10001
-  assign ALUOp[0] = u_lui| b_bne |b_bge|b_bgeu|r_sltu|i_ori|r_or|i_slli|r_sll|i_srai|r_sra|r_add | i_addi | stype | itype_l;
+  assign ALUOp[0] = u_lui|b_beq | b_bne |b_bge|b_bgeu|r_sltu|i_ori|r_or|i_slli|r_sll|i_srai|r_sra|r_add | i_addi | stype | itype_l;
   assign ALUOp[1] = u_auipc|b_blt|b_bge|i_slti|r_slt|r_sltu|i_sltiu|i_andi|r_and|i_slli|r_sll|r_add | i_addi | stype | itype_l;
-  assign ALUOp[2]=r_sub|b_bne|b_blt|b_bge|r_xor|i_xori|i_ori|r_or|i_andi|r_and|i_slli|r_sll;
+  assign ALUOp[2]=r_sub|b_beq| b_bne|b_blt|b_bge|r_xor|i_xori|i_ori|r_or|i_andi|r_and|i_slli|r_sll;
   assign ALUOp[3]=b_bltu|b_bgeu|i_slti|r_slt|r_sltu|i_sltiu|i_xori|r_xor|i_ori|r_or|i_andi|r_and|i_slli|r_sll;
   assign ALUOp[4] = i_srli | r_srl | i_srai | r_sra;
 
@@ -139,11 +140,14 @@ module Ctrl (
   assign DMType[0] = i_lh | s_sh | i_lb | s_sb;
 
   //BrUn
-  assign BrUn=b_bltu|b_bgeu;
+  assign BrUn = b_bltu | b_bgeu;
 
   //PCSel
-  wire PC_J = j_jal | i_jalr;
+  //PCSel 2'b00: PC = PC + 4;
+  //PCSel 2'b01: PC = PC+immout;
+  //PCSel 2'b10: PC = ALUout
   wire PC_B = btype & ((b_beq & Zero) | (b_bne & ~Zero) | (b_blt & BrLt) | (b_bltu & BrLt) | (b_bge & ~BrLt) | (b_bgeu & ~BrLt));
-  assign PCSel = PC_J | PC_B;
+  assign PCSel[0] = PC_B | j_jal;
+  assign PCSel[1] = i_jalr;
 
 endmodule

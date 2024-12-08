@@ -7,6 +7,7 @@ module tb_lab3;
   reg rstn;
   reg [15:0] sw_i;
   reg [5:0] counter;
+  reg [31:0] x10;
   // Outputs
   wire [7:0] disp_seg_o;
   wire [7:0] disp_an_o;
@@ -46,6 +47,7 @@ module tb_lab3;
   // Clock generation (10ns period, 50MHz)
   always begin
     clk = 1'b0;
+    x10 = u_rf.rf[10];
     #5 clk = 1'b1;
     counter = counter + 1;
     #5;
@@ -59,20 +61,20 @@ module tb_lab3;
     sw_i = 16'b0;  // Initialize switch input to 0
     #5 rstn = 1'b1;  // Deassert reset
     // Finish simulation after some time
-    #160;
+    #200;
     $finish;
   end
 
   initial begin
     // 
     $monitor(
-        "Time: %0t | clk: %b| PC/4: %h | instr: %h | Op:%h | rs1:%h | rs2:%h | rd:%h | Funct3:%b | Funct7:%b |A:%h | B:%h | ALUout:%h | addr:%h | din:%h | dout:%h |",
-        $time, clk, uut.PC / 4, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.Funct3,
-        uut.Funct7, uut.A, uut.B, uut.ALUout, uut.addr, uut.din, uut.dout);
+        "Time: %0t | clk: %b| PC: %h | instr: %h | Op:%h | rs1:%h | rs2:%h | rd:%h | immout:%h | A:%h | B:%h | ALUout:%h | addr:%h | din:%h | dout:%h |",
+        $time, clk, uut.PC, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.immout, uut.A, uut.B,
+        uut.ALUout, uut.addr, uut.din, uut.dout);
     $monitor(
-        "Time:%0t | clk:%b | Control | RegWrite:%b | WDSel:%b | ALUop:%b | ASel:%b | BSel:%b | DMType:%b | MemWrite:%b | WDSel:%b |",
-        $time, clk, uut.RegWrite, uut.WDSel, uut.ALUop, uut.ASel, uut.BSel, uut.DMType, uut.DMWr,
-        uut.WDSel,);
+        "Time:%0t | clk:%b | Control | PCSel:%b | RegWrite:%b | WDSel:%b | ALUop:%b | ASel:%b | BSel:%b | Zero:%b | DMType:%b | MemWrite:%b | WDSel:%b |",
+        $time, clk, uut.PCSel, uut.RegWrite, uut.WDSel, uut.ALUop, uut.ASel, uut.BSel, uut.Zero,
+        uut.DMType, uut.DMWr, uut.WDSel);
     $monitor(
         "Time:%0t | clk:%b | DMem | DM[0]:%h | DM[1]:%h | DM[2]:%h | DM[3]:%h | DM[4]:%h | DM[5]:%h | DM[6]:%h | DM[7]:%h | DM[8]:%h | DM[9]:%h | DM[10]:%h | DM[11]:%h | DM[12]:%h | DM[13]:%h | DM[14]:%h | DM[15]:%h |",
         $time, clk, u_dm.dmem[0], u_dm.dmem[1], u_dm.dmem[2], u_dm.dmem[3], u_dm.dmem[4],

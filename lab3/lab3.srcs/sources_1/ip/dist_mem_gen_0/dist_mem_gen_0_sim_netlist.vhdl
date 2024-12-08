@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
--- Date        : Sat Nov 23 16:22:40 2024
+-- Date        : Sun Dec  8 22:22:47 2024
 -- Host        : Zero running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim -rename_top dist_mem_gen_0 -prefix
---               dist_mem_gen_0_ dist_mem_gen_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim
+--               E:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0_sim_netlist.vhdl
 -- Design      : dist_mem_gen_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -22,6 +22,8 @@ entity dist_mem_gen_0_spram is
     we : in STD_LOGIC;
     a : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of dist_mem_gen_0_spram : entity is "spram";
 end dist_mem_gen_0_spram;
 
 architecture STRUCTURE of dist_mem_gen_0_spram is
@@ -974,6 +976,8 @@ entity dist_mem_gen_0_dist_mem_gen_v8_0_12_synth is
     we : in STD_LOGIC;
     a : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of dist_mem_gen_0_dist_mem_gen_v8_0_12_synth : entity is "dist_mem_gen_v8_0_12_synth";
 end dist_mem_gen_0_dist_mem_gen_v8_0_12_synth;
 
 architecture STRUCTURE of dist_mem_gen_0_dist_mem_gen_v8_0_12_synth is
@@ -1075,6 +1079,8 @@ entity dist_mem_gen_0_dist_mem_gen_v8_0_12 is
   attribute C_SYNC_ENABLE of dist_mem_gen_0_dist_mem_gen_v8_0_12 : entity is 1;
   attribute C_WIDTH : integer;
   attribute C_WIDTH of dist_mem_gen_0_dist_mem_gen_v8_0_12 : entity is 32;
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of dist_mem_gen_0_dist_mem_gen_v8_0_12 : entity is "dist_mem_gen_v8_0_12";
 end dist_mem_gen_0_dist_mem_gen_v8_0_12;
 
 architecture STRUCTURE of dist_mem_gen_0_dist_mem_gen_v8_0_12 is

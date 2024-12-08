@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1733635692">
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1733667745">
   <File Type="PA-TCL" Name="lab3.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="lab3_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="lab3_reports.tcl"/>
   <File Type="RDS-RDS" Name="lab3.vds"/>
   <File Type="RDS-UTIL" Name="lab3_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="lab3_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="lab3.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="lab3_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="lab3_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/ALU.v">

@@ -26,11 +26,16 @@ module ALU (
 
   always @(*) begin
     case (ALUop)
-      `ALUOp_nop: ALUout <= 0;
+      `ALUOp_nop: ALUout <= A + B;
       `ALUOp_lui: ALUout <= B;
       `ALUOp_auipc: ALUout <= A + B;
       `ALUOp_add: ALUout <= A + B;
       `ALUOp_sub: ALUout <= A - B;
+      `ALUOp_bne: ALUout <= A - B;
+      `ALUOp_blt: ALUout <= A - B;
+      `ALUOp_bge: ALUout <= A - B;
+      `ALUOp_bltu: ALUout <= A - B;
+      `ALUOp_bgeu: ALUout <= A - B;
       `ALUOp_slt: ALUout <= A < B ? 1 : 0;
       `ALUOp_sltu: ALUout <= $unsigned(A) < $unsigned(B) ? 1 : 0;
       `ALUOp_xor: ALUout <= A ^ B;
@@ -39,7 +44,7 @@ module ALU (
       `ALUOp_sll: ALUout <= A << B;
       `ALUOp_srl: ALUout <= A >> B;
       `ALUOp_sra: ALUout <= A >>> B;
-      default: ALUout <= 0;
+      default: ALUout <= A + B;
     endcase
     Zero = ALUout == 0 ? 1 : 0;
   end

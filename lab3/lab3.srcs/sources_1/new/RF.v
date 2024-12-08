@@ -24,7 +24,9 @@ module RF (
       end
     end else begin
       if (RFWr && (!sw_i[1])) begin
-        rf[A3] <= WD;
+        if (A3 != 0) begin
+          rf[A3] <= WD;
+        end
       end
     end
   end
