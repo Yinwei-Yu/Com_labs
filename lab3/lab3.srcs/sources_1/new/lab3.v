@@ -30,10 +30,6 @@ module lab3 (
   reg [31:0] clkdiv;
   wire clk_cpu;
 
-  `define WDSel_FromALU 2'b00
-  `define WDSel_FromMEM 2'b01
-  `define WDSel_FromPC 2'b10
-
   always @(posedge clk or negedge rstn) begin
     if (!rstn) clkdiv <= 0;
     else clkdiv <= clkdiv + 1'b1;
@@ -169,13 +165,18 @@ module lab3 (
   //PC update
   reg  [31:0] PC;
   wire [31:0] instr;
-
+  wire PCSel;
   always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
       PC = 32'b0;
     end else begin
       if (sw_i[1] == 1'b0) begin
+        if(PCSel==1'b0)begin
         PC = PC + 4;
+        end
+        else begin
+          PC=PC+immout;
+        end
       end
     end
   end
@@ -184,22 +185,6 @@ module lab3 (
       .a  (PC / 4),
       .spo(instr)
   );
-
-  //led_lab no use
-  // always @(posedge clk_cpu or negedge rstn) begin
-  //   if (!rstn) begin
-  //     led_data_addr <= 6'b0;
-  //     led_disp_data = 64'b1;
-  //   end else if (sw_i[0] == 1'b1) begin
-  //     if (led_data_addr == LED_DATA_NUM) begin
-  //       led_data_addr = 6'b0;
-  //       led_disp_data = 64'b1;
-  //     end
-  //     led_disp_data = LED_DATA[led_data_addr];
-  //     led_data_addr = led_data_addr + 1'b1;
-  //   end else led_data_addr = led_data_addr;
-  // end
-
 
 
   //instuction decode
@@ -247,18 +232,16 @@ module lab3 (
   reg [31:0] WD;
   wire [31:0] RD1;
   wire [31:0] RD2;
-
+  wire [1:0] WDSel;
+  
   assign rs1 = rs1_addr;
   assign rs2 = rs2_addr;
   assign rd  = rd_addr;
 
-  // always @(posedge clk) begin
-  //   if (sw_i[13] == 1'b1) begin
-  //     //rd = 3;
-  //     //RegWrite = sw_i[3];
-  //     //WD = sw_i[10:6];
-  //   end
-  // end
+  `define WDSel_FromALU 2'b00
+  `define WDSel_FromMEM 2'b01
+  `define WDSel_FromPC 2'b10
+  `define WDSel_FromImm 2'b11
 
   //Write Data to reg select
   always @(*) begin
@@ -266,6 +249,7 @@ module lab3 (
       `WDSel_FromALU: WD = ALUout;
       `WDSel_FromMEM: WD = dout;
       `WDSel_FromPC:  WD = PC + 4;
+      `WDSel_FromImm: WD = immout;
     endcase
   end
 
@@ -289,7 +273,7 @@ module lab3 (
   wire [4:0] ALUop;
   wire Zero;
   wire ALUSrc;
-  wire [1:0] WDSel;
+
   assign B = (ALUSrc) ? immout : RD2;
   assign A = RD1;
 
@@ -358,7 +342,8 @@ module lab3 (
       .ALUOp(ALUop),
       .ALUSrc(ALUSrc),
       .DMType(DMType),
-      .WDSel(WDSel)
+      .WDSel(WDSel),
+      .PCSel(PCSel)
   );
 
 endmodule

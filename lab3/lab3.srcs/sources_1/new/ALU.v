@@ -26,8 +26,24 @@ module ALU (
 
   always @(*) begin
     case (ALUop)
+      `ALUOp_nop: ALUout <= 0;
+      `ALUOp_lui: ALUout <= B;
+      `ALUOp_auipc: ALUout <= A + B;
       `ALUOp_add: ALUout <= A + B;
       `ALUOp_sub: ALUout <= A - B;
+      `ALUOp_bne: ALUout <= A != B ? 1 : 0;
+      `ALUOp_blt: ALUout <= A < B ? 1 : 0;
+      `ALUOp_bge: ALUout <= A >= B ? 1 : 0;
+      `ALUOp_bltu: ALUout <= A < B ? 1 : 0;
+      `ALUOp_bgeu: ALUout <= A >= B ? 1 : 0;
+      `ALUOp_slt: ALUout <= A < B ? 1 : 0;
+      `ALUOp_sltu: ALUout <= A < B ? 1 : 0;
+      `ALUOp_xor: ALUout <= A ^ B;
+      `ALUOp_or: ALUout <= A | B;
+      `ALUOp_and: ALUout <= A & B;
+      `ALUOp_sll: ALUout <= A << B;
+      `ALUOp_srl: ALUout <= A >> B;
+      `ALUOp_sra: ALUout <= A >>> B;
       default: ALUout <= 0;
     endcase
     Zero = ALUout == 0 ? 1 : 0;

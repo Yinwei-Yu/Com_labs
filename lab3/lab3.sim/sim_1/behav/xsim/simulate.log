@@ -2,46 +2,88 @@ Vivado Simulator 2018.3
 Time resolution is 1 ps
 WARNING: This core is supplied with a behavioral model. To model cycle-accurate behavior you must run timing simulation.
 WARNING: This core is supplied with a behavioral model. To model cycle-accurate behavior you must run timing simulation.
-Time: 0 | clk: 0| PC/4: 00000000 | instr: 000000b3 | Op:33 | rs1:00 | rs2:00 | rd:01 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
-Time: 0 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:0 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 5000 | clk: 1| PC/4: 00000001 | instr: 00108093 | Op:13 | rs1:01 | rs2:01 | rd:01 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000001 | ALUout:00000001 | addr:01 | din:00000000 | dout:00000000 |
-Time: 5000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 10000 | clk: 0| PC/4: 00000001 | instr: 00108093 | Op:13 | rs1:01 | rs2:01 | rd:01 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000001 | ALUout:00000001 | addr:01 | din:00000000 | dout:00000000 |
-Time: 10000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 15000 | clk: 1| PC/4: 00000002 | instr: 00000133 | Op:33 | rs1:00 | rs2:00 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
-Time: 15000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:0 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 20000 | clk: 0| PC/4: 00000002 | instr: 00000133 | Op:33 | rs1:00 | rs2:00 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
-Time: 20000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:0 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 25000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 25000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 30000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 30000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 35000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 35000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 40000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 40000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 45000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 45000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 50000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 50000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 55000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 55000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 60000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 60000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 65000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 65000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 70000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 70000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 75000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 75000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 80000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 80000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 85000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 85000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 90000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 90000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 95000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 95000 | clk:1 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 100000 | clk: 0| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000002 | ALUout:00000002 | addr:02 | din:00000000 | dout:00000000 |
-Time: 100000 | clk:0 | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]  0
-Time: 105000 | clk: 1| PC/4: 00000003 | instr: 00210113 | Op:13 | rs1:02 | rs2:02 | rd:02 | Funct3:000 | Funct7:0000000
+Time: 0 | clk: 0| PC/4: 00000000 | instr: 00500093 | Op:13 | rs1:00 | rs2:05 | rd:01 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000005 | ALUout:00000005 | addr:05 | din:00000005 | dout:00000000 |
+Time:0 | clk:0 | Control | RegWrite:1 | ALUop:00011 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:0 | clk:0 | Register| x0:00000000 | x1:00000001 | x2:00000002 | x3:00000003 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 5000 | clk: 1| PC/4: 00000001 | instr: 0010f113 | Op:13 | rs1:01 | rs2:01 | rd:02 | Funct3:111 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000001 | addr:01 | din:00000005 | dout:00000000 |
+Time:5000 | clk:1 | Control | RegWrite:1 | ALUop:01110 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:5000 | clk:1 | Register| x0:00000000 | x1:00000005 | x2:00000002 | x3:00000003 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 10000 | clk: 0| PC/4: 00000001 | instr: 0010f113 | Op:13 | rs1:01 | rs2:01 | rd:02 | Funct3:111 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000001 | addr:01 | din:00000005 | dout:00000000 |
+Time:10000 | clk:0 | Control | RegWrite:1 | ALUop:01110 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:10000 | clk:0 | Register| x0:00000000 | x1:00000005 | x2:00000002 | x3:00000003 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 15000 | clk: 1| PC/4: 00000002 | instr: 0010e193 | Op:13 | rs1:01 | rs2:01 | rd:03 | Funct3:110 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000005 | addr:05 | din:00000005 | dout:00000000 |
+Time:15000 | clk:1 | Control | RegWrite:1 | ALUop:01101 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:15000 | clk:1 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000003 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 20000 | clk: 0| PC/4: 00000002 | instr: 0010e193 | Op:13 | rs1:01 | rs2:01 | rd:03 | Funct3:110 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000005 | addr:05 | din:00000005 | dout:00000000 |
+Time:20000 | clk:0 | Control | RegWrite:1 | ALUop:01101 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:20000 | clk:0 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000003 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 25000 | clk: 1| PC/4: 00000003 | instr: 0010c213 | Op:13 | rs1:01 | rs2:01 | rd:04 | Funct3:100 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000004 | addr:04 | din:00000005 | dout:00000000 |
+Time:25000 | clk:1 | Control | RegWrite:1 | ALUop:01100 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:25000 | clk:1 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 30000 | clk: 0| PC/4: 00000003 | instr: 0010c213 | Op:13 | rs1:01 | rs2:01 | rd:04 | Funct3:100 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000004 | addr:04 | din:00000005 | dout:00000000 |
+Time:30000 | clk:0 | Control | RegWrite:1 | ALUop:01100 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:30000 | clk:0 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 35000 | clk: 1| PC/4: 00000004 | instr: 00109293 | Op:13 | rs1:01 | rs2:01 | rd:05 | Funct3:001 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:0000000a | addr:0a | din:00000005 | dout:00000000 |
+Time:35000 | clk:1 | Control | RegWrite:1 | ALUop:01111 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:35000 | clk:1 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 40000 | clk: 0| PC/4: 00000004 | instr: 00109293 | Op:13 | rs1:01 | rs2:01 | rd:05 | Funct3:001 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:0000000a | addr:0a | din:00000005 | dout:00000000 |
+Time:40000 | clk:0 | Control | RegWrite:1 | ALUop:01111 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:40000 | clk:0 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:00000005 | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 45000 | clk: 1| PC/4: 00000005 | instr: 0010d313 | Op:13 | rs1:01 | rs2:01 | rd:06 | Funct3:101 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000002 | addr:02 | din:00000005 | dout:00000000 |
+Time:45000 | clk:1 | Control | RegWrite:1 | ALUop:10000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:45000 | clk:1 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 50000 | clk: 0| PC/4: 00000005 | instr: 0010d313 | Op:13 | rs1:01 | rs2:01 | rd:06 | Funct3:101 | Funct7:0000000 |A:00000005 | B:00000001 | ALUout:00000002 | addr:02 | din:00000005 | dout:00000000 |
+Time:50000 | clk:0 | Control | RegWrite:1 | ALUop:10000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:50000 | clk:0 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000006 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 55000 | clk: 1| PC/4: 00000006 | instr: 800000b7 | Op:37 | rs1:00 | rs2:00 | rd:01 | Funct3:000 | Funct7:1000000 |A:00000000 | B:80000000 | ALUout:80000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:55000 | clk:1 | Control | RegWrite:1 | ALUop:00001 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:11 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:55000 | clk:1 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 60000 | clk: 0| PC/4: 00000006 | instr: 800000b7 | Op:37 | rs1:00 | rs2:00 | rd:01 | Funct3:000 | Funct7:1000000 |A:00000000 | B:80000000 | ALUout:80000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:60000 | clk:0 | Control | RegWrite:1 | ALUop:00001 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:11 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:60000 | clk:0 | Register| x0:00000000 | x1:00000005 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 65000 | clk: 1| PC/4: 00000007 | instr: 4010d393 | Op:13 | rs1:01 | rs2:01 | rd:07 | Funct3:101 | Funct7:0100000 |A:80000000 | B:00000001 | ALUout:c0000000 | addr:00 | din:80000000 | dout:00000000 |
+Time:65000 | clk:1 | Control | RegWrite:1 | ALUop:10001 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:65000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 70000 | clk: 0| PC/4: 00000007 | instr: 4010d393 | Op:13 | rs1:01 | rs2:01 | rd:07 | Funct3:101 | Funct7:0100000 |A:80000000 | B:00000001 | ALUout:c0000000 | addr:00 | din:80000000 | dout:00000000 |
+Time:70000 | clk:0 | Control | RegWrite:1 | ALUop:10001 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:70000 | clk:0 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:00000007 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 75000 | clk: 1| PC/4: 00000008 | instr: 00112413 | Op:13 | rs1:02 | rs2:01 | rd:08 | Funct3:010 | Funct7:0000000 |A:00000001 | B:00000001 | ALUout:00000000 | addr:00 | din:80000000 | dout:00000000 |
+Time:75000 | clk:1 | Control | RegWrite:1 | ALUop:01010 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:75000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 80000 | clk: 0| PC/4: 00000008 | instr: 00112413 | Op:13 | rs1:02 | rs2:01 | rd:08 | Funct3:010 | Funct7:0000000 |A:00000001 | B:00000001 | ALUout:00000000 | addr:00 | din:80000000 | dout:00000000 |
+Time:80000 | clk:0 | Control | RegWrite:1 | ALUop:01010 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:80000 | clk:0 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000008 | x9:00000009 | x10:0000000a |
+Time: 85000 | clk: 1| PC/4: 00000009 | instr: 00113493 | Op:13 | rs1:02 | rs2:01 | rd:09 | Funct3:011 | Funct7:0000000 |A:00000001 | B:00000001 | ALUout:00000000 | addr:00 | din:80000000 | dout:00000000 |
+Time:85000 | clk:1 | Control | RegWrite:1 | ALUop:01010 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:85000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000009 | x10:0000000a |
+Time: 90000 | clk: 0| PC/4: 00000009 | instr: 00113493 | Op:13 | rs1:02 | rs2:01 | rd:09 | Funct3:011 | Funct7:0000000 |A:00000001 | B:00000001 | ALUout:00000000 | addr:00 | din:80000000 | dout:00000000 |
+Time:90000 | clk:0 | Control | RegWrite:1 | ALUop:01010 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:90000 | clk:0 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000009 | x10:0000000a |
+Time: 95000 | clk: 1| PC/4: 0000000a | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:95000 | clk:1 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:95000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 100000 | clk: 0| PC/4: 0000000a | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:100000 | clk:0 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:100000 | clk:0 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 105000 | clk: 1| PC/4: 0000000b | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:105000 | clk:1 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:105000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 110000 | clk: 0| PC/4: 0000000b | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:110000 | clk:0 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:110000 | clk:0 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 115000 | clk: 1| PC/4: 0000000c | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:115000 | clk:1 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:115000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 120000 | clk: 0| PC/4: 0000000c | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:120000 | clk:0 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:120000 | clk:0 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 125000 | clk: 1| PC/4: 0000000d | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:125000 | clk:1 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:125000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 130000 | clk: 0| PC/4: 0000000d | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:130000 | clk:0 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:130000 | clk:0 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 135000 | clk: 1| PC/4: 0000000e | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00000000 | dout:00000000 |
+Time:135000 | clk:1 | Control | RegWrite:0 | ALUop:00000 | ALUsrc:1 | DMType:000 | MemWrite:0 | WDSel:00 | DM1:00 | DM[addr]:00 | DM[addr+1]:00 | DM[addr+2]:00 | DM[addr+3]:00 |
+Time:135000 | clk:1 | Register| x0:00000000 | x1:80000000 | x2:00000001 | x3:00000005 | x4:00000004 | x5:0000000a | x6:00000002 | x7:c0000000 | x8:00000000 | x9:00000000 | x10:0000000a |
+Time: 140000 | clk: 0| PC/4: 0000000e | instr: 00000000 | Op:00 | rs1:00 | rs2:00 | rd:00 | Funct3:000 | Funct7:0000000 |A:00000000 | B:00000000 | ALUout:00000000 | addr:00 | din:00

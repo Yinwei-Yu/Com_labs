@@ -12,9 +12,9 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/so
 INFO: [VRFC 10-311] analyzing module RF
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module lab3
-WARNING: [VRFC 10-3380] identifier 'WDSel' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:265]
-WARNING: [VRFC 10-3380] identifier 'ALUout' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:266]
-WARNING: [VRFC 10-3380] identifier 'dout' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:267]
+WARNING: [VRFC 10-3380] identifier 'immout' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:178]
+WARNING: [VRFC 10-3380] identifier 'ALUout' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:249]
+WARNING: [VRFC 10-3380] identifier 'dout' is used before its declaration [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:250]
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module seg7x16
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/lab3/lab3.srcs/sim_1/new/cpu.v" into library xil_defaultlib

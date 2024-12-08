@@ -70,10 +70,14 @@ module tb_lab3;
         $time, clk, uut.PC / 4, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.Funct3,
         uut.Funct7, uut.A, uut.B, uut.ALUout, uut.addr, uut.din, uut.dout);
     $monitor(
-        "Time: %0t | clk:%b | RegWrite:%b | ALUop:%b | ALUsrc:%b | DMType:%b | MemWrite:%b | WDSel:%b | DM1:%h | DM[addr]:%h | DM[addr+1]:%h | DM[addr+2]:%h | DM[addr+3]",
+        "Time:%0t | clk:%b | Control | RegWrite:%b | ALUop:%b | ALUsrc:%b | DMType:%b | MemWrite:%b | WDSel:%b | DM1:%h | DM[addr]:%h | DM[addr+1]:%h | DM[addr+2]:%h | DM[addr+3]:%h |",
         $time, clk, uut.RegWrite, uut.ALUop, uut.ALUSrc, uut.DMType, uut.DMWr, uut.WDSel,
         u_dm.dmem[1], u_dm.dmem[uut.addr], u_dm.dmem[uut.addr+1], u_dm.dmem[uut.addr+2],
         u_dm.dmem[uut.addr+3]);
+    $monitor(
+        "Time:%0t | clk:%b | Register| x0:%h | x1:%h | x2:%h | x3:%h | x4:%h | x5:%h | x6:%h | x7:%h | x8:%h | x9:%h | x10:%h |",
+        $time, clk, u_rf.rf[0], u_rf.rf[1], u_rf.rf[2], u_rf.rf[3], u_rf.rf[4], u_rf.rf[5],
+        u_rf.rf[6], u_rf.rf[7], u_rf.rf[8], u_rf.rf[9], u_rf.rf[10]);
   end
 
 endmodule
