@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Sun Dec  8 22:27:23 2024
+| Date             : Mon Dec  9 00:03:58 2024
 | Host             : Zero running 64-bit major release  (build 9200)
 | Command          : report_power -file lab3_power_routed.rpt -pb lab3_power_summary_routed.pb -rpx lab3_power_routed.rpx
 | Design           : lab3
@@ -52,16 +52,16 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.002 |     7882 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     5034 |     63400 |            7.94 |
-|   F7/F8 Muxes            |    <0.001 |      751 |     63400 |            1.18 |
-|   CARRY4                 |    <0.001 |       59 |     15850 |            0.37 |
+| Clocks                   |    <0.001 |        3 |       --- |             --- |
+| Slice Logic              |     0.002 |     8134 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     5290 |     63400 |            8.34 |
+|   F7/F8 Muxes            |    <0.001 |      723 |     63400 |            1.14 |
 |   Register               |    <0.001 |     1800 |    126800 |            1.42 |
+|   CARRY4                 |    <0.001 |       59 |     15850 |            0.37 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |       14 |       --- |             --- |
 |   LUT as Distributed RAM |     0.000 |       64 |     19000 |            0.34 |
-| Signals                  |     0.002 |     5603 |       --- |             --- |
+| Signals                  |     0.002 |     5559 |       --- |             --- |
 | I/O                      |     0.002 |       25 |       210 |           11.90 |
 | Static Power             |     0.097 |          |           |                 |
 | Total                    |     0.104 |          |           |                 |
@@ -74,9 +74,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.021 |       0.006 |      0.015 |
+| Vccint    |       1.000 |     0.020 |       0.005 |      0.015 |
 | Vccaux    |       1.800 |     0.018 |       0.000 |      0.018 |
-| Vcco33    |       3.300 |     0.004 |       0.000 |      0.004 |
+| Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -97,7 +97,7 @@ Table of Contents
 | User Input Data             | Confidence | Details                                                | Action                                                                                                             |
 +-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | Design implementation state | High       | Design is routed                                       |                                                                                                                    |
-| Clock nodes activity        | Medium     | More than 5% of clocks are missing user specification  | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
+| Clock nodes activity        | Low        | User specified less than 75% of clocks                 | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
 | I/O nodes activity          | Low        | More than 75% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view           |
 | Internal nodes activity     | Medium     | User specified less than 25% of internal nodes         | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views         |
 | Device models               | High       | Device models are Production                           |                                                                                                                    |
@@ -145,8 +145,6 @@ Table of Contents
 +---------+-----------+
 | lab3    |     0.007 |
 |   u_alu |     0.002 |
-|   u_dm  |     0.001 |
-|   u_rf  |     0.001 |
 +---------+-----------+
 
 

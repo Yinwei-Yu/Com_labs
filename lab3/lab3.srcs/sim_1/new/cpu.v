@@ -44,6 +44,15 @@ module tb_lab3;
       .dout(uut.dout)
   );
 
+  seg7x16 u_seg7x16 (
+      .clk(clk),
+      .rstn(rstn),
+      .i_data(uut.display_data),
+      .disp_mode(uut.sw_i[0]),
+      .o_seg(uut.disp_seg_o),
+      .o_sel(uut.disp_an_o)
+  );
+
   // Clock generation (10ns period, 50MHz)
   always begin
     clk = 1'b0;
@@ -58,10 +67,10 @@ module tb_lab3;
     // Initialize inputs
     counter = 6'b0;
     rstn = 1'b0;  // Apply reset
-    sw_i = 16'b0;  // Initialize switch input to 0
+    sw_i = 16'b0010_0000_0000_0000;  // Initialize switch input to 0
     #5 rstn = 1'b1;  // Deassert reset
     // Finish simulation after some time
-    #200;
+    #1000;
     $finish;
   end
 
@@ -86,16 +95,19 @@ module tb_lab3;
         u_dm.dmem[21], u_dm.dmem[22], u_dm.dmem[23], u_dm.dmem[24], u_dm.dmem[25], u_dm.dmem[26],
         u_dm.dmem[27], u_dm.dmem[28], u_dm.dmem[29], u_dm.dmem[30], u_dm.dmem[31]);
     $monitor(
-        "Time:%0t | clk:%b | Register| x0:%h | x1:%h | x2:%h | x3:%h | x4:%h | x5:%h | x6:%h | x7:%h | x8:%h | x9:%h | x10:%h | x11:%h | x12:%h | x13:%h | x14:%h | x15:%h |",
+        "Time:%0t | clk:%b | Register | x0:%h | x1:%h | x2:%h | x3:%h | x4:%h | x5:%h | x6:%h | x7:%h | x8:%h | x9:%h | x10:%h | x11:%h | x12:%h | x13:%h | x14:%h | x15:%h |",
         $time, clk, u_rf.rf[0], u_rf.rf[1], u_rf.rf[2], u_rf.rf[3], u_rf.rf[4], u_rf.rf[5],
         u_rf.rf[6], u_rf.rf[7], u_rf.rf[8], u_rf.rf[9], u_rf.rf[10], u_rf.rf[11], u_rf.rf[12],
         u_rf.rf[13], u_rf.rf[14], u_rf.rf[15]);
     $monitor(
-        "Time:%0t | clk:%b | Register| x16:%h | x17:%h | x18:%h | x19:%h | x20:%h | x21:%h | x22:%h | x23:%h | x24:%h | x25:%h | x26:%h | x27:%h | x28:%h | x29:%h | x30:%h | x31:%h |\n",
+        "Time:%0t | clk:%b | Register | x16:%h | x17:%h | x18:%h | x19:%h | x20:%h | x21:%h | x22:%h | x23:%h | x24:%h | x25:%h | x26:%h | x27:%h | x28:%h | x29:%h | x30:%h | x31:%h |",
         $time, clk, u_rf.rf[16], u_rf.rf[17], u_rf.rf[18], u_rf.rf[19], u_rf.rf[20], u_rf.rf[21],
         u_rf.rf[22], u_rf.rf[23], u_rf.rf[24], u_rf.rf[25], u_rf.rf[26], u_rf.rf[27], u_rf.rf[28],
         u_rf.rf[29], u_rf.rf[30], u_rf.rf[31]);
-
+    $monitor(
+        "Time:%0t | clk:%b | Segment | disp_seg_o:%h | disp_an_o:%h | dispdata:%h | Regdata:%h | idata_store:%h | seg7_addr:%h | seg_data_r:%h\n",
+        $time, clk, disp_seg_o, disp_an_o, uut.display_data, uut.reg_data, u_seg7x16.i_data_store,
+        u_seg7x16.seg7_addr, u_seg7x16.seg_data_r);
   end
 
 endmodule

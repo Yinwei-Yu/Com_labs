@@ -64,14 +64,14 @@ module lab3 (
 
   //choose display source data
 
-  always @(sw_i) begin
+  always @(*) begin
     if (sw_i[0] == 0) begin
       case (sw_i[14:11])
-        4'b1000: display_data = ac_instr;
-        4'b0100: display_data = reg_data;
-        4'b0010: display_data = alu_disp_data;
-        4'b0001: display_data = dmem_data;
-        default: display_data = ac_instr;
+        4'b1000: display_data <= ac_instr;
+        4'b0100: display_data <= reg_data;
+        4'b0010: display_data <= alu_disp_data;
+        4'b0001: display_data <= dmem_data;
+        default: display_data <= ac_instr;
       endcase
     end else begin
       display_data = led_disp_data;
@@ -109,7 +109,7 @@ module lab3 (
     end else begin
       if (reg_addr == RFMAX) begin
         reg_addr = 0;
-      end else if (sw_i[13] == 1'b1) begin
+      end else begin
         reg_addr = reg_addr + 1'b1;
         reg_data = u_rf.rf[reg_addr];
       end
@@ -166,7 +166,7 @@ module lab3 (
   reg  [31:0] PC;
   wire [31:0] instr;
   wire [ 1:0] PCSel;
-  always @(posedge clk or negedge rstn) begin
+  always @(posedge clk_cpu or negedge rstn) begin
     if (!rstn) begin
       PC = 32'b0;
     end else begin
@@ -251,7 +251,7 @@ module lab3 (
   end
 
   RF u_rf (
-      .clk (clk),
+      .clk (clk_cpu),
       .rst (rstn),
       .RFWr(RegWrite),
       .sw_i(sw_i),
@@ -301,7 +301,7 @@ module lab3 (
   assign din  = RD2;
 
   DM u_dm (
-      .clk(clk),
+      .clk(clk_cpu),
       .DMWr(DMWr),
       .addr(addr),
       .din(din),
