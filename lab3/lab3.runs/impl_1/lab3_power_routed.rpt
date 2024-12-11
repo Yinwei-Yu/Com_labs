@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Mon Dec  9 00:03:58 2024
+| Date             : Wed Dec 11 15:45:01 2024
 | Host             : Zero running 64-bit major release  (build 9200)
 | Command          : report_power -file lab3_power_routed.rpt -pb lab3_power_summary_routed.pb -rpx lab3_power_routed.rpx
 | Design           : lab3
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.002 |     8134 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     5290 |     63400 |            8.34 |
+| Slice Logic              |     0.002 |     8164 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     5323 |     63400 |            8.40 |
 |   F7/F8 Muxes            |    <0.001 |      723 |     63400 |            1.14 |
-|   Register               |    <0.001 |     1800 |    126800 |            1.42 |
+|   Register               |    <0.001 |     1802 |    126800 |            1.42 |
 |   CARRY4                 |    <0.001 |       59 |     15850 |            0.37 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |       14 |       --- |             --- |
 |   LUT as Distributed RAM |     0.000 |       64 |     19000 |            0.34 |
-| Signals                  |     0.002 |     5559 |       --- |             --- |
+| Signals                  |     0.002 |     5595 |       --- |             --- |
 | I/O                      |     0.002 |       25 |       210 |           11.90 |
 | Static Power             |     0.097 |          |           |                 |
 | Total                    |     0.104 |          |           |                 |

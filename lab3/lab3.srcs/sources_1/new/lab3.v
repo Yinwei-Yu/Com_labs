@@ -70,7 +70,7 @@ module lab3 (
         4'b1000: display_data <= ac_instr;
         4'b0100: display_data <= reg_data;
         4'b0010: display_data <= alu_disp_data;
-        4'b0001: display_data <= dmem_data;
+        4'b0001: display_data <= {{dm_addr}, {dmem_data[27:0]}};
         default: display_data <= ac_instr;
       endcase
     end else begin
