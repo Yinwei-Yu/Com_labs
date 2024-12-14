@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Sun Dec  8 13:30:18 2024
+| Date             : Sat Dec 14 22:54:57 2024
 | Host             : Zero running 64-bit major release  (build 9200)
 | Command          : report_power -file lab3_power_routed.rpt -pb lab3_power_summary_routed.pb -rpx lab3_power_routed.rpx
 | Design           : lab3
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.102        |
+| Total On-Chip Power (W)  | 0.101        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.005        |
+| Dynamic (W)              | 0.003        |
 | Device Static (W)        | 0.097        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.5         |
@@ -52,19 +52,19 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.002 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |     7891 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |     5230 |     63400 |            8.25 |
+| Clocks                   |    <0.001 |        3 |       --- |             --- |
+| Slice Logic              |    <0.001 |     7895 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |     5233 |     63400 |            8.25 |
 |   F7/F8 Muxes            |    <0.001 |      696 |     63400 |            1.10 |
-|   Register               |    <0.001 |     1773 |    126800 |            1.40 |
+|   Register               |    <0.001 |     1775 |    126800 |            1.40 |
 |   CARRY4                 |    <0.001 |       29 |     15850 |            0.18 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |       12 |       --- |             --- |
 |   LUT as Distributed RAM |     0.000 |       64 |     19000 |            0.34 |
-| Signals                  |    <0.001 |     4935 |       --- |             --- |
+| Signals                  |    <0.001 |     4943 |       --- |             --- |
 | I/O                      |     0.002 |       25 |       210 |           11.90 |
 | Static Power             |     0.097 |          |           |                 |
-| Total                    |     0.102 |          |           |                 |
+| Total                    |     0.101 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.018 |       0.003 |      0.015 |
+| Vccint    |       1.000 |     0.017 |       0.002 |      0.015 |
 | Vccaux    |       1.800 |     0.018 |       0.000 |      0.018 |
 | Vcco33    |       3.300 |     0.004 |       0.000 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -97,7 +97,7 @@ Table of Contents
 | User Input Data             | Confidence | Details                                                | Action                                                                                                             |
 +-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | Design implementation state | High       | Design is routed                                       |                                                                                                                    |
-| Clock nodes activity        | Medium     | More than 5% of clocks are missing user specification  | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
+| Clock nodes activity        | Low        | User specified less than 75% of clocks                 | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
 | I/O nodes activity          | Low        | More than 75% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view           |
 | Internal nodes activity     | Medium     | User specified less than 25% of internal nodes         | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views         |
 | Device models               | High       | Device models are Production                           |                                                                                                                    |
@@ -140,11 +140,10 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+--------+-----------+
-| Name   | Power (W) |
-+--------+-----------+
-| lab3   |     0.005 |
-|   u_rf |     0.001 |
-+--------+-----------+
++------+-----------+
+| Name | Power (W) |
++------+-----------+
+| lab3 |     0.003 |
++------+-----------+
 
 
