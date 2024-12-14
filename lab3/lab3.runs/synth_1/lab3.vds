@@ -2,8 +2,8 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Sun Dec  1 21:56:44 2024
-# Process ID: 13932
+# Start of session at: Sat Dec 14 22:34:02 2024
+# Process ID: 9424
 # Current directory: E:/Works/com_labs/lab3/lab3.runs/synth_1
 # Command line: vivado.exe -log lab3.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source lab3.tcl
 # Log file: E:/Works/com_labs/lab3/lab3.runs/synth_1/lab3.vds
@@ -15,9 +15,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 11080 
+INFO: Helper process launched with PID 14080 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 401.957 ; gain = 99.773
+Starting RTL Elaboration : Time (s): cpu = 00:00:00 ; elapsed = 00:00:01 . Memory (MB): peak = 401.625 ; gain = 100.156
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'lab3' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:23]
 	Parameter LED_DATA_NUM bound to: 10 - type: integer 
@@ -29,8 +29,8 @@ WARNING: [Synth 8-567] referenced signal 'reg_data' should be on the sensitivity
 WARNING: [Synth 8-567] referenced signal 'alu_disp_data' should be on the sensitivity list [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:113]
 WARNING: [Synth 8-567] referenced signal 'dmem_data' should be on the sensitivity list [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:113]
 WARNING: [Synth 8-567] referenced signal 'led_disp_data' should be on the sensitivity list [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:113]
-INFO: [Synth 8-6157] synthesizing module 'dist_mem_gen_0' [E:/Works/com_labs/lab3/lab3.runs/synth_1/.Xil/Vivado-13932-Zero/realtime/dist_mem_gen_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'dist_mem_gen_0' (1#1) [E:/Works/com_labs/lab3/lab3.runs/synth_1/.Xil/Vivado-13932-Zero/realtime/dist_mem_gen_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'dist_mem_gen_0' [E:/Works/com_labs/lab3/lab3.runs/synth_1/.Xil/Vivado-9424-Zero/realtime/dist_mem_gen_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'dist_mem_gen_0' (1#1) [E:/Works/com_labs/lab3/lab3.runs/synth_1/.Xil/Vivado-9424-Zero/realtime/dist_mem_gen_0_stub.v:6]
 WARNING: [Synth 8-689] width (32) of port connection 'a' does not match port width (6) of module 'dist_mem_gen_0' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:128]
 WARNING: [Synth 8-350] instance 'u_IM' of module 'dist_mem_gen_0' requires 5 connections, but only 2 given [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:127]
 INFO: [Synth 8-6157] synthesizing module 'seg7x16' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/seg7x16.v:23]
@@ -40,8 +40,13 @@ INFO: [Synth 8-6155] done synthesizing module 'RF' (3#1) [E:/Works/com_labs/lab3
 INFO: [Synth 8-6157] synthesizing module 'ALU' [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/ALU.v:1]
 INFO: [Synth 8-6155] done synthesizing module 'ALU' (4#1) [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/ALU.v:1]
 WARNING: [Synth 8-5788] Register reg_data_reg in module lab3 is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:101]
-WARNING: [Synth 8-5788] Register alu_disp_data_reg in module lab3 is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:207]
+WARNING: [Synth 8-5788] Register alu_disp_data_reg in module lab3 is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:199]
 WARNING: [Synth 8-3848] Net dmem_data in module/entity lab3 does not have driver. [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:109]
+WARNING: [Synth 8-3848] Net RegWrite in module/entity lab3 does not have driver. [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:142]
+WARNING: [Synth 8-3848] Net rs1 in module/entity lab3 does not have driver. [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:143]
+WARNING: [Synth 8-3848] Net rs2 in module/entity lab3 does not have driver. [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:144]
+WARNING: [Synth 8-3848] Net rd in module/entity lab3 does not have driver. [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:145]
+WARNING: [Synth 8-3848] Net WD in module/entity lab3 does not have driver. [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:146]
 INFO: [Synth 8-6155] done synthesizing module 'lab3' (5#1) [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:23]
 WARNING: [Synth 8-3331] design RF has unconnected port sw_i[15]
 WARNING: [Synth 8-3331] design RF has unconnected port sw_i[14]
@@ -59,7 +64,7 @@ WARNING: [Synth 8-3331] design RF has unconnected port sw_i[3]
 WARNING: [Synth 8-3331] design RF has unconnected port sw_i[2]
 WARNING: [Synth 8-3331] design RF has unconnected port sw_i[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 457.457 ; gain = 155.273
+Finished RTL Elaboration : Time (s): cpu = 00:00:00 ; elapsed = 00:00:02 . Memory (MB): peak = 456.852 ; gain = 155.383
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -68,14 +73,62 @@ Report Check Netlist:
 +------+------------------+-------+---------+-------+------------------+
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
+WARNING: [Synth 8-3295] tying undriven pin u_rf:RFWr to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A1[4] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A1[3] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A1[2] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A1[1] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A1[0] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A2[4] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A2[3] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A2[2] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A2[1] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A2[0] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A3[4] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A3[3] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A3[2] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A3[1] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:A3[0] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[31] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[30] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[29] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[28] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[27] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[26] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[25] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[24] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[23] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[22] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[21] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[20] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[19] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[18] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[17] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[16] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[15] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[14] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[13] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[12] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[11] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[10] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[9] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[8] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[7] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[6] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[5] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[4] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[3] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[2] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[1] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
+WARNING: [Synth 8-3295] tying undriven pin u_rf:WD[0] to constant 0 [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/lab3.v:157]
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 457.457 ; gain = 155.273
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:00 ; elapsed = 00:00:02 . Memory (MB): peak = 456.852 ; gain = 155.383
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 457.457 ; gain = 155.273
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:00 ; elapsed = 00:00:02 . Memory (MB): peak = 456.852 ; gain = 155.383
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a100tcsg324-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -113,31 +166,31 @@ Finished Parsing XDC File [E:/Works/com_labs/icf.xdc]
 WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [E:/Works/com_labs/icf.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/lab3_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [E:/Works/com_labs/icf.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/lab3_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/lab3_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 818.555 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 818.594 ; gain = 0.000
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 818.613 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 818.664 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 818.613 ; gain = 0.000
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 818.613 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 818.664 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 818.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 818.613 ; gain = 516.430
+Finished Constraint Validation : Time (s): cpu = 00:00:02 ; elapsed = 00:00:09 . Memory (MB): peak = 818.664 ; gain = 517.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 818.613 ; gain = 516.430
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:02 ; elapsed = 00:00:10 . Memory (MB): peak = 818.664 ; gain = 517.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 Applied set_property DONT_TOUCH = true for u_IM. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 818.613 ; gain = 516.430
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:02 ; elapsed = 00:00:10 . Memory (MB): peak = 818.664 ; gain = 517.195
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5587] ROM size for "o_seg_r" is below threshold of ROM address width. It will be mapped to LUTs
 INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [E:/Works/com_labs/lab3/lab3.srcs/sources_1/new/ALU.v:12]
@@ -145,7 +198,7 @@ INFO: [Synth 8-5545] ROM "Zero_reg0" won't be mapped to RAM because address size
 INFO: [Synth 8-5545] ROM "rom_addr" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 INFO: [Synth 8-5544] ROM "LED_DATA" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 818.613 ; gain = 516.430
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:12 . Memory (MB): peak = 818.664 ; gain = 517.195
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -165,13 +218,12 @@ Detailed RTL Component Info :
 	   2 Input      3 Bit       Adders := 2     
 +---Registers : 
 	               64 Bit    Registers := 2     
-	               32 Bit    Registers := 37    
-	               31 Bit    Registers := 1     
+	               32 Bit    Registers := 35    
 	                8 Bit    Registers := 1     
 	                6 Bit    Registers := 1     
 	                5 Bit    Registers := 1     
-	                3 Bit    Registers := 5     
-	                2 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 2     
 	                1 Bit    Registers := 1     
 +---Muxes : 
 	  12 Input     64 Bit        Muxes := 1     
@@ -199,12 +251,11 @@ Detailed RTL Component Info :
 	   2 Input      3 Bit       Adders := 1     
 +---Registers : 
 	               64 Bit    Registers := 1     
-	               32 Bit    Registers := 5     
-	               31 Bit    Registers := 1     
+	               32 Bit    Registers := 3     
 	                6 Bit    Registers := 1     
 	                5 Bit    Registers := 1     
-	                3 Bit    Registers := 4     
-	                2 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
 	                1 Bit    Registers := 1     
 +---Muxes : 
 	  12 Input     64 Bit        Muxes := 1     
@@ -272,34 +323,6 @@ WARNING: [Synth 8-3331] design RF has unconnected port sw_i[4]
 WARNING: [Synth 8-3331] design RF has unconnected port sw_i[3]
 WARNING: [Synth 8-3331] design RF has unconnected port sw_i[2]
 WARNING: [Synth 8-3331] design RF has unconnected port sw_i[0]
-INFO: [Synth 8-3886] merging instance 'WD_reg[2]' (FDE) to 'WD_reg[3]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[3]' (FDE) to 'WD_reg[4]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[4]' (FDE) to 'WD_reg[5]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[5]' (FDE) to 'WD_reg[6]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[6]' (FDE) to 'WD_reg[7]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[7]' (FDE) to 'WD_reg[8]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[8]' (FDE) to 'WD_reg[9]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[9]' (FDE) to 'WD_reg[10]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[10]' (FDE) to 'WD_reg[11]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[11]' (FDE) to 'WD_reg[12]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[12]' (FDE) to 'WD_reg[13]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[13]' (FDE) to 'WD_reg[14]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[14]' (FDE) to 'WD_reg[15]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[15]' (FDE) to 'WD_reg[16]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[16]' (FDE) to 'WD_reg[17]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[17]' (FDE) to 'WD_reg[18]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[18]' (FDE) to 'WD_reg[19]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[19]' (FDE) to 'WD_reg[20]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[20]' (FDE) to 'WD_reg[21]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[21]' (FDE) to 'WD_reg[22]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[22]' (FDE) to 'WD_reg[23]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[23]' (FDE) to 'WD_reg[24]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[24]' (FDE) to 'WD_reg[25]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[25]' (FDE) to 'WD_reg[26]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[26]' (FDE) to 'WD_reg[27]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[27]' (FDE) to 'WD_reg[28]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[28]' (FDE) to 'WD_reg[29]'
-INFO: [Synth 8-3886] merging instance 'WD_reg[29]' (FDE) to 'WD_reg[30]'
 INFO: [Synth 8-3886] merging instance 'led_disp_data_reg[62]' (FDCE) to 'led_disp_data_reg[63]'
 INFO: [Synth 8-3886] merging instance 'led_disp_data_reg[54]' (FDCE) to 'led_disp_data_reg[63]'
 INFO: [Synth 8-3886] merging instance 'led_disp_data_reg[46]' (FDCE) to 'led_disp_data_reg[63]'
@@ -366,7 +389,7 @@ INFO: [Synth 8-3886] merging instance 'u_seg7x16/i_data_store_reg[47]' (FDC) to 
 INFO: [Synth 8-3886] merging instance 'u_seg7x16/i_data_store_reg[33]' (FDC) to 'u_seg7x16/i_data_store_reg[34]'
 INFO: [Synth 8-3886] merging instance 'u_seg7x16/i_data_store_reg[43]' (FDC) to 'u_seg7x16/i_data_store_reg[50]'
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:05 ; elapsed = 00:00:11 . Memory (MB): peak = 818.613 ; gain = 516.430
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:05 ; elapsed = 00:00:18 . Memory (MB): peak = 818.664 ; gain = 517.195
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -378,13 +401,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:15 . Memory (MB): peak = 818.613 ; gain = 516.430
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:30 . Memory (MB): peak = 818.664 ; gain = 517.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:16 . Memory (MB): peak = 829.277 ; gain = 527.094
+Finished Timing Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:31 . Memory (MB): peak = 820.004 ; gain = 518.535
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -396,7 +419,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:08 ; elapsed = 00:00:16 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished Technology Mapping : Time (s): cpu = 00:00:10 ; elapsed = 00:00:33 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -454,7 +477,7 @@ CRITICAL WARNING: [Synth 8-4442] BlackBox module u_IM has unconnected pin d[0]
 CRITICAL WARNING: [Synth 8-4442] BlackBox module u_IM has unconnected pin clk
 CRITICAL WARNING: [Synth 8-4442] BlackBox module u_IM has unconnected pin we
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished IO Insertion : Time (s): cpu = 00:00:10 ; elapsed = 00:00:35 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -467,7 +490,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:10 ; elapsed = 00:00:35 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -479,25 +502,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:10 ; elapsed = 00:00:35 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:10 ; elapsed = 00:00:35 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:35 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:10 ; elapsed = 00:00:35 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -517,18 +540,18 @@ Report Cell Usage:
 |1     |dist_mem_gen_0 |     1|
 |2     |BUFG           |     2|
 |3     |CARRY4         |    27|
-|4     |LUT1           |    21|
-|5     |LUT2           |    59|
+|4     |LUT1           |    77|
+|5     |LUT2           |    24|
 |6     |LUT3           |    46|
-|7     |LUT4           |    44|
-|8     |LUT5           |   319|
-|9     |LUT6           |   518|
-|10    |MUXF7          |   196|
+|7     |LUT4           |    36|
+|8     |LUT5           |    71|
+|9     |LUT6           |   390|
+|10    |MUXF7          |   132|
 |11    |FDCE           |  1101|
 |12    |FDPE           |    89|
-|13    |FDRE           |   115|
+|13    |FDRE           |    41|
 |14    |FDSE           |    32|
-|15    |IBUF           |    18|
+|15    |IBUF           |    17|
 |16    |OBUF           |    16|
 +------+---------------+------+
 
@@ -536,33 +559,33 @@ Report Instance Areas:
 +------+------------+--------+------+
 |      |Instance    |Module  |Cells |
 +------+------------+--------+------+
-|1     |top         |        |  2635|
-|2     |  u_rf      |RF      |  1483|
-|3     |  u_alu     |ALU     |    80|
+|1     |top         |        |  2133|
+|2     |  u_rf      |RF      |  1034|
+|3     |  u_alu     |ALU     |   104|
 |4     |  u_seg7x16 |seg7x16 |   221|
 +------+------------+--------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:10 ; elapsed = 00:00:35 . Memory (MB): peak = 835.348 ; gain = 533.879
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 34 critical warnings and 15 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:05 ; elapsed = 00:00:13 . Memory (MB): peak = 850.754 ; gain = 187.414
-Synthesis Optimization Complete : Time (s): cpu = 00:00:08 ; elapsed = 00:00:17 . Memory (MB): peak = 850.754 ; gain = 548.570
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:31 . Memory (MB): peak = 835.348 ; gain = 172.066
+Synthesis Optimization Complete : Time (s): cpu = 00:00:11 ; elapsed = 00:00:36 . Memory (MB): peak = 835.348 ; gain = 533.879
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 223 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 159 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 850.754 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 835.348 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-123 Infos, 65 Warnings, 34 Critical Warnings and 0 Errors encountered.
+95 Infos, 118 Warnings, 34 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:19 . Memory (MB): peak = 850.754 ; gain = 560.074
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 850.754 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:12 ; elapsed = 00:00:39 . Memory (MB): peak = 835.348 ; gain = 545.352
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 835.348 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'E:/Works/com_labs/lab3/lab3.runs/synth_1/lab3.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file lab3_utilization_synth.rpt -pb lab3_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun Dec  1 21:57:05 2024...
+INFO: [Common 17-206] Exiting Vivado at Sat Dec 14 22:34:44 2024...

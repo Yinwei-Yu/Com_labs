@@ -176,17 +176,9 @@ module lab3 (
   reg [2:0] alu_addr;
   always @(posedge clk) begin
     if (sw_i[12] == 1'b1) begin
-      if (sw_i[2] == 1'b0) begin
-        rs1 = sw_i[10:8];
-        rs2 = sw_i[7:5];
-        A   = RD1;
-        B   = RD2;
-      end else begin
-        rd = sw_i[10:8];
-        WD = {{28{sw_i[7]}}, sw_i[7:5]};
-      end
-      RegWrite = sw_i[2];
-      ALUop = sw_i[4:3];
+      A   = sw_i[10:7];
+      B   = sw_i[6:3];
+      ALUop = sw_i[2];
     end
   end
 
