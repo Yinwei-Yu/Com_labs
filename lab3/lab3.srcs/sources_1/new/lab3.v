@@ -163,12 +163,34 @@ module lab3 (
   //THE TRUE CPU HERE
 
   //PC update
-  reg  [31:0] PC;
+  reg [31:0] PC;
+  
   wire [31:0] instr;
-  wire [ 1:0] PCSel;
+  wire [1:0] PCSel;
+  //NPC和PC模块暂时有错
+  //如果用NPC和PC模块，把下面的代码注释打开，上面的reg [31:0] PC 注释掉
+  // wire [31:0] PC;
+  // wire [31:0] NPC;
+  // wire PCwr = !sw_i[1];  //sw_i[1] = 1, PC write disable
+
+  //下面的是不需要NPC和PC模块的代码,如需使用NPC和PC模块，注释掉下面的代码
+  //PC和NPC模块在代码底部
   always @(posedge clk_cpu or negedge rstn) begin
     if (!rstn) begin
-      PC = 32'b0;
+      case (sw_i)
+        4'b0000: PC <= 32'h0000_0000;  //beq
+        4'b0001: PC <= 32'h0000_0080;  //bne
+        4'b0010: PC <= 32'h0000_0100;  //blt
+        4'b0011: PC <= 32'h0000_0180;  //bge
+        4'b0100: PC <= 32'h0000_0200;  //bltu
+        4'b0101: PC <= 32'h0000_0280;  //bgeu
+        4'b0110: PC <= 32'h0000_0300;  //jal
+        4'b0111: PC <= 32'h0000_037c;  //jalr   
+        4'b1000: PC <= 32'h0000_03f0;  //sll
+        4'b1001: PC <= 32'h0000_0410;  //srl 
+        4'b1010: PC <= 32'h0000_0430;  //sra 
+        default: PC <= 32'h0000_0000;
+      endcase
     end else begin
       if (sw_i[1] == 1'b0) begin
         if (PCSel == 2'b00) begin
@@ -183,6 +205,8 @@ module lab3 (
       end
     end
   end
+
+
 
   dist_mem_gen_0 u_im (
       .a  (PC / 4),
@@ -286,16 +310,10 @@ module lab3 (
 
   //DM
   wire DMWr;
-  wire [5:0] addr;
+  wire [8:0] addr; //9位地址支持512个字节寻址,改的话注意下面的模块里的addr位数也要改
   wire [31:0] din;
   wire [2:0] DMType;
   wire [31:0] dout;
-  // always @(posedge clk) begin
-  //   if (sw_i[11] == 1'b1) begin
-  //     //DMWr   = 0;
-  //     //DMType = sw_i[10:8];
-  //   end
-  // end
 
   assign addr = ALUout;
   assign din  = RD2;
@@ -331,5 +349,27 @@ module lab3 (
       .WDSel(WDSel),
       .PCSel(PCSel)
   );
+
+  // PC u_pc (
+  //     .clk(clk),
+  //     .rst(rstn),
+  //     .NPC(NPC),
+  //     .PCwr(PCwr),
+  //     .sw_i(sw_i),
+  //     .PC(PC)
+  // );
+
+
+  // NPC u_npc (
+  //     .clk(clk),
+  //     .rst(rstn),
+  //     .sw_i(sw_i),
+  //     .PC(PC),
+  //     .PCSel(PCSel),
+  //     .immout(immout),
+  //     .ALUout(ALUout),
+  //     .instr(instr),
+  //     .NPC(NPC)
+  // );
 
 endmodule

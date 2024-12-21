@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Wed Dec 11 15:44:33 2024
+| Date         : Sun Dec 22 00:38:42 2024
 | Host         : Zero running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file lab3_control_sets_placed.rpt
 | Design       : lab3
@@ -23,8 +23,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Number of unique control sets                            |   105 |
-| Unused register locations in slices containing registers |   382 |
+| Number of unique control sets                            |   124 |
+| Unused register locations in slices containing registers |   549 |
 +----------------------------------------------------------+-------+
 
 
@@ -34,22 +34,22 @@ Table of Contents
 +--------+--------------+
 | Fanout | Control Sets |
 +--------+--------------+
-|      1 |           11 |
-|      2 |            8 |
-|      3 |           12 |
-|      4 |            4 |
+|      1 |           32 |
+|      2 |           13 |
+|      3 |           10 |
+|      4 |            5 |
 |      5 |            3 |
-|      6 |            3 |
-|      7 |            6 |
-|      8 |            7 |
-|      9 |            6 |
+|      6 |            1 |
+|      7 |            3 |
+|      8 |            6 |
+|      9 |            4 |
 |     10 |            3 |
-|     11 |            2 |
+|     11 |            3 |
 |     12 |            8 |
-|     13 |            5 |
+|     13 |            6 |
 |     14 |            3 |
-|     15 |            5 |
-|    16+ |           19 |
+|     15 |            3 |
+|    16+ |           21 |
 +--------+--------------+
 
 
@@ -59,11 +59,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             345 |          290 |
-| No           | No                    | Yes                    |             488 |          187 |
-| No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |             262 |          214 |
-| Yes          | No                    | Yes                    |             706 |          414 |
+| No           | No                    | No                     |            3105 |         2463 |
+| No           | No                    | Yes                    |             497 |          179 |
+| No           | Yes                   | No                     |               8 |            8 |
+| Yes          | No                    | No                     |            1070 |         1020 |
+| Yes          | No                    | Yes                    |             706 |          473 |
 | Yes          | Yes                   | No                     |               1 |            1 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -71,114 +71,133 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+---------------------+------------------------------+------------------------------------+------------------+----------------+
-|     Clock Signal    |         Enable Signal        |          Set/Reset Signal          | Slice Load Count | Bel Load Count |
-+---------------------+------------------------------+------------------------------------+------------------+----------------+
-|  clk_cpu_BUFG       | u_rf/rf[16][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[2][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[1][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[7][31]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                1 |              1 |
-|  clk_cpu_BUFG       | rstn_IBUF                    | alu_disp_data[0]_i_1_n_0           |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[26][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[8][31]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[4][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[3][13]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[31][28]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[28][25]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                1 |              1 |
-|  clk_cpu_BUFG       | u_rf/rf[5][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[24][26]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[10][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[6][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[12][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                1 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[28][25]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                1 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[20][28]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[18][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              2 |
-|  clk_cpu_BUFG       | u_rf/rf[27][28]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                3 |              3 |
-|  u_seg7x16/seg7_clk |                              | u_seg7x16/rstn                     |                2 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[22][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                3 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[5][31]_i_1_n_0       | u_rf/rstn                          |                2 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[26][31]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                2 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[13][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[14][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[11][15]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                3 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[19][22]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                1 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[21][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[25][26]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                1 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[19][22]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                3 |              3 |
-|  clk_cpu_BUFG       | u_rf/rf[30][31]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                4 |              4 |
-|  clk_cpu_BUFG       | u_rf/rf[29][30]_i_1_n_0      | u_rf/rf[31][2]_i_2_n_0             |                2 |              4 |
-|  clk_cpu_BUFG       | u_rf/rf[31][28]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                3 |              4 |
-|  clk_cpu_BUFG       | u_rf/rf[28][25]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                1 |              4 |
-|  clk_cpu_BUFG       | u_rf/rf[26][31]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                2 |              5 |
-|  clk_cpu_BUFG       | u_rf/rf[6][31]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                3 |              5 |
-|  clk_cpu_BUFG       | u_rf/rf[7][31]_i_1_n_0       | u_rf/rf[19][11]_i_1_n_0            |                4 |              5 |
-|  clk_IBUF_BUFG      |                              | u_seg7x16/i_data_store[20]_i_2_n_0 |                3 |              6 |
-|  clk_cpu_BUFG       | u_rf/rf[6][31]_i_1_n_0       | u_rf/rf[19][11]_i_1_n_0            |                6 |              6 |
-|  clk_cpu_BUFG       | u_rf/rf[31][28]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                4 |              6 |
-|  clk_cpu_BUFG       | u_alu/dmem[65][7]_i_3_0      |                                    |                7 |              7 |
-|  clk_cpu_BUFG       | u_alu/dmem[63][7]_i_1_39     |                                    |                6 |              7 |
-|  clk_cpu_BUFG       | u_rf/rf[30][31]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                6 |              7 |
-|  clk_cpu_BUFG       | u_rf/rf[19][22]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                4 |              7 |
-|  clk_cpu_BUFG       | u_rf/rf[24][26]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                2 |              7 |
-|  clk_cpu_BUFG       | u_rf/rf[25][26]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                6 |              7 |
-|  clk_cpu_BUFG       | u_rf/rf[27][28]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                5 |              8 |
-|  clk_cpu_BUFG       | dmem_data                    |                                    |                5 |              8 |
-|  clk_cpu_BUFG       |                              | u_rf/rstn                          |                4 |              8 |
-|  clk_cpu_BUFG       | u_alu/dmem[63][6]_i_2        |                                    |                5 |              8 |
-|  clk_cpu_BUFG       | u_rf/rf[24][26]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                7 |              8 |
-|  clk_IBUF_BUFG      | u_seg7x16/o_seg_r[7]_i_1_n_0 | u_seg7x16/i_data_store[20]_i_2_n_0 |                3 |              8 |
-|  clk_cpu_BUFG       | u_rf/rf[27][28]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                3 |              8 |
-|  clk_cpu_BUFG       | u_rf/rf[22][31]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                7 |              9 |
-|  clk_cpu_BUFG       | u_rf/rf[25][26]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                3 |              9 |
-|  clk_cpu_BUFG       | u_rf/rf[19][22]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |                5 |              9 |
-|  clk_cpu_BUFG       | u_rf/rf[7][31]_i_1_n_0       | u_rf/rf[16][31]_i_2_n_0            |                4 |              9 |
-|  clk_cpu_BUFG       | u_rf/rf[30][31]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                8 |              9 |
-|  clk_cpu_BUFG       | u_rf/rf[16][31]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |                5 |              9 |
-|  clk_cpu_BUFG       | u_rf/rf[8][31]_i_1_n_0       | u_rf/rf[16][31]_i_2_n_0            |                6 |             10 |
-|  clk_cpu_BUFG       | u_rf/rf[30][31]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                8 |             10 |
-|  clk_cpu_BUFG       | u_rf/rf[3][13]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                6 |             10 |
-|  clk_cpu_BUFG       | u_rf/rf[16][31]_i_1_n_0      | u_rf/rf[16][31]_i_2_n_0            |                8 |             11 |
-|  clk_cpu_BUFG       | u_rf/rf[29][30]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                8 |             11 |
-|  clk_cpu_BUFG       | u_rf/rf[13][31]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |                8 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[18][31]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                7 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[18][31]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |                7 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[20][28]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                6 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[21][31]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |               10 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[8][31]_i_1_n_0       | u_rf/rf[19][11]_i_1_n_0            |                7 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[1][31]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                7 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[14][31]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |               10 |             12 |
-|  clk_cpu_BUFG       | u_rf/rf[5][31]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                8 |             13 |
-|  clk_cpu_BUFG       | u_rf/rf[20][28]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                7 |             13 |
-|  clk_cpu_BUFG       | u_rf/rf[11][15]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |                4 |             13 |
-|  clk_cpu_BUFG       | u_rf/rf[6][31]_i_1_n_0       | u_rf/rf[16][31]_i_2_n_0            |                6 |             13 |
-|  clk_cpu_BUFG       | u_rf/rf[5][31]_i_1_n_0       | u_rf/rf[16][31]_i_2_n_0            |                8 |             13 |
-|  clk_cpu_BUFG       | u_rf/rf[14][31]_i_1_n_0      | u_rf/rf[16][31]_i_2_n_0            |               11 |             14 |
-|  clk_cpu_BUFG       | u_rf/rf[12][31]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |                7 |             14 |
-|  clk_cpu_BUFG       | u_rf/rf[10][31]_i_1_n_0      | u_rf/rf[19][11]_i_1_n_0            |                7 |             14 |
-|  clk_cpu_BUFG       | u_rf/rf[29][30]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                7 |             15 |
-|  clk_cpu_BUFG       | u_rf/rf[1][31]_i_1_n_0       | u_rf/rstn                          |                8 |             15 |
-|  clk_cpu_BUFG       | u_rf/rf[2][31]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                9 |             15 |
-|  clk_cpu_BUFG       | u_rf/rf[22][31]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                9 |             15 |
-|  clk_cpu_BUFG       | u_rf/rf[4][31]_i_1_n_0       | u_rf/rf[31][2]_i_2_n_0             |                9 |             15 |
-|  clk_cpu_BUFG       | u_rf/rf[21][31]_i_1_n_0      | u_rf/rf[30][22]_i_2_n_0            |                8 |             16 |
-|  clk_cpu_BUFG       | u_rf/rf[10][31]_i_1_n_0      | u_rf/rf[16][31]_i_2_n_0            |               10 |             16 |
-|  clk_cpu_BUFG       | u_rf/rf[13][31]_i_1_n_0      | u_rf/rf[16][31]_i_2_n_0            |               12 |             16 |
-|  clk_cpu_BUFG       | u_rf/rf[12][31]_i_1_n_0      | u_rf/rf[16][31]_i_2_n_0            |               10 |             16 |
-|  clk_cpu_BUFG       | u_rf/rf[4][31]_i_1_n_0       | u_rf/rstn                          |                5 |             16 |
-|  clk_cpu_BUFG       | u_rf/rf[2][31]_i_1_n_0       | u_rf/rstn                          |                7 |             16 |
-|  clk_IBUF_BUFG      |                              | u_rf/rstn                          |                7 |             28 |
-|  clk_cpu_BUFG       |                              | u_rf/rf[31][15]_i_2_n_0            |               11 |             29 |
-|  clk_cpu_BUFG       | PC[31]_i_1_n_0               | u_rf/rstn                          |               15 |             32 |
-|  clk_cpu_BUFG       | rom_addr                     | u_seg7x16/rstn                     |                6 |             32 |
-|  clk_cpu_BUFG       |                              | u_seg7x16/rstn                     |               13 |             40 |
-|  clk_IBUF_BUFG      |                              | u_seg7x16/rstn                     |               21 |             43 |
-|  clk_cpu_BUFG       | rstn_IBUF                    |                                    |               29 |             63 |
-|                     |                              |                                    |               16 |             64 |
-|  clk_cpu_BUFG       |                              | u_rf/rf[31][31]_i_2_n_0            |               37 |            103 |
-|  clk_cpu_BUFG       |                              | u_rf/rstn_0                        |               48 |            110 |
-|  clk_cpu_BUFG       |                              | u_rf/rf[29][15]_i_2_n_0            |               41 |            118 |
-|  clk_cpu_BUFG       | u_dm/sw_i[1]                 |                                    |              162 |            169 |
-|  clk_cpu_BUFG       |                              |                                    |              290 |            345 |
-+---------------------+------------------------------+------------------------------------+------------------+----------------+
++-------------------------+------------------------------+------------------------------------+------------------+----------------+
+|       Clock Signal      |         Enable Signal        |          Set/Reset Signal          | Slice Load Count | Bel Load Count |
++-------------------------+------------------------------+------------------------------------+------------------+----------------+
+|  clk_cpu_BUFG           |                              | PC_reg[8]_LDC_i_2_n_0              |                1 |              1 |
+|  PC_reg[8]_LDC_i_1_n_0  |                              | PC_reg[8]_LDC_i_2_n_0              |                1 |              1 |
+|  PC_reg[6]_LDC_i_1_n_0  |                              | PC_reg[6]_LDC_i_2_n_0              |                1 |              1 |
+|  PC_reg[7]_LDC_i_1_n_0  |                              | PC_reg[7]_LDC_i_2_n_0              |                1 |              1 |
+|  PC_reg[5]_LDC_i_1_n_0  |                              | PC_reg[5]_LDC_i_2_n_0              |                1 |              1 |
+|  PC_reg[4]_LDC_i_1_n_0  |                              | PC_reg[4]_LDC_i_2_n_0              |                1 |              1 |
+|  PC_reg[10]_LDC_i_1_n_0 |                              | PC_reg[10]_LDC_i_2_n_0             |                1 |              1 |
+|  PC_reg[3]_LDC_i_1_n_0  |                              | PC_reg[3]_LDC_i_2_n_0              |                1 |              1 |
+|  PC_reg[9]_LDC_i_1_n_0  |                              | PC_reg[9]_LDC_i_2_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[10]_LDC_i_1_n_0             |                1 |              1 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[9]_LDC_i_1_n_0              |                1 |              1 |
+|  clk_IBUF_BUFG          |                              | u_rf/rstn_1                        |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[8][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[16][31]_i_1_n_0      | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           |                              | PC_reg[6]_LDC_i_2_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           | rstn_IBUF                    | alu_disp_data[0]_i_1_n_0           |                1 |              1 |
+|  clk_cpu_BUFG           |                              | PC_reg[9]_LDC_i_2_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           |                              | PC_reg[5]_LDC_i_2_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           |                              | PC_reg[7]_LDC_i_2_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           |                              | PC_reg[4]_LDC_i_2_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           |                              | PC_reg[10]_LDC_i_2_n_0             |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[7][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[3][13]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[28][25]_i_1_n_0      | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[31][28]_i_1_n_0      | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[26][31]_i_1_n_0      | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[4][31]_i_1_n_0       | u_rf/rstn_0                        |                1 |              1 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[8]_LDC_i_1_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[6]_LDC_i_1_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[7]_LDC_i_1_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[5]_LDC_i_1_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[4]_LDC_i_1_n_0              |                1 |              1 |
+|  clk_cpu_BUFG           | u_rf/rf[10][31]_i_1_n_0      | u_rf/rstn_0                        |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[6][31]_i_1_n_0       | u_rf/rstn_0                        |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[22][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[12][31]_i_1_n_0      | u_rf/rstn_0                        |                2 |              2 |
+|  clk_cpu_BUFG           |                              | PC_reg[3]_LDC_i_2_n_0              |                1 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[14][31]_i_1_n_0      | u_rf/rf[14][4]_i_1_n_0             |                1 |              2 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | PC_reg[3]_LDC_i_1_n_0              |                1 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[18][31]_i_1_n_0      | u_rf/rstn_0                        |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[5][31]_i_1_n_0       | u_rf/rstn_0                        |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[24][26]_i_1_n_0      | u_rf/rstn_0                        |                1 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[20][28]_i_1_n_0      | u_rf/rstn_0                        |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[8][31]_i_1_n_0       | u_rf/rf[22][17]_i_1_n_0            |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[28][25]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                2 |              2 |
+|  clk_cpu_BUFG           | u_rf/rf[26][31]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                2 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[25][26]_i_1_n_0      | u_rf/rstn_0                        |                2 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[27][28]_i_1_n_0      | u_rf/rstn_0                        |                2 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[11][15]_i_1_n_0      | u_rf/rstn_0                        |                2 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[22][31]_i_1_n_0      | u_rf/rstn_0                        |                2 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[14][31]_i_1_n_0      | u_rf/rstn_0                        |                3 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[13][31]_i_1_n_0      | u_rf/rstn_0                        |                3 |              3 |
+|  u_seg7x16/seg7_clk     |                              | u_seg7x16/i_data_store[33]_i_2_n_0 |                2 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[19][22]_i_1_n_0      | u_rf/rstn_0                        |                3 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[21][31]_i_1_n_0      | u_rf/rstn_0                        |                3 |              3 |
+|  clk_cpu_BUFG           | u_rf/rf[29][30]_i_1_n_0      | u_rf/rstn_0                        |                3 |              4 |
+|  clk_cpu_BUFG           | u_rf/rf[2][31]_i_1_n_0       | u_rf/rf[14][4]_i_1_n_0             |                3 |              4 |
+|  clk_cpu_BUFG           | u_rf/rf[31][28]_i_1_n_0      | u_rf/rf[31][15]_i_2_n_0            |                3 |              4 |
+|  clk_cpu_BUFG           | u_rf/rf[30][31]_i_1_n_0      | u_rf/rstn_0                        |                2 |              4 |
+|  clk_cpu_BUFG           | u_rf/rf[28][25]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                2 |              4 |
+|  clk_cpu_BUFG           |                              | u_rf/rstn                          |                1 |              5 |
+|  clk_cpu_BUFG           | u_rf/rf[7][31]_i_1_n_0       | u_rf/rf[14][4]_i_1_n_0             |                5 |              5 |
+|  clk_cpu_BUFG           | u_rf/rf[26][31]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                5 |              5 |
+|  clk_cpu_BUFG           | u_rf/rf[31][28]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                5 |              6 |
+|  clk_cpu_BUFG           | u_rf/rf[25][26]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                4 |              7 |
+|  clk_cpu_BUFG           | u_rf/rf[24][26]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                4 |              7 |
+|  clk_cpu_BUFG           | u_rf/rf[19][22]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |                4 |              7 |
+|  clk_IBUF_BUFG          | u_seg7x16/o_seg_r[7]_i_1_n_0 | u_seg7x16/i_data_store[33]_i_2_n_0 |                6 |              8 |
+|  clk_cpu_BUFG           | u_rf/rf[27][28]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                5 |              8 |
+|  clk_cpu_BUFG           | u_rf/rf[24][26]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                4 |              8 |
+|  clk_cpu_BUFG           | u_rf/rf[27][28]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                6 |              8 |
+|  clk_cpu_BUFG           | dmem_data                    |                                    |                4 |              8 |
+|  clk_cpu_BUFG           | u_rf/rf[8][31]_i_1_n_0       | u_rf/rstn                          |                4 |              8 |
+|  clk_cpu_BUFG           | u_rf/rf[22][31]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                7 |              9 |
+|  clk_cpu_BUFG           | u_rf/rf[16][31]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                4 |              9 |
+|  clk_cpu_BUFG           | u_rf/rf[25][26]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |                7 |              9 |
+|  clk_cpu_BUFG           | u_rf/rf[7][31]_i_1_n_0       | u_rf/rstn                          |                8 |              9 |
+|  clk_cpu_BUFG           | u_rf/rf[3][13]_i_1_n_0       | u_rf/rf[14][4]_i_1_n_0             |                6 |             10 |
+|  clk_cpu_BUFG           | u_rf/rf[14][31]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                7 |             10 |
+|  clk_cpu_BUFG           | u_rf/rf[30][31]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                8 |             10 |
+|  clk_cpu_BUFG           | u_rf/rf[16][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |                6 |             11 |
+|  clk_cpu_BUFG           | u_rf/rf[6][31]_i_1_n_0       | u_rf/rf[14][4]_i_1_n_0             |                7 |             11 |
+|  clk_cpu_BUFG           | u_rf/rf[29][30]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                9 |             11 |
+|  clk_cpu_BUFG           | u_rf/rf[18][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |                5 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[20][28]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                7 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[13][31]_i_1_n_0      | u_rf/rf[14][4]_i_1_n_0             |                8 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[21][31]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                8 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[18][31]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                7 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[19][22]_i_1_n_0      | u_rf/rf[30][15]_i_2_n_0            |                6 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[2][31]_i_1_n_0       | u_rf/rstn_0                        |                7 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[8][31]_i_1_n_0       | u_rf/rf[14][4]_i_1_n_0             |                8 |             12 |
+|  clk_cpu_BUFG           | u_rf/rf[6][31]_i_1_n_0       | u_rf/rstn                          |               12 |             13 |
+|  clk_cpu_BUFG           | u_rf/rf[1][31]_i_1_n_0       | u_rf/rstn_0                        |                7 |             13 |
+|  clk_cpu_BUFG           | u_rf/rf[11][15]_i_1_n_0      | u_rf/rf[14][4]_i_1_n_0             |                9 |             13 |
+|  clk_cpu_BUFG           | u_rf/rf[5][31]_i_1_n_0       | u_rf/rf[14][4]_i_1_n_0             |                8 |             13 |
+|  clk_cpu_BUFG           | u_rf/rf[20][28]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |                9 |             13 |
+|  clk_cpu_BUFG           | u_rf/rf[22][31]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |               10 |             13 |
+|  clk_cpu_BUFG           | u_rf/rf[14][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |               12 |             14 |
+|  clk_cpu_BUFG           | u_rf/rf[12][31]_i_1_n_0      | u_rf/rf[14][4]_i_1_n_0             |                9 |             14 |
+|  clk_cpu_BUFG           | u_rf/rf[10][31]_i_1_n_0      | u_rf/rf[14][4]_i_1_n_0             |                7 |             14 |
+|  clk_cpu_BUFG           | u_rf/rf[1][31]_i_1_n_0       | u_rf/rstn                          |               10 |             15 |
+|  clk_cpu_BUFG           | u_rf/rf[29][30]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |               11 |             15 |
+|  clk_cpu_BUFG           | u_rf/rf[4][31]_i_1_n_0       | u_rf/rf[14][4]_i_1_n_0             |               10 |             15 |
+|  clk_cpu_BUFG           | u_rf/rf[13][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |               10 |             16 |
+|  clk_cpu_BUFG           | u_rf/rf[30][31]_i_1_n_0      | u_rf/rf[31][31]_i_2_n_0            |               14 |             16 |
+|  clk_cpu_BUFG           | u_rf/rf[21][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |               12 |             16 |
+|  clk_cpu_BUFG           | u_rf/rf[12][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |               10 |             16 |
+|  clk_cpu_BUFG           | u_rf/rf[10][31]_i_1_n_0      | u_rf/rf[22][17]_i_1_n_0            |               11 |             16 |
+|  clk_cpu_BUFG           | u_rf/rf[5][31]_i_1_n_0       | u_rf/rstn                          |               11 |             16 |
+|  clk_cpu_BUFG           | u_rf/rf[4][31]_i_1_n_0       | u_rf/rstn                          |               12 |             16 |
+|  clk_cpu_BUFG           | u_rf/rf[2][31]_i_1_n_0       | u_rf/rstn                          |               10 |             16 |
+|  clk_cpu_BUFG           | PC[31]_i_1_n_0               | u_rf/rstn_1                        |               14 |             23 |
+|  clk_IBUF_BUFG          |                              | u_rf/rstn                          |                7 |             27 |
+|  clk_cpu_BUFG           | rom_addr[31]_i_1_n_0         | u_rf/rstn_1                        |                7 |             32 |
+|  clk_cpu_BUFG           |                              | u_rf/rf[31][31]_i_2_n_0            |               15 |             42 |
+|  clk_cpu_BUFG           |                              | u_rf/rstn_0                        |               15 |             46 |
+|  clk_IBUF_BUFG          |                              | u_seg7x16/i_data_store[33]_i_2_n_0 |               20 |             49 |
+|  clk_cpu_BUFG           | rstn_IBUF                    |                                    |               36 |             63 |
+|                         |                              |                                    |               16 |             64 |
+|  clk_cpu_BUFG           |                              | u_rf/rstn_1                        |               29 |             69 |
+|  clk_cpu_BUFG           |                              | u_rf/rf[31][15]_i_2_n_0            |               41 |            121 |
+|  clk_cpu_BUFG           |                              | u_rf/rf[25][31]_i_2_n_0            |               40 |            125 |
+|  clk_cpu_BUFG           | u_dm/dmem[511][7]_i_1_n_0    |                                    |              980 |            999 |
+|  clk_cpu_BUFG           |                              |                                    |             2463 |           3105 |
++-------------------------+------------------------------+------------------------------------+------------------+----------------+
 
 

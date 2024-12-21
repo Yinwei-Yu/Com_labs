@@ -1,7 +1,7 @@
 module DM (
     input clk,
     input DMWr,
-    input [5:0] addr,
+    input [8:0] addr,
     input [31:0] din,
     input [2:0] DMType,
     input [15:0] sw_i,
@@ -16,7 +16,7 @@ module DM (
   `define dm_byte 3'b011
   `define dm_byte_unsigned 3'b100
 
-  reg [7:0] dmem[127:0];
+  reg [7:0] dmem[512:0];
 
   //initial dmem to index
   integer i;

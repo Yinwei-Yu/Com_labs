@@ -2,13 +2,13 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Sun Dec  8 23:57:45 2024
-# Process ID: 23720
+# Start of session at: Sun Dec 22 00:35:20 2024
+# Process ID: 24028
 # Current directory: E:/Works/com_labs/lab3/lab3.runs/dist_mem_gen_0_synth_1
 # Command line: vivado.exe -log dist_mem_gen_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dist_mem_gen_0.tcl
 # Log file: E:/Works/com_labs/lab3/lab3.runs/dist_mem_gen_0_synth_1/dist_mem_gen_0.vds
 # Journal file: E:/Works/com_labs/lab3/lab3.runs/dist_mem_gen_0_synth_1\vivado.jou
 #-----------------------------------------------------------
 source dist_mem_gen_0.tcl -notrace
-INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP dist_mem_gen_0, cache-ID = 129cf474985b68a4.
-INFO: [Common 17-206] Exiting Vivado at Sun Dec  8 23:57:47 2024...
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP dist_mem_gen_0, cache-ID = 5fff1001f73b3d8d.
+INFO: [Common 17-206] Exiting Vivado at Sun Dec 22 00:35:22 2024...

@@ -70,7 +70,7 @@ module tb_lab3;
     sw_i = 16'b0010_0000_0000_0000;  // Initialize switch input to 0
     #5 rstn = 1'b1;  // Deassert reset
     // Finish simulation after some time
-    #1000;
+    #500;
     $finish;
   end
 
@@ -78,8 +78,8 @@ module tb_lab3;
     // 
     $monitor(
         "Time: %0t | clk: %b| PC: %h | instr: %h | Op:%h | rs1:%h | rs2:%h | rd:%h | immout:%h | A:%h | B:%h | ALUout:%h | addr:%h | din:%h | dout:%h |",
-        $time, clk, uut.PC, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.immout, uut.A, uut.B,
-        uut.ALUout, uut.addr, uut.din, uut.dout);
+        $time, clk, uut.PC, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.immout,
+        uut.A, uut.B, uut.ALUout, uut.addr, uut.din, uut.dout);
     $monitor(
         "Time:%0t | clk:%b | Control | PCSel:%b | RegWrite:%b | WDSel:%b | ALUop:%b | ASel:%b | BSel:%b | Zero:%b | DMType:%b | MemWrite:%b | WDSel:%b |",
         $time, clk, uut.PCSel, uut.RegWrite, uut.WDSel, uut.ALUop, uut.ASel, uut.BSel, uut.Zero,
@@ -104,10 +104,6 @@ module tb_lab3;
         $time, clk, u_rf.rf[16], u_rf.rf[17], u_rf.rf[18], u_rf.rf[19], u_rf.rf[20], u_rf.rf[21],
         u_rf.rf[22], u_rf.rf[23], u_rf.rf[24], u_rf.rf[25], u_rf.rf[26], u_rf.rf[27], u_rf.rf[28],
         u_rf.rf[29], u_rf.rf[30], u_rf.rf[31]);
-    $monitor(
-        "Time:%0t | clk:%b | Segment | disp_seg_o:%h | disp_an_o:%h | dispdata:%h | Regdata:%h | idata_store:%h | seg7_addr:%h | seg_data_r:%h\n",
-        $time, clk, disp_seg_o, disp_an_o, uut.display_data, uut.reg_data, u_seg7x16.i_data_store,
-        u_seg7x16.seg7_addr, u_seg7x16.seg_data_r);
   end
 
 endmodule
