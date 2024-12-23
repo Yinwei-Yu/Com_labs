@@ -67,10 +67,10 @@ module tb_lab3;
     // Initialize inputs
     counter = 6'b0;
     rstn = 1'b0;  // Apply reset
-    sw_i = 16'b0010_0000_0000_0000;  // Initialize switch input to 0
+    sw_i = 16'b0000_0000_00_0110_00;  // Initialize switch input to 0
     #5 rstn = 1'b1;  // Deassert reset
     // Finish simulation after some time
-    #500;
+    #300;
     $finish;
   end
 
@@ -78,8 +78,8 @@ module tb_lab3;
     // 
     $monitor(
         "Time: %0t | clk: %b| PC: %h | instr: %h | Op:%h | rs1:%h | rs2:%h | rd:%h | immout:%h | A:%h | B:%h | ALUout:%h | addr:%h | din:%h | dout:%h |",
-        $time, clk, uut.PC, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.immout,
-        uut.A, uut.B, uut.ALUout, uut.addr, uut.din, uut.dout);
+        $time, clk, uut.PC, uut.instr, uut.Op, uut.rs1, uut.rs2, uut.rd, uut.immout, uut.A, uut.B,
+        uut.ALUout, uut.addr, uut.din, uut.dout);
     $monitor(
         "Time:%0t | clk:%b | Control | PCSel:%b | RegWrite:%b | WDSel:%b | ALUop:%b | ASel:%b | BSel:%b | Zero:%b | DMType:%b | MemWrite:%b | WDSel:%b |",
         $time, clk, uut.PCSel, uut.RegWrite, uut.WDSel, uut.ALUop, uut.ASel, uut.BSel, uut.Zero,

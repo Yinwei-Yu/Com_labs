@@ -88,8 +88,8 @@ module Ctrl (
   // `define WDSel_FromMEM 2'b01
   // `define WDSel_FromPC 2'b10
   // `define WDSel_FromImm 2'b11
-  assign WDSel[0] = itype_l | u_lui;  //if is load then select from memory 1
-  assign WDSel[1] = i_jalr | j_jal | u_lui;  //if is rtype or itype_r or u_auipc or i_jalr or j_jal then select from alu 2
+  assign WDSel[0] = itype_l | u_lui;  //if is itype_l then select from immediate
+  assign WDSel[1] = i_jalr | j_jal | u_lui;  //if is i_jalr or j_jal then select from PC,lui from the immediate
 
   // `define ALUOp_nop 5'b00000
   // `define ALUOp_lui 5'b00001

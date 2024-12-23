@@ -57,7 +57,7 @@ module lab3 (
   end
 
   //data display
-  wire [31:0] ac_instr;
+  wire [31:0] ac_instr;//这里ac_instr是按顺序读出rom中的指令,不是按照pc读出的指令
   reg  [31:0] reg_data;
   reg  [31:0] alu_disp_data;
   reg  [31:0] dmem_data;
@@ -67,11 +67,11 @@ module lab3 (
   always @(*) begin
     if (sw_i[0] == 0) begin
       case (sw_i[14:11])
-        4'b1000: display_data <= ac_instr;
+        4'b1000: display_data <= instr;//instr是实际的指令,可以在这里修改要显示什么内容,注意下面的rom显示模块不用改
         4'b0100: display_data <= reg_data;
         4'b0010: display_data <= alu_disp_data;
         4'b0001: display_data <= {{dm_addr}, {dmem_data[27:0]}};
-        default: display_data <= ac_instr;
+        default: display_data <= instr;//注意这里也要改
       endcase
     end else begin
       display_data = led_disp_data;
@@ -167,7 +167,7 @@ module lab3 (
   
   wire [31:0] instr;
   wire [1:0] PCSel;
-  //NPC和PC模块暂时有错
+  //NPC和PC模块暂时有错，摆了不写这两个模块了，就用下面的代码吧
   //如果用NPC和PC模块，把下面的代码注释打开，上面的reg [31:0] PC 注释掉
   // wire [31:0] PC;
   // wire [31:0] NPC;
@@ -177,7 +177,7 @@ module lab3 (
   //PC和NPC模块在代码底部
   always @(posedge clk_cpu or negedge rstn) begin
     if (!rstn) begin
-      case (sw_i)
+      case (sw_i[5:2])
         4'b0000: PC <= 32'h0000_0000;  //beq
         4'b0001: PC <= 32'h0000_0080;  //bne
         4'b0010: PC <= 32'h0000_0100;  //blt

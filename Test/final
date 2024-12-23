@@ -1,0 +1,322 @@
+L0:
+add x1 x0 x0 #BEQ测试入口
+addi x1 x1 1
+add x2 x0 x0
+addi x2 x2 2
+add x3 x0 x0
+addi x3 x3 3
+sw x1 256(x0)
+sw x2 257(x0)
+sw x3 258(x0)
+lw x4 256(x0)
+lw x5 257(x0)
+lw x6 258(x0)
+add x7 x0 x0
+beq x0 x0 L1
+add x10 x0 x0
+addi x10 x10 666
+addi x7 x7 -10
+L1:
+addi x7 x7 1
+add x8 x0 x0
+addi x8 x8 8
+add x9 x0 x0
+addi x9 x9 9
+beq x9 x8 L0
+beq x7 x7 L1
+add x31 x31 x0
+addi x31 x31 1
+nop
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+addi x1,x0,10
+addi x2,x0,10
+addi x3,x0,20
+
+addi x4,x0,-1
+
+#beq
+beq x1,x2,equal
+addi x5,x0,0 # x5=1
+equback:
+
+#bne
+bne x1,x3,nonequal
+addi x6,x0,0 # x6 =2
+nonequalback:
+
+#blt
+blt x3,x1,Less 
+addi x7,x0,3 # x7=3
+bltback:
+
+#bltu
+bltu x1,x4,bltu
+addi x8,x0,0 # x8=4
+jal x1,END
+bltuback:
+
+#bge
+bge x3,x1,bge
+addi x9,x0,0 # x9=5
+bgeback:
+
+#bgeu
+bgeu x1,x4,bgeu
+addi x10,x0,6 # x10=6
+bgeuback:
+
+jal x0,END
+
+############################################
+#accessing the labels
+#beq
+equal:
+addi x5,x0,1
+jal x0,equback
+
+#bne
+nonequal:
+addi x6,x0,2
+jal x0,nonequalback
+
+#blt
+Less:
+addi x7,x0,0
+jal x0,bltback
+
+#bltu
+bltu:
+addi x8,x0,4
+jal x0,bltuback
+
+#bge
+bge:
+addi x9,x0,5
+jal x0,bgeback
+
+#bgeu
+bgeu:
+addi x10,x0,0
+jal x0,bgeuback
+
+END:
+
+
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+
+addi x10,x0,1
+addi x11,x0,2
+jal x1,PLUS
+addi x12,x0,-1 # x12=-1
+jal x1,END1
+PLUS:
+add x10,x10,x11 # x10=3
+jalr x0,x1,0
+END1:
+
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+add x0,x0,x0
+
+addi x1,x0,5
+addi x2,x0,4
+
+add x3,x1,x2 #x3=5+4=9
+sub x4,x1,x2 #x4=5-4=1
+sub x5,x2,x1 #x5=4-5=-1
+
+and x6,x1,x2 #x6=5&4=4
+or x7,x1,x2 #x7=5|4=5
+xor x8,x1,x2 #x8=5^4=1
+sll x9,x1,x2 #x9=5<<4=80
+lui x10,0x80000
+srl x11,x10,x2 #x11=0x80000>>4=0x8000
+sra x12,x10,x2 #x12=0x80000>>4=0xf8000
+
+addi x1,x0,-1
+addi x2,x0,1
+slt x13,x1,x2 #x13=-1<1=1
+sltu x14,x1,x2 #x14=-1<1=0
