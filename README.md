@@ -6,8 +6,10 @@
 
 请结合实验文档(不在仓库中)进行食用
 
-[考试指令指南](https://github.com/Yinwei-Yu/Com_labs/blob/master/%E8%80%83%E8%AF%95%E6%8C%87%E4%BB%A4%E6%B3%A8%E6%84%8F.md)是一些针对最终考试需要注意的事项的提醒(不专业勿喷)
+[考试指令指南](https://github.com/Yinwei-Yu/Com_labs/blob/master/%E8%80%83%E8%AF%95%E6%8C%87%E4%BB%A4%E6%B3%A8%E6%84%8F.md)是一些针对最终考试需要注意的事项的提醒(不专业勿喷),欢迎提pr
 
 如需考试代码纸质版请自行打印(lab3/lab3.srcs/sources_1/new)
 
-祝你学习愉快😝
+祝你学习愉快😝,(悄悄地)请求一个⭐
+
+🫡
