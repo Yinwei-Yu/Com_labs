@@ -124,7 +124,7 @@ module Ctrl (
   // `define EXT_CTRL_JTYPE 6'b000001
 
   assign EXTOp[5] = i_slli | i_srai | i_srli;
-  assign EXTOp[4] = itype_l | itype_r & ~i_slli & ~i_srai & ~i_srli;
+  assign EXTOp[4] = itype_l | itype_r | i_jalr & ~i_slli & ~i_srai & ~i_srli;
   assign EXTOp[3] = stype;
   assign EXTOp[2] = btype;
   assign EXTOp[1] = u_lui | u_auipc;
