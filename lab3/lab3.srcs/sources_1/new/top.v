@@ -169,7 +169,7 @@ module lab3 (
   wire [31:0] instr;
   wire [ 1:0] PCSel;
 
-  always @(posedge clk_cpu or negedge rstn) begin
+  always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
       case (sw_i[5:2])
         4'b0000: PC <= 32'h0000_0000;  //beq
@@ -269,7 +269,7 @@ module lab3 (
   end
 
   RF u_rf (
-      .clk (clk_cpu),
+      .clk (clk),
       .rst (rstn),
       .RFWr(RegWrite),
       .sw_i(sw_i),
@@ -313,7 +313,7 @@ module lab3 (
   assign din  = RD2;
 
   DM u_dm (
-      .clk(clk_cpu),
+      .clk(clk),
       .DMWr(DMWr),
       .addr(addr),
       .din(din),

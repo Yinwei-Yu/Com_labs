@@ -6,8 +6,8 @@ module tb_lab3;
   reg clk;
   reg rstn;
   reg [15:0] sw_i;
-  reg [5:0] counter;
-  reg [31:0] x10;
+  //reg [5:0] counter;
+  //reg [31:0] x10;
   // Outputs
   wire [7:0] disp_seg_o;
   wire [7:0] disp_an_o;
@@ -56,21 +56,20 @@ module tb_lab3;
   // Clock generation (10ns period, 50MHz)
   always begin
     clk = 1'b0;
-    x10 = u_rf.rf[10];
     #5 clk = 1'b1;
-    counter = counter + 1;
+    //counter = counter + 1;
     #5;
   end
 
   // Initial block to apply reset and stimulus
   initial begin
     // Initialize inputs
-    counter = 6'b0;
+    //counter = 6'b0;
     rstn = 1'b0;  // Apply reset
-    sw_i = 16'b0000_0000_00_0110_00;  // Initialize switch input to 0
+    sw_i = 16'b0000_0000_00_0000_00;  // Initialize switch input to 0
     #5 rstn = 1'b1;  // Deassert reset
     // Finish simulation after some time
-    #300;
+    #3000;
     $finish;
   end
 

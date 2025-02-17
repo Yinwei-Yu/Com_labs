@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
 -- Date        : Mon Dec 23 22:38:12 2024
 -- Host        : Zero running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               E:/Works/com_labs/lab3/lab3.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top dist_mem_gen_0 -prefix
+--               dist_mem_gen_0_ dist_mem_gen_0_stub.vhdl
 -- Design      : dist_mem_gen_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a100tcsg324-1
