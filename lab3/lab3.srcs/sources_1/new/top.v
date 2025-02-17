@@ -58,20 +58,21 @@ module lab3 (
 
   //data display
   wire [31:0] ac_instr;//这里ac_instr是按顺序读出rom中的指令,不是按照pc读出的指令
-  reg  [31:0] reg_data;
-  reg  [31:0] alu_disp_data;
-  reg  [31:0] dmem_data;
+  reg [31:0] reg_data;
+  reg [31:0] alu_disp_data;
+  reg [31:0] dmem_data;
 
   //choose display source data
 
   always @(*) begin
     if (sw_i[0] == 0) begin
       case (sw_i[14:11])
-        4'b1000: display_data <= instr;//instr是实际的指令,可以在这里修改要显示什么内容,注意下面的rom显示模块不用改
+        4'b1000:
+        display_data <= instr;//instr是实际的指令,可以在这里修改要显示什么内容,注意下面的rom显示模块不用改
         4'b0100: display_data <= reg_data;
         4'b0010: display_data <= alu_disp_data;
         4'b0001: display_data <= {{dm_addr}, {dmem_data[27:0]}};
-        default: display_data <= instr;//注意这里也要改
+        default: display_data <= instr;  //注意这里也要改
       endcase
     end else begin
       display_data = led_disp_data;
@@ -163,18 +164,11 @@ module lab3 (
   //THE TRUE CPU HERE
 
   //PC update
-  reg [31:0] PC;
-  
-  wire [31:0] instr;
-  wire [1:0] PCSel;
-  //NPC和PC模块暂时有错，摆了不写这两个模块了，就用下面的代码吧
-  //如果用NPC和PC模块，把下面的代码注释打开，上面的reg [31:0] PC 注释掉
-  // wire [31:0] PC;
-  // wire [31:0] NPC;
-  // wire PCwr = !sw_i[1];  //sw_i[1] = 1, PC write disable
+  reg  [31:0] PC;
 
-  //下面的是不需要NPC和PC模块的代码,如需使用NPC和PC模块，注释掉下面的代码
-  //PC和NPC模块在代码底部
+  wire [31:0] instr;
+  wire [ 1:0] PCSel;
+
   always @(posedge clk_cpu or negedge rstn) begin
     if (!rstn) begin
       case (sw_i[5:2])
@@ -310,7 +304,7 @@ module lab3 (
 
   //DM
   wire DMWr;
-  wire [8:0] addr; //9位地址支持512个字节寻址,改的话注意下面的模块里的addr位数也要改
+  wire [8:0] addr;
   wire [31:0] din;
   wire [2:0] DMType;
   wire [31:0] dout;
@@ -350,26 +344,5 @@ module lab3 (
       .PCSel(PCSel)
   );
 
-  // PC u_pc (
-  //     .clk(clk),
-  //     .rst(rstn),
-  //     .NPC(NPC),
-  //     .PCwr(PCwr),
-  //     .sw_i(sw_i),
-  //     .PC(PC)
-  // );
-
-
-  // NPC u_npc (
-  //     .clk(clk),
-  //     .rst(rstn),
-  //     .sw_i(sw_i),
-  //     .PC(PC),
-  //     .PCSel(PCSel),
-  //     .immout(immout),
-  //     .ALUout(ALUout),
-  //     .instr(instr),
-  //     .NPC(NPC)
-  // );
 
 endmodule

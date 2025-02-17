@@ -83,46 +83,19 @@ module Ctrl (
   assign ASel = u_auipc;  // ALU A is from register or PC 
   assign BSel = itype_l | itype_r | u_auipc | stype | i_jalr;  // ALU B is from instruction immediate
 
-
-  // `define WDSel_FromALU 2'b00
-  // `define WDSel_FromMEM 2'b01
-  // `define WDSel_FromPC 2'b10
-  // `define WDSel_FromImm 2'b11
+  //WDSel
   assign WDSel[0] = itype_l | u_lui;  //if is itype_l then select from immediate
   assign WDSel[1] = i_jalr | j_jal | u_lui;  //if is i_jalr or j_jal then select from PC,lui from the immediate
 
-  // `define ALUOp_nop 5'b00000
-  // `define ALUOp_lui 5'b00001
-  // `define ALUOp_auipc 5'b00010
-  // `define ALUOp_add 5'b00011 //stype itype_l jalr  
-  // `define ALUOp_sub 5'b00100
-  // `define ALUOp_beq 5'b00101
-  // `define ALUOp_bne 5'b00101
-  // `define ALUOp_blt 5'b00110
-  // `define ALUOp_bge 5'b00111
-  // `define ALUOp_bltu 5'b01000
-  // `define ALUOp_bgeu 5'b01001
-  // `define ALUOp_slt 5'b01010
-  // `define ALUOp_sltu 5'b01011
-  // `define ALUOp_xor 5'b01100
-  // `define ALUOp_or 5'b01101
-  // `define ALUOp_and 5'b01110
-  // `define ALUOp_sll 5'b01111
-  // `define ALUOp_srl 5'b10000
-  // `define ALUOp_sra 5'b10001
+  //ALUOp
   assign ALUOp[0] = u_lui|b_beq | b_bne |b_bge|b_bgeu|r_sltu|i_ori|r_or|i_slli|r_sll|i_srai|r_sra|r_add | i_addi | stype | itype_l;
   assign ALUOp[1] = u_auipc|b_blt|b_bge|i_slti|r_slt|r_sltu|i_sltiu|i_andi|r_and|i_slli|r_sll|r_add | i_addi | stype | itype_l;
   assign ALUOp[2]=r_sub|b_beq| b_bne|b_blt|b_bge|r_xor|i_xori|i_ori|r_or|i_andi|r_and|i_slli|r_sll;
   assign ALUOp[3]=b_bltu|b_bgeu|i_slti|r_slt|r_sltu|i_sltiu|i_xori|r_xor|i_ori|r_or|i_andi|r_and|i_slli|r_sll;
   assign ALUOp[4] = i_srli | r_srl | i_srai | r_sra;
 
-  // `define EXT_CTRL_ITYPE_SHAMT 6'b100000
-  // `define EXT_CTRL_ITYPE 6'b010000
-  // `define EXT_CTRL_STYPE 6'b001000
-  // `define EXT_CTRL_BTYPE 6'b000100
-  // `define EXT_CTRL_UTYPE 6'b000010
-  // `define EXT_CTRL_JTYPE 6'b000001
 
+  //EXTOp
   assign EXTOp[5] = i_slli | i_srai | i_srli;
   assign EXTOp[4] = itype_l | itype_r | i_jalr & ~i_slli & ~i_srai & ~i_srli;
   assign EXTOp[3] = stype;
@@ -143,9 +116,6 @@ module Ctrl (
   assign BrUn = b_bltu | b_bgeu;
 
   //PCSel
-  //PCSel 2'b00: PC = PC + 4;
-  //PCSel 2'b01: PC = PC+immout;
-  //PCSel 2'b10: PC = ALUout
   wire PC_B = btype & ((b_beq & Zero) | (b_bne & ~Zero) | (b_blt & BrLt) | (b_bltu & BrLt) | (b_bge & ~BrLt) | (b_bgeu & ~BrLt));
   assign PCSel[0] = PC_B | j_jal;
   assign PCSel[1] = i_jalr;
