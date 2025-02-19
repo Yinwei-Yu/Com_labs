@@ -1,0 +1,114 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
+| Date         : Wed Feb 19 19:58:22 2025
+| Host         : Zero running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
+| Design       : top
+| Device       : xc7a100t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    46 |
+| Unused register locations in slices containing registers |    30 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      1 |            2 |
+|      2 |            1 |
+|      4 |            1 |
+|      8 |            1 |
+|    16+ |           41 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              70 |           38 |
+| No           | No                    | Yes                    |             354 |          118 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              40 |           21 |
+| Yes          | No                    | Yes                    |            1106 |          592 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-----------------------------------+---------------------------------+--------------------+------------------+----------------+
+|            Clock Signal           |          Enable Signal          |  Set/Reset Signal  | Slice Load Count | Bel Load Count |
++-----------------------------------+---------------------------------+--------------------+------------------+----------------+
+|  clk0_BUFG                        |                                 |                    |                1 |              1 |
+|  U5_Multi_8CH320_BUFG             |                                 |                    |                1 |              1 |
+|  clk0_BUFG                        |                                 | U9_Counter_x/AR[0] |                1 |              2 |
+|  U6_SSeg7/flash_IBUF_BUFG         |                                 |                    |                3 |              4 |
+|  U6_SSeg7/flash_IBUF_BUFG         | U6_SSeg7/seg_sout[7]_i_1_n_0    |                    |                7 |              8 |
+|  U5_Multi_8CH320_BUFG             | U4_MIO_BUS/GPIOf0000000_we_OBUF | U9_Counter_x/AR[0] |                8 |             18 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[23][31]_i_1_n_1 | U9_Counter_x/AR[0] |               20 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[25][31]_i_1_n_1 | U9_Counter_x/AR[0] |               15 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[13][31]_i_1_n_1 | U9_Counter_x/AR[0] |               18 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[18][31]_i_1_n_1 | U9_Counter_x/AR[0] |               15 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[24][31]_i_1_n_1 | U9_Counter_x/AR[0] |               11 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[0][31]_i_1_n_1  |                    |               14 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[26][31]_i_1_n_1 | U9_Counter_x/AR[0] |               12 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[16][31]_i_1_n_1 | U9_Counter_x/AR[0] |               14 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[27][31]_i_1_n_1 | U9_Counter_x/AR[0] |               16 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[28][31]_i_1_n_1 | U9_Counter_x/AR[0] |               12 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[29][31]_i_1_n_1 | U9_Counter_x/AR[0] |               17 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[2][31]_i_1_n_1  | U9_Counter_x/AR[0] |               21 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[11][31]_i_1_n_1 | U9_Counter_x/AR[0] |               25 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[15][31]_i_1_n_1 | U9_Counter_x/AR[0] |               17 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[19][31]_i_1_n_1 | U9_Counter_x/AR[0] |               14 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[12][31]_i_1_n_1 | U9_Counter_x/AR[0] |               14 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[14][31]_i_1_n_1 | U9_Counter_x/AR[0] |               26 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[17][31]_i_1_n_1 | U9_Counter_x/AR[0] |               13 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[1][31]_i_1_n_1  | U9_Counter_x/AR[0] |               15 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[7][31]_i_1_n_1  | U9_Counter_x/AR[0] |               26 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[8][31]_i_1_n_1  | U9_Counter_x/AR[0] |               23 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[4][31]_i_1_n_1  | U9_Counter_x/AR[0] |               22 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[3][31]_i_1_n_1  | U9_Counter_x/AR[0] |               19 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[30][31]_i_1_n_1 | U9_Counter_x/AR[0] |               22 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[9][31]_i_1_n_1  | U9_Counter_x/AR[0] |               20 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[5][31]_i_1_n_1  | U9_Counter_x/AR[0] |               20 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[6][31]_i_1_n_1  | U9_Counter_x/AR[0] |               19 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[31][31]_i_1_n_1 | U9_Counter_x/AR[0] |               24 |             32 |
+|  U3_dm_controller/mem_w_IBUF_BUFG |                                 |                    |               10 |             32 |
+|  U1_SCPU/n_0_1263_BUFG            |                                 |                    |               23 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            |                                 | U9_Counter_x/AR[0] |               17 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[20][31]_i_1_n_1 | U9_Counter_x/AR[0] |               14 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[10][31]_i_1_n_1 | U9_Counter_x/AR[0] |               19 |             32 |
+|  clk0_BUFG                        | U9_Counter_x/counter0[31]       | U9_Counter_x/AR[0] |               10 |             32 |
+|  U5_Multi_8CH320_BUFG             | U9_Counter_x/counter0_Lock_0    | U9_Counter_x/AR[0] |                9 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[21][31]_i_1_n_1 | U9_Counter_x/AR[0] |               14 |             32 |
+|  U1_SCPU/clk_IBUF_BUFG            | U1_SCPU/U_RF/rf[22][31]_i_1_n_1 | U9_Counter_x/AR[0] |               19 |             32 |
+|  U5_Multi_8CH320_BUFG             | U4_MIO_BUS/GPIOe0000000_we_OBUF | U9_Counter_x/AR[0] |                9 |             32 |
+|  clk_IBUF_BUFG                    |                                 | U9_Counter_x/AR[0] |               29 |             80 |
+|  U5_Multi_8CH320_BUFG             |                                 | U9_Counter_x/AR[0] |               71 |            240 |
++-----------------------------------+---------------------------------+--------------------+------------------+----------------+
+
+
