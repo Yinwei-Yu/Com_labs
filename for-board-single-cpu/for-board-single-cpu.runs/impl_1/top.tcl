@@ -65,6 +65,7 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
+  set_param xicom.use_bs_reader 1
   create_project -in_memory -part xc7a100tcsg324-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
@@ -80,7 +81,6 @@ set rc [catch {
   read_edif E:/Works/com_labs/teacher/edf_file/Multi_8CH32.edf
   read_edif E:/Works/com_labs/teacher/edf_file/MIO_BUS.edf
   read_edif E:/Works/com_labs/teacher/edf_file/dm_controller.edf
-  read_edif E:/Works/com_labs/teacher/edf_file/SCPU.edf
   read_edif E:/Works/com_labs/teacher/edf_file/SPIO.edf
   read_xdc E:/Works/com_labs/teacher/icf.xdc
   link_design -top top -part xc7a100tcsg324-1

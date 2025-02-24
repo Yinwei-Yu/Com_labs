@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-// Date        : Wed Feb 19 15:25:23 2025
+// Date        : Mon Feb 24 19:23:13 2025
 // Host        : Zero running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               e:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/ip/ROM_D/ROM_D_stub.v
+//               E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/ip/ROM_D/ROM_D_stub.v
 // Design      : ROM_D
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tcsg324-1

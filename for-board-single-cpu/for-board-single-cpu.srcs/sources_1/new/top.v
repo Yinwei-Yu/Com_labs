@@ -91,11 +91,11 @@ module top (
   wire [31:0] PC_out;
   wire [2:0] dm_ctrl;
   wire mem_w;
-  SCPU U1_SCPU (
+  my_SCPU U1_SCPU (
       .clk(Clk_CPU),
-      .reset(rst),
+      .rstn(rstn),
       .MIO_ready(MIO_ready),
-      .inst_in(inst_in),
+      .instr(inst_in),
       .Data_in(Data_in),
       .mem_w(mem_w),
       .PC_out(PC_out),
