@@ -1,6 +1,6 @@
 module my_SCPU (
     input clk,
-    input rstn,
+    input rst,
     input MIO_ready,
     input [31:0] instr,  //inst_in,instruction
     input [31:0] Data_in,
@@ -16,10 +16,10 @@ module my_SCPU (
   //THE TRUE CPU HERE
   //PC update
   reg  [31:0] PC;
-  wire [31:0] instr;
   wire [ 1:0] PCSel;
-  always @(posedge clk or negedge rstn) begin
-    if (!rstn) begin
+  wire i_jalr;
+  always @(posedge clk or posedge rst) begin
+    if (rst) begin
       PC <= 0;
     end else begin
       if (PCSel == 2'b00) begin
@@ -27,7 +27,7 @@ module my_SCPU (
       end else if (PCSel == 2'b01) begin
         PC <= PC + immout;
       end else if (PCSel == 2'b10) begin
-        PC <= ALUout;
+        PC <= (i_jalr)?(ALUout&32'hFFFFFFFE):ALUout;
       end else begin
         PC <= PC + 4;
       end
@@ -98,7 +98,7 @@ module my_SCPU (
 
   RF u_rf (
       .clk (clk),
-      .rst (rstn),
+      .rst (rst),
       .RFWr(RegWrite),
       .A1  (rs1),
       .A2  (rs2),
@@ -156,7 +156,8 @@ module my_SCPU (
       .BSel(BSel),
       .DMType(DMType),
       .WDSel(WDSel),
-      .PCSel(PCSel)
+      .PCSel(PCSel),
+      .i_jalr(i_jalr)
   );
 
   assign CPU_MIO = 1'b0;

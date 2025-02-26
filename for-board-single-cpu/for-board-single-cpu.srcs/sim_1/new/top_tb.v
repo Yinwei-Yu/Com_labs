@@ -3,7 +3,7 @@
 module top_tb ();
 
   reg clk, rstn;
-  reg sw_i;
+  reg [15:0]sw_i;
   wire [7:0] disp_seg_o;
   wire [7:0] disp_an_o;
   wire [4:0] btn_i;

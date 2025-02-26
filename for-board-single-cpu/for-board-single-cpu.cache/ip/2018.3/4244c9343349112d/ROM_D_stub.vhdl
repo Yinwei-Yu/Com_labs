@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
--- Date        : Mon Feb 24 19:23:13 2025
+-- Date        : Wed Feb 26 14:48:18 2025
 -- Host        : Zero running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/ip/ROM_D/ROM_D_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+--               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ ROM_D_stub.vhdl
 -- Design      : ROM_D
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a100tcsg324-1
@@ -12,15 +12,15 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity ROM_D is
+entity decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix is
   Port ( 
     a : in STD_LOGIC_VECTOR ( 9 downto 0 );
     spo : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
 
-end ROM_D;
+end decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix;
 
-architecture stub of ROM_D is
+architecture stub of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix is
 attribute syn_black_box : boolean;
 attribute black_box_pad_pin : string;
 attribute syn_black_box of stub : architecture is true;

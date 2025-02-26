@@ -13,8 +13,23 @@ module Ctrl (
     output BSel,  //ALU B Source
     output [2:0] DMType,  //Data Memory Type
     output [1:0] WDSel,  //Memory Write Data Select
-    output [1:0] PCSel  //PC Select
+    output [1:0] PCSel,  //PC Select
+    output i_jalr  //jalr
 );
+
+  `define ALUOp_nop 5'b00000
+  `define ALUOp_lui 5'b00001
+  `define ALUOp_auipc 5'b00010
+  `define ALUOp_add 5'b00011
+  `define ALUOp_sub 5'b00100
+  `define ALUOp_slt 5'b01010
+  `define ALUOp_sltu 5'b01011
+  `define ALUOp_xor 5'b01100
+  `define ALUOp_or 5'b01101
+  `define ALUOp_and 5'b01110
+  `define ALUOp_sll 5'b01111
+  `define ALUOp_srl 5'b10000
+  `define ALUOp_sra 5'b10001
 
   //R type
   wire rtype = ~Op[6] & Op[5] & Op[4] & ~Op[3] & ~Op[2] & Op[1] & Op[0];  //rtype op 0110011
@@ -28,9 +43,9 @@ module Ctrl (
   wire r_sra =rtype&~Funct7[6]&Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&~Funct7[0]&Funct3[2]&~Funct3[1]&Funct3[0]; // sra 0100000 101
   wire r_slt =rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&~Funct7[0]&~Funct3[2]&Funct3[1]&~Funct3[0]; // slt 0000000 010
   wire r_sltu=rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&~Funct7[0]&~Funct3[2]&Funct3[1]&Funct3[0]; // sltu 0000000 011
-  wire r_mul = rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&Funct7[0]&~Funct3[2]&~Funct3[1]&~Funct3[0]; // mul 0000001 000
-  wire r_mulh= rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&Funct7[0]&~Funct3[2]&~Funct3[1]&Funct3[0]; // mulh 0000001 001
-  wire r_mulhu =rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&Funct7[0]&~Funct3[2]&Funct3[1]&Funct3[0]; // mulhu 0000001 011
+  //wire r_mul = rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&Funct7[0]&~Funct3[2]&~Funct3[1]&~Funct3[0]; // mul 0000001 000
+  //wire r_mulh= rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&Funct7[0]&~Funct3[2]&~Funct3[1]&Funct3[0]; // mulh 0000001 001
+  //wire r_mulhu =rtype&~Funct7[6]&~Funct7[5]&~Funct7[4]&~Funct7[3]&~Funct7[2]&~Funct7[1]&Funct7[0]&~Funct3[2]&Funct3[1]&Funct3[0]; // mulhu 0000001 011
 
   //I type
   //load
@@ -69,7 +84,7 @@ module Ctrl (
 
   //J type
   wire j_jal = Op[6] & Op[5] & ~Op[4] & Op[3] & Op[2] & Op[1] & Op[0];  //op=1101111
-  wire i_jalr= Op[6] & Op[5] & ~Op[4] & ~Op[3] & Op[2] & Op[1] & Op[0] & ~Funct3[2] & ~Funct3[1] & ~Funct3[0];  //op=1100111 000
+  assign i_jalr= Op[6] & Op[5] & ~Op[4] & ~Op[3] & Op[2] & Op[1] & Op[0] & ~Funct3[2] & ~Funct3[1] & ~Funct3[0];  //op=1100111 000
 
   //U type
   wire u_auipc = ~Op[6] & ~Op[5] & Op[4] & ~Op[3] & Op[2] & Op[1] & Op[0];  //op=0010111
@@ -79,7 +94,7 @@ module Ctrl (
 
   //signal
   assign RegWrite = rtype | itype_r | itype_l | u_auipc | u_lui | i_jalr | j_jal;  // register write
-  assign MemWrite = stype;  // memory write
+  assign MemWrite = stype&(s_sb |s_sh |s_sw);  // memory write
   assign ASel = u_auipc;  // ALU A is from register or PC 
   assign BSel = itype_l | itype_r | u_auipc | stype | i_jalr;  // ALU B is from instruction immediate
 
@@ -88,16 +103,23 @@ module Ctrl (
   assign WDSel[1] = i_jalr | j_jal | u_lui;  //if is i_jalr or j_jal then select from PC,lui from the immediate
 
   //ALUOp
-  assign ALUOp[0] = u_lui|b_beq | b_bne |b_bge|b_bgeu|r_sltu|i_ori|r_or|i_slli|r_sll|i_srai|r_sra|r_add | i_addi | stype | itype_l;
-  assign ALUOp[1] = u_auipc|b_blt|b_bge|i_slti|r_slt|r_sltu|i_sltiu|i_andi|r_and|i_slli|r_sll|r_add | i_addi | stype | itype_l;
-  assign ALUOp[2]=r_sub|b_beq| b_bne|b_blt|b_bge|r_xor|i_xori|i_ori|r_or|i_andi|r_and|i_slli|r_sll;
-  assign ALUOp[3]=b_bltu|b_bgeu|i_slti|r_slt|r_sltu|i_sltiu|i_xori|r_xor|i_ori|r_or|i_andi|r_and|i_slli|r_sll;
-  assign ALUOp[4] = i_srli | r_srl | i_srai | r_sra;
-
+  assign ALUOp = (r_add | i_addi | itype_l | stype | u_auipc | j_jal | i_jalr) ? `ALUOp_add :
+               (r_sub) ? `ALUOp_sub :
+               (r_and | i_andi) ? `ALUOp_and :
+               (r_or | i_ori) ? `ALUOp_or :
+               (r_xor | i_xori) ? `ALUOp_xor :
+               (r_sll | i_slli) ? `ALUOp_sll :
+               (r_srl | i_srli) ? `ALUOp_srl :
+               (r_sra | i_srai) ? `ALUOp_sra :
+               (r_slt | i_slti) ? `ALUOp_slt :
+               (r_sltu | i_sltiu) ? `ALUOp_sltu :
+               (btype) ? `ALUOp_sub :
+               (u_lui) ? `ALUOp_lui :
+               `ALUOp_nop;
 
   //EXTOp
   assign EXTOp[5] = i_slli | i_srai | i_srli;
-  assign EXTOp[4] = itype_l | itype_r | i_jalr & ~i_slli & ~i_srai & ~i_srli;
+  assign EXTOp[4] = (itype_l | itype_r | i_jalr) & (~i_slli & ~i_srai & ~i_srli);
   assign EXTOp[3] = stype;
   assign EXTOp[2] = btype;
   assign EXTOp[1] = u_lui | u_auipc;

@@ -3,7 +3,6 @@ Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
 Running: E:/StudyApps/Vivado_2018_3/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 9a83c55cb41e46ba84659bf8a8e9ade3 --incr --debug typical --relax --mt 2 -L blk_mem_gen_v8_4_2 -L xil_defaultlib -L dist_mem_gen_v8_0_12 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot top_tb_behav xil_defaultlib.top_tb xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 16 for port 'sw_i' [E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sim_1/new/top_tb.v:16]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis

@@ -6,12 +6,12 @@ module clk_div(input clk,
 					output Clk_CPU
 					);
 					
-// Clock divider-ʱ�ӷ�Ƶ��
+
 
 
 	always @ (posedge clk or posedge rst) begin 
 		if (rst) clkdiv <= 0; else clkdiv <= clkdiv + 1'b1; end
 		
-	assign Clk_CPU=(SW2)? clkdiv[24] : clkdiv[1];
+	assign Clk_CPU=(SW2)? clkdiv[24] : clkdiv[3];
 		
 endmodule

@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
--- Date        : Mon Feb 24 19:23:14 2025
+-- Date        : Mon Feb 24 19:23:13 2025
 -- Host        : Zero running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/ip/ROM_D/ROM_D_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top ROM_D -prefix
+--               ROM_D_ ROM_D_sim_netlist.vhdl
 -- Design      : ROM_D
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -19,8 +19,6 @@ entity ROM_D_rom is
     spo : out STD_LOGIC_VECTOR ( 30 downto 0 );
     a : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of ROM_D_rom : entity is "rom";
 end ROM_D_rom;
 
 architecture STRUCTURE of ROM_D_rom is
@@ -6885,8 +6883,6 @@ entity ROM_D_dist_mem_gen_v8_0_12_synth is
     spo : out STD_LOGIC_VECTOR ( 30 downto 0 );
     a : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of ROM_D_dist_mem_gen_v8_0_12_synth : entity is "dist_mem_gen_v8_0_12_synth";
 end ROM_D_dist_mem_gen_v8_0_12_synth;
 
 architecture STRUCTURE of ROM_D_dist_mem_gen_v8_0_12_synth is
@@ -6985,8 +6981,6 @@ entity ROM_D_dist_mem_gen_v8_0_12 is
   attribute C_SYNC_ENABLE of ROM_D_dist_mem_gen_v8_0_12 : entity is 1;
   attribute C_WIDTH : integer;
   attribute C_WIDTH of ROM_D_dist_mem_gen_v8_0_12 : entity is 32;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of ROM_D_dist_mem_gen_v8_0_12 : entity is "dist_mem_gen_v8_0_12";
 end ROM_D_dist_mem_gen_v8_0_12;
 
 architecture STRUCTURE of ROM_D_dist_mem_gen_v8_0_12 is

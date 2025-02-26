@@ -7,14 +7,8 @@ module ALU (
 );
   `define ALUOp_nop 5'b00000
   `define ALUOp_lui 5'b00001
-  `define ALUOp_auipc 5'b00010
   `define ALUOp_add 5'b00011
   `define ALUOp_sub 5'b00100
-  `define ALUOp_bne 5'b00101
-  `define ALUOp_blt 5'b00110
-  `define ALUOp_bge 5'b00111
-  `define ALUOp_bltu 5'b01000
-  `define ALUOp_bgeu 5'b01001
   `define ALUOp_slt 5'b01010
   `define ALUOp_sltu 5'b01011
   `define ALUOp_xor 5'b01100
@@ -28,23 +22,17 @@ module ALU (
     case (ALUop)
       `ALUOp_nop: ALUout <= A + B;
       `ALUOp_lui: ALUout <= B;
-      `ALUOp_auipc: ALUout <= A + B;
       `ALUOp_add: ALUout <= A + B;
       `ALUOp_sub: ALUout <= A - B;
-      `ALUOp_bne: ALUout <= A - B;
-      `ALUOp_blt: ALUout <= A - B;
-      `ALUOp_bge: ALUout <= A - B;
-      `ALUOp_bltu: ALUout <= A - B;
-      `ALUOp_bgeu: ALUout <= A - B;
       `ALUOp_slt: ALUout <= A < B ? 1 : 0;
       `ALUOp_sltu: ALUout <= $unsigned(A) < $unsigned(B) ? 1 : 0;
       `ALUOp_xor: ALUout <= A ^ B;
       `ALUOp_or: ALUout <= A | B;
       `ALUOp_and: ALUout <= A & B;
-      `ALUOp_sll: ALUout <= A << B;
-      `ALUOp_srl: ALUout <= A >> B;
-      `ALUOp_sra: ALUout <= A >>> B;
-      default: ALUout <= A + B;
+      `ALUOp_sll: ALUout <= A << B[4:0];
+      `ALUOp_srl: ALUout <= A >> B[4:0];
+      `ALUOp_sra: ALUout <= A >>> B[4:0];
+      default: ALUout <= 32'b0;
     endcase
     Zero = ALUout == 0 ? 1 : 0;
   end

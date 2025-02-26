@@ -16,10 +16,10 @@ module RF (
 
 
   integer i;
-  always @(posedge clk or negedge rst) begin
-    if (!rst) begin
+  always @(posedge clk or posedge rst) begin
+    if (rst) begin
       for (i = 0; i < 32; i = i + 1) begin
-        rf[i] <= i;
+        rf[i] <= 0;
       end
     end else begin
       if (RFWr) begin

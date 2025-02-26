@@ -33,7 +33,8 @@ set_property ip_output_repo e:/Works/com_labs/for-board-single-cpu/for-board-sin
 set_property ip_cache_permissions {read write} [current_project]
 add_files E:/Works/com_labs/teacher/I_mem.coe
 add_files E:/Works/com_labs/teacher/D_mem.coe
-add_files e:/Works/com_labs/teacher/test.coe
+add_files E:/Works/com_labs/teacher/test.coe
+add_files E:/Works/com_labs/IM.coe
 read_verilog -library xil_defaultlib {
   E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/new/ALU.v
   E:/Works/com_labs/teacher/IO/Counter_3_IO.v
@@ -72,6 +73,8 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc E:/Works/com_labs/teacher/icf.xdc
 set_property used_in_implementation false [get_files E:/Works/com_labs/teacher/icf.xdc]
 
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 

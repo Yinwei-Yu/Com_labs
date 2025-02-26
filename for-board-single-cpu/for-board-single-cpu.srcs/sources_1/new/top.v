@@ -93,7 +93,7 @@ module top (
   wire mem_w;
   my_SCPU U1_SCPU (
       .clk(Clk_CPU),
-      .rstn(rstn),
+      .rst(rst),
       .MIO_ready(MIO_ready),
       .instr(inst_in),
       .Data_in(Data_in),
@@ -134,7 +134,7 @@ module top (
 
   //RAM_B
   wire [9:0] addra = ram_addr;
-  wire clka = !clk;
+  wire clka = !clk;//mind this
   wire [31:0] dina = Data_write_to_dm;
   wire [3:0] wea = wea_mem;
   wire [31:0] douta;
@@ -231,7 +231,7 @@ module top (
       .rst(rst),
       .SW0(SW_out[0]),
       .flash(clkdiv[10]),
-      .Hexs(Disp_num),
+      .Hexs(~Disp_num),
       .point(point_out),
       .LES(LE_out),
       .seg_an(disp_an_o),
