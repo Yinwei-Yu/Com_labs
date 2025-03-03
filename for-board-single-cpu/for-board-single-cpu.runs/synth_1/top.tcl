@@ -33,8 +33,8 @@ set_property ip_output_repo e:/Works/com_labs/for-board-single-cpu/for-board-sin
 set_property ip_cache_permissions {read write} [current_project]
 add_files E:/Works/com_labs/teacher/I_mem.coe
 add_files E:/Works/com_labs/teacher/D_mem.coe
-add_files E:/Works/com_labs/teacher/test.coe
 add_files E:/Works/com_labs/IM.coe
+add_files E:/Works/com_labs/teacher/testac.coe
 read_verilog -library xil_defaultlib {
   E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/new/ALU.v
   E:/Works/com_labs/teacher/IO/Counter_3_IO.v
@@ -47,8 +47,8 @@ read_verilog -library xil_defaultlib {
   E:/Works/com_labs/teacher/edf_file/SPIO.v
   E:/Works/com_labs/teacher/edf_file/SSeg7.v
   E:/Works/com_labs/teacher/IO/clk_div.v
-  E:/Works/com_labs/teacher/edf_file/dm_controller.v
   E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/new/my_SCPU.v
+  E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/new/my_dm_controler.v
   E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/new/top.v
 }
 read_ip -quiet E:/Works/com_labs/for-board-single-cpu/for-board-single-cpu.srcs/sources_1/ip/ROM_D/ROM_D.xci
@@ -60,7 +60,6 @@ set_property used_in_implementation false [get_files -all e:/Works/com_labs/for-
 read_edif E:/Works/com_labs/teacher/edf_file/SSeg7.edf
 read_edif E:/Works/com_labs/teacher/edf_file/Multi_8CH32.edf
 read_edif E:/Works/com_labs/teacher/edf_file/MIO_BUS.edf
-read_edif E:/Works/com_labs/teacher/edf_file/dm_controller.edf
 read_edif E:/Works/com_labs/teacher/edf_file/SPIO.edf
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the

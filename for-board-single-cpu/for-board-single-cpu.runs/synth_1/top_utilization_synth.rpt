@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Wed Feb 26 17:07:21 2025
+| Date         : Mon Mar  3 21:13:41 2025
 | Host         : Zero running 64-bit major release  (build 9200)
 | Command      : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
 | Design       : top
@@ -30,14 +30,14 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 1875 |     0 |     63400 |  2.96 |
-|   LUT as Logic          | 1875 |     0 |     63400 |  2.96 |
+| Slice LUTs*             | 1881 |     0 |     63400 |  2.97 |
+|   LUT as Logic          | 1881 |     0 |     63400 |  2.97 |
 |   LUT as Memory         |    0 |     0 |     19000 |  0.00 |
-| Slice Registers         | 1554 |     0 |    126800 |  1.23 |
+| Slice Registers         | 1522 |     0 |    126800 |  1.20 |
 |   Register as Flip Flop | 1522 |     0 |    126800 |  1.20 |
-|   Register as Latch     |   32 |     0 |    126800 |  0.03 |
-| F7 Muxes                |  312 |     0 |     31700 |  0.98 |
-| F8 Muxes                |    3 |     0 |     15850 |  0.02 |
+|   Register as Latch     |    0 |     0 |    126800 |  0.00 |
+| F7 Muxes                |  309 |     0 |     31700 |  0.97 |
+| F8 Muxes                |    0 |     0 |     15850 |  0.00 |
 +-------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
 
@@ -55,7 +55,7 @@ Table of Contents
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 32    |          Yes |           - |          Set |
-| 1508  |          Yes |           - |        Reset |
+| 1476  |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
 | 14    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -112,7 +112,7 @@ Table of Contents
 +------------+------+-------+-----------+-------+
 |  Site Type | Used | Fixed | Available | Util% |
 +------------+------+-------+-----------+-------+
-| BUFGCTRL   |    8 |     0 |        32 | 25.00 |
+| BUFGCTRL   |    7 |     0 |        32 | 21.88 |
 | BUFIO      |    0 |     0 |        24 |  0.00 |
 | MMCME2_ADV |    0 |     0 |         6 |  0.00 |
 | PLLE2_ADV  |    0 |     0 |         6 |  0.00 |
@@ -147,21 +147,19 @@ Table of Contents
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
 | FDCE     | 1476 |        Flop & Latch |
-| LUT6     | 1178 |                 LUT |
-| MUXF7    |  312 |               MuxFx |
-| LUT4     |  277 |                 LUT |
-| LUT5     |  251 |                 LUT |
-| LUT3     |  207 |                 LUT |
-| LUT2     |  122 |                 LUT |
-| LUT1     |   77 |                 LUT |
+| LUT6     | 1169 |                 LUT |
+| LUT4     |  318 |                 LUT |
+| MUXF7    |  309 |               MuxFx |
+| LUT5     |  234 |                 LUT |
+| LUT3     |  214 |                 LUT |
+| LUT2     |  149 |                 LUT |
 | CARRY4   |   56 |          CarryLogic |
-| LDCE     |   32 |        Flop & Latch |
+| LUT1     |   45 |                 LUT |
 | FDPE     |   32 |        Flop & Latch |
 | IBUF     |   23 |                  IO |
 | OBUF     |   16 |                  IO |
 | FDRE     |   14 |        Flop & Latch |
-| BUFG     |    8 |               Clock |
-| MUXF8    |    3 |               MuxFx |
+| BUFG     |    7 |               Clock |
 +----------+------+---------------------+
 
 
@@ -179,14 +177,13 @@ Table of Contents
 9. Instantiated Netlists
 ------------------------
 
-+---------------+------+
-|    Ref Name   | Used |
-+---------------+------+
-| dm_controller |    1 |
-| SSeg7         |    1 |
-| SPIO          |    1 |
-| Multi_8CH32   |    1 |
-| MIO_BUS       |    1 |
-+---------------+------+
++-------------+------+
+|   Ref Name  | Used |
++-------------+------+
+| SSeg7       |    1 |
+| SPIO        |    1 |
+| Multi_8CH32 |    1 |
+| MIO_BUS     |    1 |
++-------------+------+
 
 

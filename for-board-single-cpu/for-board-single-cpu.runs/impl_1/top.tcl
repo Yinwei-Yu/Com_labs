@@ -80,7 +80,6 @@ set rc [catch {
   read_edif E:/Works/com_labs/teacher/edf_file/SSeg7.edf
   read_edif E:/Works/com_labs/teacher/edf_file/Multi_8CH32.edf
   read_edif E:/Works/com_labs/teacher/edf_file/MIO_BUS.edf
-  read_edif E:/Works/com_labs/teacher/edf_file/dm_controller.edf
   read_edif E:/Works/com_labs/teacher/edf_file/SPIO.edf
   read_xdc E:/Works/com_labs/teacher/icf.xdc
   link_design -top top -part xc7a100tcsg324-1

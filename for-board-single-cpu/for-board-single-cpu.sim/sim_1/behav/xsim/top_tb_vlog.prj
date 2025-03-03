@@ -13,8 +13,8 @@ verilog xil_defaultlib  \
 "../../../../../teacher/edf_file/SPIO.v" \
 "../../../../../teacher/edf_file/SSeg7.v" \
 "../../../../../teacher/IO/clk_div.v" \
-"../../../../../teacher/edf_file/dm_controller.v" \
 "../../../../for-board-single-cpu.srcs/sources_1/new/my_SCPU.v" \
+"../../../../for-board-single-cpu.srcs/sources_1/new/my_dm_controler.v" \
 "../../../../for-board-single-cpu.srcs/sources_1/new/top.v" \
 "../../../../for-board-single-cpu.srcs/sim_1/new/top_tb.v" \
 

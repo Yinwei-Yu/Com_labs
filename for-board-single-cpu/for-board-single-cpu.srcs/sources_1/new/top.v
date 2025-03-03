@@ -121,7 +121,7 @@ module top (
   wire [31:0] Data_read;
   wire [31:0] Data_write_to_dm;
   wire [3:0] wea_mem;
-  dm_controller U3_dm_controller (
+  my_dm_controller U3_dm_controller (
       .mem_w(mem_w),
       .Addr_in(Addr_in),
       .Data_write(Data_write),
@@ -231,7 +231,7 @@ module top (
       .rst(rst),
       .SW0(SW_out[0]),
       .flash(clkdiv[10]),
-      .Hexs(~Disp_num),
+      .Hexs(Disp_num),
       .point(point_out),
       .LES(LE_out),
       .seg_an(disp_an_o),

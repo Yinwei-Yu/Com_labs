@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Wed Feb 26 17:08:15 2025
+| Date             : Mon Mar  3 21:14:47 2025
 | Host             : Zero running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |     0.004 |     4528 |       --- |             --- |
-|   LUT as Logic |     0.003 |     2277 |     63400 |            3.59 |
-|   F7/F8 Muxes  |    <0.001 |      419 |     63400 |            0.66 |
-|   Register     |    <0.001 |     1506 |    126800 |            1.19 |
+| Slice Logic    |     0.004 |     4547 |       --- |             --- |
+|   LUT as Logic |     0.003 |     2286 |     63400 |            3.61 |
+|   F7/F8 Muxes  |    <0.001 |      451 |     63400 |            0.71 |
+|   Register     |    <0.001 |     1474 |    126800 |            1.16 |
 |   CARRY4       |    <0.001 |       56 |     15850 |            0.35 |
-|   BUFG         |    <0.001 |        5 |        32 |           15.63 |
-|   Others       |     0.000 |       16 |       --- |             --- |
-| Signals        |     0.004 |     3469 |       --- |             --- |
+|   BUFG         |    <0.001 |        4 |        32 |           12.50 |
+|   Others       |     0.000 |       14 |       --- |             --- |
+| Signals        |     0.004 |     3462 |       --- |             --- |
 | Block RAM      |    <0.001 |        1 |       135 |            0.74 |
 | I/O            |     0.003 |       39 |       210 |           18.57 |
 | Static Power   |     0.097 |          |           |                 |
@@ -145,7 +145,7 @@ Table of Contents
 +-----------------------------------+-----------+
 | top                               |     0.011 |
 |   U1_SCPU                         |     0.005 |
-|     u_ext                         |     0.001 |
+|     u_ext                         |     0.002 |
 |     u_rf                          |     0.003 |
 |   U2_ROMD                         |     0.002 |
 |     U0                            |     0.002 |
