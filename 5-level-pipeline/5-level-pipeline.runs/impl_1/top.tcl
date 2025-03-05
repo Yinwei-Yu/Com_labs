@@ -65,6 +65,7 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
+  set_param xicom.use_bs_reader 1
   create_project -in_memory -part xc7a100tcsg324-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
@@ -74,8 +75,8 @@ set rc [catch {
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES XPM_MEMORY [current_project]
   add_files -quiet E:/Works/com_labs/5-level-pipeline/5-level-pipeline.runs/synth_1/top.dcp
-  read_ip -quiet e:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/ROM_D/ROM_D.xci
-  read_ip -quiet e:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/RAM_B/RAM_B.xci
+  read_ip -quiet E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/ROM_D/ROM_D.xci
+  read_ip -quiet E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/RAM_B/RAM_B.xci
   read_edif E:/Works/com_labs/teacher/edf_file/SSeg7.edf
   read_edif E:/Works/com_labs/teacher/edf_file/Multi_8CH32.edf
   read_edif E:/Works/com_labs/teacher/edf_file/MIO_BUS.edf

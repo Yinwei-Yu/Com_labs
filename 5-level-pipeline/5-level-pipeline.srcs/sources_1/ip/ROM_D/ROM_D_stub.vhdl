@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
 -- Date        : Wed Mar  5 14:46:26 2025
 -- Host        : Zero running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               e:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/ROM_D/ROM_D_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top ROM_D -prefix
+--               ROM_D_ ROM_D_stub.vhdl
 -- Design      : ROM_D
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a100tcsg324-1

@@ -17,6 +17,7 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
+set_param xicom.use_bs_reader 1
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -30,8 +31,8 @@ set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property ip_output_repo e:/Works/com_labs/5-level-pipeline/5-level-pipeline.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-add_files e:/Works/com_labs/teacher/testac.coe
-add_files e:/Works/com_labs/teacher/D_mem.coe
+add_files E:/Works/com_labs/teacher/testac.coe
+add_files E:/Works/com_labs/teacher/D_mem.coe
 read_verilog -library xil_defaultlib {
   E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/ALU.v
   E:/Works/com_labs/teacher/IO/Counter_3_IO.v
@@ -48,10 +49,10 @@ read_verilog -library xil_defaultlib {
   E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_dm_controler.v
   E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v
 }
-read_ip -quiet e:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/ROM_D/ROM_D.xci
+read_ip -quiet E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/ROM_D/ROM_D.xci
 set_property used_in_implementation false [get_files -all e:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/ROM_D/ROM_D_ooc.xdc]
 
-read_ip -quiet e:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/RAM_B/RAM_B.xci
+read_ip -quiet E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/RAM_B/RAM_B.xci
 set_property used_in_implementation false [get_files -all e:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/RAM_B/RAM_B_ooc.xdc]
 
 read_edif E:/Works/com_labs/teacher/edf_file/SSeg7.edf
