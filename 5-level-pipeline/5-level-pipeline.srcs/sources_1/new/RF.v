@@ -6,8 +6,8 @@ module RF (
     input [4:0] A2,
     input [4:0] A3,
     input [31:0] WD,
-    output [31:0] RD1,
-    output [31:0] RD2
+    output reg [31:0] RD1,
+    output reg [31:0] RD2
 );
 
   reg [31:0] rf[31:0];
@@ -29,8 +29,10 @@ module RF (
       end
     end
   end
+  always @(negedge clk) begin
+    assign RD1 = rf[A1];
+    assign RD2 = rf[A2];
+  end
 
-  assign RD1 = rf[A1];
-  assign RD2 = rf[A2];
 
 endmodule

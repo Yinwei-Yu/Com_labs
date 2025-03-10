@@ -250,6 +250,7 @@ module my_SCPU (
   assign EX_MEM_data_in[97] = EX_DMWr;  //97位为DMWr
   assign EX_MEM_data_in[99:97] = EX_DMType;  //99-97位为DMType
   assign EX_MEM_data_in[131:100] = EX_PC;  //127-100位为PC
+  assign EX_MEM_data_in[133:132] = ID_EX_data_in[165:164];  //165-164位为WDSel
 
   Pipeline_reg #(
       .WIDTH(128)
@@ -282,6 +283,7 @@ module my_SCPU (
   assign Data_out = MEM_RD2;
   assign mem_w = MEM_DMWr;
   assign dm_ctrl = MEM_DMType;
+  assign DM_ALUout = MEM_ALUout;
 
   //MEM/WB regs
   wire [95:0] MEM_WB_data_in;
@@ -292,6 +294,7 @@ module my_SCPU (
   assign MEM_WB_data_in[95:64] = DM_ALUout;  //95-64位为ALUout
   assign MEM_WB_data_in[96] = MEM_RegWrite;  //96位为RegWrite
   assign MEM_WB_data_in[128:97] = MEM_PC;  //128-97位为PC
+  assign MEM_WB_data_in[130:129] = EX_MEM_data_in[133:132];  //165-164位为WDSel
 
   Pipeline_reg #(
       .WIDTH(129)
@@ -307,7 +310,8 @@ module my_SCPU (
   assign DM_data_into_reg = MEM_WB_data_out[63:32];  //DM读出的数据
   assign ALU_data_into_reg = MEM_WB_data_out[95:64];  //ALUout
   assign RegWrite_MEM_out = MEM_WB_data_out[96];  //RegWrite
-  assign PC_for_reg = MEM_WB_data_in[128:97];  //PC
+  assign PC_for_reg = MEM_WB_data_out[128:97];  //PC
+  assign WDSel_from_MEM = MEM_WB_data_out[130:129];  //WDSel
 
   assign CPU_MIO = 1'b0;
   assign INT = 1'b0;
