@@ -120,10 +120,10 @@ module my_SCPU (
 
   //Write Data to reg select
   always @(*) begin
-    case (MEM_WDsel)
-      `WDSel_FromALU: WD = ALU_data_into_reg;
-      `WDSel_FromMEM: WD = DM_data_into_reg;
-      `WDSel_FromPC:  WD = PC_for_reg + 4;
+    case (MEM_WB_WDSel)
+      `WDSel_FromALU: WD = MEM_WB_ALUout;
+      `WDSel_FromMEM: WD = MEM_WB_DMout_data;
+      `WDSel_FromPC:  WD = MEM_WB_Pc + 4;
       `WDSel_FromImm: WD = immout;
     endcase
   end
@@ -240,7 +240,7 @@ module my_SCPU (
       .MEM_RegWrite(MEM_RegWrite),
       .MEM_rd(MEM_rd),
       .WB_RegWrite(RegWrite_MEM_out),
-      .WB_rd(MEM_rd),
+      .WB_rd(WB_rd),
       .EX_rs1(EX_rs1),
       .EX_rs2(EX_rs2),
       .forwardA(forwardA),
@@ -254,13 +254,13 @@ module my_SCPU (
     case(forwardA)
       2'b00: A = EX_Data_1;
       2'b01: A = MEM_ALUout;
-      2'b10: A = DM_data_into_reg;
+      2'b10: A = MEM_WB_ALUout;
       default: A = EX_Data_1;
     endcase
     case (forwardB)
       2'b00: B = EX_Data_2;
       2'b01: B = MEM_ALUout;
-      2'b10: B = DM_data_into_reg;
+      2'b10: B = MEM_WB_ALUout;
       default: B=EX_Data_2;
     endcase
   end
@@ -338,10 +338,10 @@ module my_SCPU (
       MEM_WB_data_out
   );
 
-  wire [31:0]DM_data_into_reg = MEM_WB_data_out[63:32];  //DM读出的数据
-  wire [31:0]ALU_data_into_reg = MEM_WB_data_out[95:64];  //ALUout
-  wire [31:0]PC_for_reg = MEM_WB_data_out[128:97];  //PC
-  wire [1:0]MEM_WDsel = MEM_WB_data_out[130:129];  //WDSel
+  wire [31:0]MEM_WB_DMout_data = MEM_WB_data_out[63:32];  //DM读出的数据
+  wire [31:0]MEM_WB_ALUout = MEM_WB_data_out[95:64];  //ALUout
+  wire [31:0]MEM_WB_Pc = MEM_WB_data_out[128:97];  //PC
+  wire [1:0]MEM_WB_WDSel = MEM_WB_data_out[130:129];  //WDSel
 
   assign CPU_MIO = 1'b0;
   assign INT = 1'b0;

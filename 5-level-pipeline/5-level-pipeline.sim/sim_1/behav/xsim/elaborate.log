@@ -5,4 +5,36 @@ Using 2 slave threads.
 Starting static elaboration
 WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 3 for port 'DMType' [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:167]
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.Enter
+Compiling module xil_defaultlib.clk_div
+Compiling module xil_defaultlib.SPIO
+Compiling module xil_defaultlib.Counter_x
+Compiling module xil_defaultlib.Pipeline_reg(WIDTH=64)
+Compiling module xil_defaultlib.EXT
+Compiling module xil_defaultlib.RF
+Compiling module xil_defaultlib.Ctrl
+Compiling module xil_defaultlib.Pipeline_reg(WIDTH=177)
+Compiling module xil_defaultlib.Forward
+Compiling module xil_defaultlib.ALU
+Compiling module xil_defaultlib.Pipeline_reg(WIDTH=135)
+Compiling module xil_defaultlib.Pipeline_reg(WIDTH=131)
+Compiling module xil_defaultlib.my_SCPU
+Compiling module dist_mem_gen_v8_0_12.dist_mem_gen_v8_0_12(C_FAMILY="a...
+Compiling module xil_defaultlib.ROM_D
+Compiling module xil_defaultlib.my_dm_controller
+Compiling module blk_mem_gen_v8_4_2.blk_mem_gen_v8_4_2_output_stage(...
+Compiling module blk_mem_gen_v8_4_2.blk_mem_gen_v8_4_2_output_stage(...
+Compiling module blk_mem_gen_v8_4_2.blk_mem_gen_v8_4_2_softecc_outpu...
+Compiling module blk_mem_gen_v8_4_2.blk_mem_gen_v8_4_2_mem_module(C_...
+Compiling module blk_mem_gen_v8_4_2.blk_mem_gen_v8_4_2(C_FAMILY="art...
+Compiling module xil_defaultlib.RAM_B
+Compiling module xil_defaultlib.MIO_BUS
+Compiling module xil_defaultlib.Multi_8CH32
+Compiling module xil_defaultlib.SSeg7
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.top_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot top_tb_behav

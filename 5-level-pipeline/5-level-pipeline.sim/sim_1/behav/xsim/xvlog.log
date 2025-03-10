@@ -1,0 +1,65 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/RAM_B/sim/RAM_B.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RAM_B
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/ip/ROM_D/sim/ROM_D.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ROM_D
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/ALU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/teacher/IO/Counter_3_IO.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Counter_x
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/Ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Ctrl
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/EXT.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module EXT
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/teacher/IO/Enter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Enter
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/Forward.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Forward
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/teacher/edf_file/MIO_BUS.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MIO_BUS
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/teacher/edf_file/Multi_8CH32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Multi_8CH32
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/Pipeline_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Pipeline_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/RF.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RF
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/teacher/edf_file/SPIO.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SPIO
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/teacher/edf_file/SSeg7.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SSeg7
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/teacher/IO/clk_div.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clk_div
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module my_SCPU
+INFO: [VRFC 10-2458] undeclared symbol write_enable, assumed default net type wire [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:44]
+INFO: [VRFC 10-2458] undeclared symbol flush, assumed default net type wire [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:45]
+INFO: [VRFC 10-2458] undeclared symbol Zero, assumed default net type wire [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:158]
+INFO: [VRFC 10-2458] undeclared symbol DMWr, assumed default net type wire [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:162]
+WARNING: [VRFC 10-3380] identifier 'immout' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:32]
+WARNING: [VRFC 10-3380] identifier 'ALUout' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:34]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_data_out' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:114]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_WDSel' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:123]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_ALUout' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:124]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_DMout_data' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:125]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_Pc' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:126]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_data_out' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:131]
+WARNING: [VRFC 10-3380] identifier 'EX_MEM_data_out' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:231]
+WARNING: [VRFC 10-3380] identifier 'EX_MEM_data_out' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:232]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_data_out' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:233]
+WARNING: [VRFC 10-3380] identifier 'MEM_ALUout' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:256]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_ALUout' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:257]
+WARNING: [VRFC 10-3380] identifier 'MEM_ALUout' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:262]
+WARNING: [VRFC 10-3380] identifier 'MEM_WB_ALUout' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_SCPU.v:263]
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/my_dm_controler.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module my_dm_controller
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top
+WARNING: [VRFC 10-3380] identifier 'GPIOf0000000_we' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:38]
+WARNING: [VRFC 10-3380] identifier 'Peripheral_in' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:39]
+WARNING: [VRFC 10-3380] identifier 'Peripheral_in' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:60]
+WARNING: [VRFC 10-3380] identifier 'Data_read' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:83]
+WARNING: [VRFC 10-3380] identifier 'data' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:87]
+WARNING: [VRFC 10-3380] identifier 'Cpu_data4bus' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:119]
+WARNING: [VRFC 10-3380] identifier 'ram_data_in' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:120]
+WARNING: [VRFC 10-3380] identifier 'ram_addr' is used before its declaration [E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/top.v:136]
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sim_1/new/top_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_tb
