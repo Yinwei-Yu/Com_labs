@@ -17,7 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param xicom.use_bs_reader 1
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -33,14 +32,17 @@ set_property ip_output_repo e:/Works/com_labs/5-level-pipeline/5-level-pipeline.
 set_property ip_cache_permissions {read write} [current_project]
 add_files E:/Works/com_labs/teacher/testac.coe
 add_files E:/Works/com_labs/teacher/D_mem.coe
+add_files E:/Works/com_labs/IM.coe
 read_verilog -library xil_defaultlib {
   E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/ALU.v
   E:/Works/com_labs/teacher/IO/Counter_3_IO.v
   E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/Ctrl.v
   E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/EXT.v
   E:/Works/com_labs/teacher/IO/Enter.v
+  E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/Forward.v
   E:/Works/com_labs/teacher/edf_file/MIO_BUS.v
   E:/Works/com_labs/teacher/edf_file/Multi_8CH32.v
+  E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/Pipeline_reg.v
   E:/Works/com_labs/5-level-pipeline/5-level-pipeline.srcs/sources_1/new/RF.v
   E:/Works/com_labs/teacher/edf_file/SPIO.v
   E:/Works/com_labs/teacher/edf_file/SSeg7.v

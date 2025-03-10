@@ -19,7 +19,7 @@ module RF (
   always @(posedge clk or posedge rst) begin
     if (rst) begin
       for (i = 0; i < 32; i = i + 1) begin
-        rf[i] <= 0;
+        rf[i] <= i;
       end
     end else begin
       if (RFWr) begin
@@ -30,8 +30,8 @@ module RF (
     end
   end
   always @(negedge clk) begin
-    assign RD1 = rf[A1];
-    assign RD2 = rf[A2];
+    RD1 = rf[A1];
+    RD2 = rf[A2];
   end
 
 
