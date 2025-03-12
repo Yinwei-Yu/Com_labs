@@ -22,21 +22,51 @@ module my_SCPU (
   reg [31:0] PC;
   wire [1:0] PCSel;
   wire i_jalr;
+  //wire PC_write_enable;
+  // always @(posedge clk or posedge rst) begin
+  //   if (rst) begin
+  //     PC <= 0;
+  //   end else begin
+  //     if (PCSel == 2'b00) begin
+  //       PC <= PC + 4;
+  //     end else if (PCSel == 2'b01) begin
+  //       PC <= PC + immout;
+  //     end else if (PCSel == 2'b10) begin
+  //       PC <= (i_jalr) ? (ALUout & 32'hFFFFFFFE) : ALUout;
+  //     end else begin
+  //       PC <= PC + 4;
+  //     end
+  //   end
+   
+wire MEM_PC = EX_MEM_data_out[132:101];  //PC
+wire MEM_i_jalr = EX_MEM_data_out[167];  //i_jalr
+wire MEM_ALUout = EX_MEM_data_out[63:32];  //ALUout
+wire MEM_immout =EX_MEM_data_out[166:135];  //immout
+wire MEM_PCSel = EX_MEM_data_out[169:168];  //PCSel
+reg IF_ID_flush=0;
+reg ID_EX_flush=0;
+reg EX_MEM_flush=0;
+
   always @(posedge clk or posedge rst) begin
     if (rst) begin
       PC <= 0;
     end else begin
-      if (PCSel == 2'b00) begin
-        PC <= PC + 4;
-      end else if (PCSel == 2'b01) begin
-        PC <= PC + immout;
-      end else if (PCSel == 2'b10) begin
-        PC <= (i_jalr) ? (ALUout & 32'hFFFFFFFE) : ALUout;
+      if(MEM_PCSel==2'b01||MEM_PCSel==2'b10) begin
+    IF_ID_flush<=1;
+    ID_EX_flush<=1;
+    EX_MEM_flush<=1;
+          if (MEM_PCSel==2'b01) begin
+        PC <= MEM_PC + MEM_immout;
+      end else if (MEM_PCSel == 2'b10) begin
+        PC <= (MEM_i_jalr) ? (MEM_ALUout & 32'hFFFFFFFE) : MEM_ALUout;
+      end
       end else begin
         PC <= PC + 4;
       end
     end
   end
+  
+
 
   assign PC_out = PC;
 
@@ -55,7 +85,7 @@ module my_SCPU (
       clk,
       rst,
       write_enable,
-      flush,
+      IF_ID_flush,
       IF_ID_data_in,
       IF_ID_data_out
   );
@@ -148,7 +178,7 @@ module my_SCPU (
   wire ASel;
   wire BSel;
   //wire PCSel;
-  wire DMType;
+  wire [2:0]DMType;
 
   //Control Unit
   Ctrl u_ctrl (
@@ -200,7 +230,7 @@ module my_SCPU (
       clk,
       rst,
       write_enable,
-      flush,
+      ID_EX_flush,
       ID_EX_data_in,
       ID_EX_data_out
   );
@@ -228,7 +258,7 @@ module my_SCPU (
   wire EX_i_jalr = ID_EX_data_out[176];  //i_jalr
   wire EX_BrUn = ID_EX_data_out[177];  //BrUn
   wire EX_BrLt = ID_EX_data_out[178];  //BrLt
-  wire Zero = ID_EX_data_out[179];  //zero
+  wire EX_Zero = ID_EX_data_out[179];  //zero
 
 
   //ALU
@@ -304,7 +334,7 @@ module my_SCPU (
       clk,
       rst,
       write_enable,
-      flush,
+      EX_MEM_flush,
       EX_MEM_data_in,
       EX_MEM_data_out
   );
@@ -315,12 +345,13 @@ module my_SCPU (
   //MEM 阶段
 
   wire [31:0] MEM_instr = EX_MEM_data_out[31:0];  //指令
-  wire [63:32] MEM_ALUout = EX_MEM_data_out[63:32];  //ALUout
+  // wire [63:32] MEM_ALUout = EX_MEM_data_out[63:32];  //ALUout
   wire [31:0] MEM_RD2 = EX_MEM_data_out[95:64];  //rs2数据
   wire MEM_DMWr = EX_MEM_data_out[97];  //DMWr
   wire [2:0] MEM_DMType = EX_MEM_data_out[100:98];  //DMType
-  wire [31:0] MEM_PC = EX_MEM_data_out[132:101];  //PC
-  wire MEM_i_jalr =EX_MEM_data_out[167];
+  // wire [31:0] MEM_PC = EX_MEM_data_out[132:101];  //PC
+  // wire MEM_i_jalr =EX_MEM_data_out[167];
+  // wire [1:0] MEM_PCSel = EX_MEM_data_out[169:168];  //PCSel
 
   //DM
   assign Addr_out = MEM_ALUout;
@@ -342,7 +373,7 @@ module my_SCPU (
   assign MEM_WB_data_in[163] = EX_MEM_data_out[167];  //163位为i_jalr
 
   Pipeline_reg #(
-      .WIDTH(163)
+      .WIDTH(164)
   ) MEM_WB (
       clk,
       rst,
@@ -357,6 +388,7 @@ module my_SCPU (
   wire [31:0] MEM_WB_Pc = MEM_WB_data_out[128:97];  //PC
   wire [ 1:0] MEM_WB_WDSel = MEM_WB_data_out[130:129];  //WDSel
   wire [31:0] MEM_WB_immout = MEM_WB_data_out[162:131];  //immout(for lui)
+  wire MEM_WB_i_jalr=MEM_WB_data_out[163];
 
   assign CPU_MIO = 1'b0;
   assign INT = 1'b0;
