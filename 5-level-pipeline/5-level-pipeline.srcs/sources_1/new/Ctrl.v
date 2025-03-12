@@ -14,7 +14,8 @@ module Ctrl (
     output [2:0] DMType,  //Data Memory Type
     output [1:0] WDSel,  //Memory Write Data Select
     output [1:0] PCSel,  //PC Select
-    output i_jalr  //jalr
+    output i_jalr,  //jalr 
+    output u_lui  //lui
 );
 
   `define ALUOp_nop 5'b00000
@@ -88,22 +89,27 @@ module Ctrl (
 
   //U type
   wire u_auipc = ~Op[6] & ~Op[5] & Op[4] & ~Op[3] & Op[2] & Op[1] & Op[0];  //op=0010111
-  wire u_lui = ~Op[6] & Op[5] & Op[4] & ~Op[3] & Op[2] & Op[1] & Op[0];  //op=0110111
+  assign u_lui = ~Op[6] & Op[5] & Op[4] & ~Op[3] & Op[2] & Op[1] & Op[0];  //op=0110111
 
 
 
   //signal
   assign RegWrite = rtype | itype_r | itype_l | u_auipc | u_lui | i_jalr | j_jal;  // register write
-  assign MemWrite = stype&(s_sb |s_sh |s_sw);  // memory write
+  assign MemWrite = stype & (s_sb | s_sh | s_sw);  // memory write
   assign ASel = u_auipc;  // ALU A is from register or PC 
-  assign BSel = itype_l | itype_r | u_auipc | stype | i_jalr;  // ALU B is from instruction immediate
+  assign BSel = itype_l | itype_r | u_auipc | stype | i_jalr | u_lui;  // ALU B is from instruction immediate
 
+  `define WDSel_FromALU 2'b00
+  `define WDSel_FromMEM 2'b01
+  `define WDSel_FromPC 2'b10
+  //`define WDSel_FromImm 2'b11
   //WDSel
-  assign WDSel[0] = itype_l | u_lui;  //if is itype_l then select from immediate
-  assign WDSel[1] = i_jalr | j_jal | u_lui;  //if is i_jalr or j_jal then select from PC,lui from the immediate
+  //assign WDSel[0] = itype_l | u_lui;  //if is itype_l then select from immediate
+  //assign WDSel[1] = i_jalr | j_jal | u_lui;  //if is i_jalr or j_jal then select from PC,lui from the immediate
+  assign WDSel = (i_jalr | j_jal) ? `WDSel_FromPC : (itype_l) ? `WDSel_FromMEM : `WDSel_FromALU;
 
   //ALUOp
-  assign ALUOp = (r_add | i_addi | itype_l | stype | u_auipc | j_jal | i_jalr) ? `ALUOp_add :
+  assign ALUOp = (r_add | i_addi | itype_l | stype | u_auipc | j_jal | i_jalr|u_lui) ? `ALUOp_add :
                (r_sub) ? `ALUOp_sub :
                (r_and | i_andi) ? `ALUOp_and :
                (r_or | i_ori) ? `ALUOp_or :
