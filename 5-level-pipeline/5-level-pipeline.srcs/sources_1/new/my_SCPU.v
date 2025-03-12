@@ -3,11 +3,11 @@ module my_SCPU (
     input rst,
     input MIO_ready,
     input [31:0] instr,  //inst_in,instruction
-    input [31:0] Data_in,
+    input [31:0] Data_in, // 从内存中读取的数据
     output mem_w,
     output [31:0] PC_out,
-    output [31:0] Addr_out,
-    output [31:0] Data_out,
+    output [31:0] Addr_out, // 地址输出
+    output [31:0] Data_out, // 要写入内存的数据 rs2
     output [2:0] dm_ctrl,
     output CPU_MIO,
     input INT
@@ -124,7 +124,7 @@ module my_SCPU (
       `WDSel_FromALU: WD = MEM_WB_ALUout;
       `WDSel_FromMEM: WD = MEM_WB_DMout_data;
       `WDSel_FromPC:  WD = MEM_WB_Pc + 4;
-      `WDSel_FromImm: WD = immout;
+      `WDSel_FromImm: WD = MEM_WB_immout;
     endcase
   end
 
