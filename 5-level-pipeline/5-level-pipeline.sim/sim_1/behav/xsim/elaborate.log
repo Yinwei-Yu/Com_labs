@@ -19,8 +19,8 @@ Compiling module xil_defaultlib.Ctrl
 Compiling module xil_defaultlib.Pipeline_reg(WIDTH=177)
 Compiling module xil_defaultlib.Forward
 Compiling module xil_defaultlib.ALU
-Compiling module xil_defaultlib.Pipeline_reg(WIDTH=135)
-Compiling module xil_defaultlib.Pipeline_reg(WIDTH=131)
+Compiling module xil_defaultlib.Pipeline_reg(WIDTH=167)
+Compiling module xil_defaultlib.Pipeline_reg(WIDTH=163)
 Compiling module xil_defaultlib.my_SCPU
 Compiling module dist_mem_gen_v8_0_12.dist_mem_gen_v8_0_12(C_FAMILY="a...
 Compiling module xil_defaultlib.ROM_D
