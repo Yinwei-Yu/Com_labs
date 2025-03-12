@@ -172,8 +172,8 @@ module my_SCPU (
 
 
   //ID/EX regs
-  wire [176:0] ID_EX_data_in;
-  wire [176:0] ID_EX_data_out;
+  wire [179:0] ID_EX_data_in;
+  wire [179:0] ID_EX_data_out;
 
   assign ID_EX_data_in[31:0] = ID_instr;  //31-0位为指令
   assign ID_EX_data_in[63:32] = ID_PC;  //63-32位为PC
@@ -190,10 +190,12 @@ module my_SCPU (
   assign ID_EX_data_in[172:168] = ALUop;  //172-168位为ALUop 5bit
   assign ID_EX_data_in[175:173] = DMType;  //175-173位为DMType 3bit
   assign ID_EX_data_in[176] = i_jalr;  //176位为i_jalr 1bit
-
+  assign ID_EX_data_in[177] = BrUn;  //177位为BrUn 1bit
+  assign ID_EX_data_in[178] = BrLt;  //178位为zero 1bit
+  assign ID_EX_data_in[179] = zero;  //179位为zero 1bit
 
   Pipeline_reg #(
-      .WIDTH(177)
+      .WIDTH(180)
   ) ID_EX (
       clk,
       rst,
@@ -210,18 +212,24 @@ module my_SCPU (
   //EX阶段 
 
   wire [31:0] EX_instr = ID_EX_data_out[31:0];  //指令
+  wire [63:32] EX_PC = ID_EX_data_out[63:32];  //PC
   wire [31:0] EX_RD1 = ID_EX_data_out[95:64];  //rs1数据
   wire [31:0] EX_RD2 = ID_EX_data_out[127:96];  //rs2数据
   wire [31:0] EX_immout = ID_EX_data_out[159:128];  //立即数
-  wire [63:32] EX_PC = ID_EX_data_out[63:32];  //PC
+
   //控制信号 传递
   wire EX_RegWrite = ID_EX_data_out[160];  //RegWrite
   wire EX_DMWr = ID_EX_data_out[161];  //DMWr
-  wire [4:0] EX_ALUop = ID_EX_data_out[172:168];  //ALUop
+  wire [1:0] EX_PCSel = ID_EX_data_out[163:162];  //PCSel
   wire EX_ASel = ID_EX_data_out[166];  //ASel
   wire EX_BSel = ID_EX_data_out[167];  //BSel
-  wire [1:0] EX_PCSel = ID_EX_data_out[163:162];  //PCSel
+  wire [4:0] EX_ALUop = ID_EX_data_out[172:168];  //ALUop
   wire [2:0] EX_DMType = ID_EX_data_out[175:173];  //DMType
+  wire EX_i_jalr = ID_EX_data_out[176];  //i_jalr
+  wire EX_BrUn = ID_EX_data_out[177];  //BrUn
+  wire EX_BrLt = ID_EX_data_out[178];  //BrLt
+  wire Zero = ID_EX_data_out[179];  //zero
+
 
   //ALU
   reg [31:0] A;
@@ -275,8 +283,8 @@ module my_SCPU (
   );
 
   //EX/MEM regs
-  wire [166:0] EX_MEM_data_in;
-  wire [166:0] EX_MEM_data_out;
+  wire [169:0] EX_MEM_data_in;
+  wire [169:0] EX_MEM_data_out;
 
   assign EX_MEM_data_in[31:0] = EX_instr;  //31-0位为指令
   assign EX_MEM_data_in[63:32] = ALUout;  // 63-32位为ALUout
@@ -287,9 +295,11 @@ module my_SCPU (
   assign EX_MEM_data_in[132:101] = EX_PC;  //132-101位为PC
   assign EX_MEM_data_in[134:133] = ID_EX_data_out[165:164];  //134-133位为WDSel
   assign EX_MEM_data_in[166:135] = EX_immout;
+  assign EX_MEM_data_in[167] = EX_i_jalr;  //167位为i_jalr
+  assign EX_MEM_data_in[169:168]=EX_PCSel;  //168-169位为PCSel
 
   Pipeline_reg #(
-      .WIDTH(167)
+      .WIDTH(170)
   ) EX_MEM (
       clk,
       rst,
@@ -308,8 +318,9 @@ module my_SCPU (
   wire [63:32] MEM_ALUout = EX_MEM_data_out[63:32];  //ALUout
   wire [31:0] MEM_RD2 = EX_MEM_data_out[95:64];  //rs2数据
   wire MEM_DMWr = EX_MEM_data_out[97];  //DMWr
-  wire [2:0] MEM_DMType = EX_MEM_data_out[99:97];  //DMType
-  wire [31:0] MEM_PC = EX_MEM_data_out[131:100];  //PC
+  wire [2:0] MEM_DMType = EX_MEM_data_out[100:98];  //DMType
+  wire [31:0] MEM_PC = EX_MEM_data_out[132:101];  //PC
+  wire MEM_i_jalr =EX_MEM_data_out[167];
 
   //DM
   assign Addr_out = MEM_ALUout;
@@ -318,16 +329,17 @@ module my_SCPU (
   assign dm_ctrl = MEM_DMType;
 
   //MEM/WB regs
-  wire [162:0] MEM_WB_data_in;
-  wire [162:0] MEM_WB_data_out;
+  wire [163:0] MEM_WB_data_in;
+  wire [163:0] MEM_WB_data_out;
 
   assign MEM_WB_data_in[31:0] = MEM_instr;  //31-0位为指令
   assign MEM_WB_data_in[63:32] = Data_in;  //63-32位为DM读出的数据
   assign MEM_WB_data_in[95:64] = MEM_ALUout;  //95-64位为ALUout
   assign MEM_WB_data_in[96] = MEM_RegWrite;  //96位为RegWrite
   assign MEM_WB_data_in[128:97] = MEM_PC;  //128-97位为PC
-  assign MEM_WB_data_in[130:129] = EX_MEM_data_out[133:132];  //130-129位为WDSel
+  assign MEM_WB_data_in[130:129] = EX_MEM_data_out[134:133];  //130-129位为WDSel
   assign MEM_WB_data_in[162:131] = EX_MEM_data_out[166:135];  // 162-131位为immout
+  assign MEM_WB_data_in[163] = EX_MEM_data_out[167];  //163位为i_jalr
 
   Pipeline_reg #(
       .WIDTH(163)
