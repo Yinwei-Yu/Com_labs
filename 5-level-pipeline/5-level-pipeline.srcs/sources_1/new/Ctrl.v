@@ -2,9 +2,9 @@ module Ctrl (
     input [6:0] Op,
     input [2:0] Funct3,
     input [6:0] Funct7,
-    input Zero,  //Zero Flag
-    input BrLt,  //Branch Less Than
-    output BrUn,  //Branch Unsigned
+    //input Zero,  //Zero Flag
+    //input BrLt,  //Branch Less Than
+    //output BrUn,  //Branch Unsigned
     output RegWrite,  //Register Write
     output MemWrite,  //Memory Write
     output [5:0] EXTOp,  //Extend Operation
@@ -13,7 +13,7 @@ module Ctrl (
     output BSel,  //ALU B Source
     output [2:0] DMType,  //Data Memory Type
     output [1:0] WDSel,  //Memory Write Data Select
-    output [1:0] PCSel,  //PC Select
+    //output [1:0] PCSel,  //PC Select
     output i_jalr,  //jalr 
     output u_lui  //lui
 );
@@ -70,12 +70,12 @@ module Ctrl (
 
   //B type
   wire btype = Op[6] & Op[5] & ~Op[4] & ~Op[3] & ~Op[2] & Op[1] & Op[0];  //1100011
-  wire b_beq = btype & ~Funct3[2] & ~Funct3[1] & ~Funct3[0];  //beq 000
-  wire b_bne = btype & ~Funct3[2] & ~Funct3[1] & Funct3[0];  //bne 001
-  wire b_bge = btype & Funct3[2] & ~Funct3[1] & Funct3[0];  //bge 101
-  wire b_bgeu = btype & Funct3[2] & Funct3[1] & Funct3[0];  //bgeu 111
-  wire b_blt = btype & Funct3[2] & ~Funct3[1] & ~Funct3[0];  //blt 100
-  wire b_bltu = btype & Funct3[2] & Funct3[1] & ~Funct3[0];  //bltu 110
+  // wire b_beq = btype & ~Funct3[2] & ~Funct3[1] & ~Funct3[0];  //beq 000
+  // wire b_bne = btype & ~Funct3[2] & ~Funct3[1] & Funct3[0];  //bne 001
+  // wire b_bge = btype & Funct3[2] & ~Funct3[1] & Funct3[0];  //bge 101
+  // wire b_bgeu = btype & Funct3[2] & Funct3[1] & Funct3[0];  //bgeu 111
+  // wire b_blt = btype & Funct3[2] & ~Funct3[1] & ~Funct3[0];  //blt 100
+  // wire b_bltu = btype & Funct3[2] & Funct3[1] & ~Funct3[0];  //bltu 110
 
   //S type
   wire stype = ~Op[6] & Op[5] & ~Op[4] & ~Op[3] & ~Op[2] & Op[1] & Op[0];  //0100011
@@ -102,10 +102,6 @@ module Ctrl (
   `define WDSel_FromALU 2'b00
   `define WDSel_FromMEM 2'b01
   `define WDSel_FromPC 2'b10
-  //`define WDSel_FromImm 2'b11
-  //WDSel
-  //assign WDSel[0] = itype_l | u_lui;  //if is itype_l then select from immediate
-  //assign WDSel[1] = i_jalr | j_jal | u_lui;  //if is i_jalr or j_jal then select from PC,lui from the immediate
   assign WDSel = (i_jalr | j_jal) ? `WDSel_FromPC : (itype_l) ? `WDSel_FromMEM : `WDSel_FromALU;
 
   //ALUOp
@@ -140,12 +136,12 @@ module Ctrl (
   assign DMType[1] = i_lb | s_sb | i_lhu;
   assign DMType[0] = i_lh | s_sh | i_lb | s_sb;
 
-  //BrUn
-  assign BrUn = b_bltu | b_bgeu;
+  // //BrUn
+  // assign BrUn = b_bltu | b_bgeu;
 
-  //PCSel
-  wire PC_B = btype & ((b_beq & Zero) | (b_bne & ~Zero) | (b_blt & BrLt) | (b_bltu & BrLt) | (b_bge & ~BrLt) | (b_bgeu & ~BrLt));
-  assign PCSel[0] = PC_B | j_jal;
-  assign PCSel[1] = i_jalr;
+  // //PCSel
+  // wire PC_B = btype & ((b_beq & Zero) | (b_bne & ~Zero) | (b_blt & BrLt) | (b_bltu & BrLt) | (b_bge & ~BrLt) | (b_bgeu & ~BrLt));
+  // assign PCSel[0] = PC_B | j_jal;
+  // assign PCSel[1] = i_jalr;
 
 endmodule

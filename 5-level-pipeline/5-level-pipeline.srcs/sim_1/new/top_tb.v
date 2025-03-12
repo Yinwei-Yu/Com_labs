@@ -31,7 +31,7 @@ module top_tb ();
     sw_i = 16'b0000_0000_00_0000_00;  // Initialize switch input to 0
     #5 rstn = 1'b1;  // Deassert reset
     // Finish simulation after some time
-    #3000;
+    #100000;
   end
 
 endmodule
