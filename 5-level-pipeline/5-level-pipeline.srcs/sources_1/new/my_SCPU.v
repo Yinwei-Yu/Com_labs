@@ -24,50 +24,53 @@ module my_SCPU (
   wire i_jalr;
   reg [10:0] cycles;
   //wire PC_write_enable;
-  // always @(posedge clk or posedge rst) begin
-  //   if (rst) begin
-  //     PC <= 0;
-  //   end else begin
-  //     if (PCSel == 2'b00) begin
-  //       PC <= PC + 4;
-  //     end else if (PCSel == 2'b01) begin
-  //       PC <= PC + immout;
-  //     end else if (PCSel == 2'b10) begin
-  //       PC <= (i_jalr) ? (ALUout & 32'hFFFFFFFE) : ALUout;
-  //     end else begin
-  //       PC <= PC + 4;
-  //     end
-  //   end
-   
-wire MEM_PC = EX_MEM_data_out[132:101];  //PC
-wire MEM_i_jalr = EX_MEM_data_out[167];  //i_jalr
-wire MEM_ALUout = EX_MEM_data_out[63:32];  //ALUout
-wire MEM_immout =EX_MEM_data_out[166:135];  //immout
-wire MEM_PCSel = EX_MEM_data_out[169:168];  //PCSel
-reg IF_ID_flush=0;
-reg ID_EX_flush=0;
-reg EX_MEM_flush=0;
-
   always @(posedge clk or posedge rst) begin
     cycles <= cycles + 1;
     if (rst) begin
       cycles <= 0;
       PC <= 0;
     end else begin
-      if(MEM_PCSel==2'b01||MEM_PCSel==2'b10) begin
-    IF_ID_flush<=1;
-    ID_EX_flush<=1;
-    EX_MEM_flush<=1;
-          if (MEM_PCSel==2'b01) begin
-        PC <= MEM_PC + MEM_immout;
-      end else if (MEM_PCSel == 2'b10) begin
-        PC <= (MEM_i_jalr) ? (MEM_ALUout & 32'hFFFFFFFE) : MEM_ALUout;
-      end
+      if (PCSel == 2'b00) begin
+        PC <= PC + 4;
+      end else if (PCSel == 2'b01) begin
+        PC <= PC + immout;
+      end else if (PCSel == 2'b10) begin
+        PC <= (i_jalr) ? (ALUout & 32'hFFFFFFFE) : ALUout;
       end else begin
         PC <= PC + 4;
       end
     end
-  end
+    end
+   
+// wire MEM_PC = EX_MEM_data_out[132:101];  //PC
+// wire MEM_i_jalr = EX_MEM_data_out[167];  //i_jalr
+// wire MEM_ALUout = EX_MEM_data_out[63:32];  //ALUout
+// wire MEM_immout =EX_MEM_data_out[166:135];  //immout
+// wire MEM_PCSel = EX_MEM_data_out[169:168];  //PCSel
+//reg IF_ID_flush=0;
+//reg ID_EX_flush=0;
+//reg EX_MEM_flush=0;
+
+  // always @(posedge clk or posedge rst) begin
+  //   cycles <= cycles + 1;
+  //   if (rst) begin
+  //     cycles <= 0;
+  //     PC <= 0;
+  //   end else begin
+  //     if(MEM_PCSel==2'b01||MEM_PCSel==2'b10) begin
+  //   IF_ID_flush<=1;
+  //   ID_EX_flush<=1;
+  //   EX_MEM_flush<=1;
+  //         if (MEM_PCSel==2'b01) begin
+  //       PC <= MEM_PC + MEM_immout;
+  //     end else if (MEM_PCSel == 2'b10) begin
+  //       PC <= (MEM_i_jalr) ? (MEM_ALUout & 32'hFFFFFFFE) : MEM_ALUout;
+  //     end
+  //     end else begin
+  //       PC <= PC + 4;
+  //     end
+  //   end
+  // end
   
 
 
@@ -246,7 +249,7 @@ reg EX_MEM_flush=0;
   //EX阶段 
 
   wire [31:0] EX_instr = ID_EX_data_out[31:0];  //指令
-  wire [63:32] EX_PC = ID_EX_data_out[63:32];  //PC
+  wire [31:0] EX_PC = ID_EX_data_out[63:32];  //PC
   wire [31:0] EX_RD1 = ID_EX_data_out[95:64];  //rs1数据
   wire [31:0] EX_RD2 = ID_EX_data_out[127:96];  //rs2数据
   wire [31:0] EX_immout = ID_EX_data_out[159:128];  //立即数
