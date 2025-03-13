@@ -15,7 +15,8 @@ module Ctrl (
     output [1:0] WDSel,  //Memory Write Data Select
     //output [1:0] PCSel,  //PC Select
     output i_jalr,  //jalr 
-    output u_lui  //lui
+    output u_lui,  //lui
+    output MemRead
 );
 
   `define ALUOp_nop 5'b00000
@@ -135,6 +136,8 @@ module Ctrl (
   assign DMType[2] = i_lbu;
   assign DMType[1] = i_lb | s_sb | i_lhu;
   assign DMType[0] = i_lh | s_sh | i_lb | s_sb;
+
+  assign MemRead=itype_l;
 
   // //BrUn
   // assign BrUn = b_bltu | b_bgeu;

@@ -31,7 +31,8 @@ module my_SCPU (
   reg IF_ID_flush = 0;
   reg ID_EX_flush = 0;
   reg EX_MEM_flush = 0;
-
+  reg IF_ID_write_enable=1;
+  wire stall = loadUseHazard;
   
 
   always @(posedge clk or posedge rst) begin
@@ -52,17 +53,25 @@ module my_SCPU (
           PC<=(EX_i_jalr)?(EX_ALUout&32'hFFFFFFFE):EX_ALUout;
         end
       end else begin
+        if(!stall)begin
         PC <= PC + 4;
+        end
       end
     end
   end
 
   always@(*)begin
     if (EX_PCSel==2'b01 || EX_PCSel == 2'b10 /*MEM_PCSel == 2'b01 || MEM_PCSel == 2'b10*/) begin
+        IF_ID_write_enable<=1;
         IF_ID_flush  <= 1;
         ID_EX_flush  <= 1;
     end
+    else if(stall)begin
+        IF_ID_write_enable<=0;
+        ID_EX_flush  <= 1;
+    end
     else begin
+        IF_ID_write_enable<=1;
         IF_ID_flush  <= 0;
         ID_EX_flush  <= 0;
     end
@@ -86,7 +95,7 @@ module my_SCPU (
   ) IF_ID (
       clk,
       rst,
-      write_enable,
+      IF_ID_write_enable,
       IF_ID_flush,
       IF_ID_data_in,
       IF_ID_data_out
@@ -145,6 +154,20 @@ module my_SCPU (
   assign rs2 = rs2_addr;
   assign rd  = MEM_WB_data_out[11:7];
 
+
+  //Hazard Detection
+  wire loadUseHazard;
+  wire [4:0] EX_rd = ID_EX_data_out[11:7];
+  wire ID_EX_MemRead = ID_EX_data_out[181];
+  HazardDetection u_hazard (
+      .ID_EX_MemRead(ID_EX_MemRead),
+      .EX_rd(EX_rd),
+      .ID_rs1(rs1),
+      .ID_rs2(rs2),
+      .loadUseHazard(loadUseHazard)
+  );
+  
+
   `define WDSel_FromALU 2'b00
   `define WDSel_FromMEM 2'b01
   `define WDSel_FromPC 2'b10
@@ -181,6 +204,7 @@ module my_SCPU (
   wire BSel;
   //wire PCSel;
   wire [2:0] DMType;
+  wire MemWrite;
   wire u_lui;
   //Control Unit
   Ctrl u_ctrl (
@@ -200,13 +224,14 @@ module my_SCPU (
       .WDSel(WDSel),
       //.PCSel(PCSel),
       .i_jalr(i_jalr),
-      .u_lui(u_lui)
+      .u_lui(u_lui),
+      .MemRead(MemRead)
   );
 
 
   //ID/EX regs
-  wire [180:0] ID_EX_data_in;
-  wire [180:0] ID_EX_data_out;
+  wire [181:0] ID_EX_data_in;
+  wire [181:0] ID_EX_data_out;
 
   assign ID_EX_data_in[31:0] = ID_instr;  //31-0位为指令
   assign ID_EX_data_in[63:32] = ID_PC;  //63-32位为PC
@@ -227,8 +252,9 @@ module my_SCPU (
   assign ID_EX_data_in[178] = 0;//BrLt;  //178位为zero 1bit
   assign ID_EX_data_in[179] = 0;//zero;  //179位为zero 1bit
   assign ID_EX_data_in[180] = u_lui;
+  assign ID_EX_data_in[181] = MemRead;
   Pipeline_reg #(
-      .WIDTH(181)
+      .WIDTH(182)
   ) ID_EX (
       clk,
       rst,
@@ -249,7 +275,7 @@ module my_SCPU (
   wire [31:0] EX_RD1 = ID_EX_data_out[95:64];  //rs1数据
   wire [31:0] EX_RD2 = ID_EX_data_out[127:96];  //rs2数据
   wire [31:0] EX_immout = ID_EX_data_out[159:128];  //立即数
-
+  // wire [4:0]  EX_rd=ID_EX_data_out[11:7];//EX阶段rd,用于HazardDetect
   //控制信号 传递
   wire EX_RegWrite = ID_EX_data_out[160];  //RegWrite
   wire EX_DMWr = ID_EX_data_out[161];  //DMWr
