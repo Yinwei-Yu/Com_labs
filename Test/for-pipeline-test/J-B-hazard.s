@@ -75,7 +75,7 @@ lui x19, 0x1E5F   # x19 = 0x1E5F（标记前递正确）
 # 验证MEM阶段数据用于分支
 sw   x19, 0(x0)        # [0x0] = 0x1E5F
 lw   x20, 0(x0)        # x20 = 0x1E5F
-bne  x20, x19, fail    # 0x1E5F == 0x1E5F → 不跳转
+bne  x20, x19, fail    # 0x1E5F == 0x1E5F → 不跳转 这里需要支持lw的stall实现
 lui x21,0xCAFE   # x21 = 0xCAFE（标记加载正确）
 
 # ----------------- 验证区 -----------------
