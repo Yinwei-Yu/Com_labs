@@ -1,0 +1,15 @@
+#for-board-single-cpu/
+#lab1/
+#lab2_led_slash/
+#lab3/
+#teacher/
+*.zip
+*/*.cache/
+*/*.hw/
+*/*.ip_user_files/
+*/*.runs/
+*/*.sim/
+*/*.srcs/sources_1/ip/
+*/*.xpr
+*.log
+*.jou

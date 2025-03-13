@@ -1,5 +1,0 @@
-xpm_memory.sv,systemverilog,xil_defaultlib,../../../../../../../StudyApps/Vivado_2018_3/Vivado/2018.3/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv,
-xpm_VCOMP.vhd,vhdl,xpm,../../../../../../../StudyApps/Vivado_2018_3/Vivado/2018.3/data/ip/xpm/xpm_VCOMP.vhd,
-dist_mem_gen_v8_0.v,verilog,dist_mem_gen_v8_0_12,../../../ipstatic/simulation/dist_mem_gen_v8_0.v,
-ROM_D.v,verilog,xil_defaultlib,../../../../for-board-single-cpu.srcs/sources_1/ip/ROM_D/sim/ROM_D.v,
-glbl.v,Verilog,xil_defaultlib,glbl.v
