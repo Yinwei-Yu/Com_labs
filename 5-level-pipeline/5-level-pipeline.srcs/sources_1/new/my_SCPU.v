@@ -320,18 +320,35 @@ module my_SCPU (
   reg [31:0] EX_MEM_forward_Data;
   reg [31:0] MEM_WB_forward_Data;
 
-  //选择从EX/MEM,MEM/WB寄存器中要前递的数据
+  wire EX_MEM_WDSel = EX_MEM_data_out[134:133];
+  //选择从EX/MEM寄存器中要前递的数据
+  always @(*) begin
+    case (EX_MEM_WDSel)
+      `WDSel_FromALU: begin
+        EX_MEM_forward_Data = EX_MEM_ALUout;
+        //MEM_WB_forward_Data = MEM_WB_ALUout;
+      end
+      //`WDSel_FromMEM: begin
+        //MEM_WB_forward_Data = MEM_WB_DMout_data;
+      //end
+      `WDSel_FromPC: begin
+        EX_MEM_forward_Data = EX_MEM_PC + 4;
+        //MEM_WB_forward_Data = MEM_WB_Pc + 4;
+      end
+    endcase
+  end
+
   always @(*) begin
     case (MEM_WB_WDSel)
       `WDSel_FromALU: begin
-        EX_MEM_forward_Data = EX_MEM_ALUout;
+        //EX_MEM_forward_Data = EX_MEM_ALUout;
         MEM_WB_forward_Data = MEM_WB_ALUout;
       end
       `WDSel_FromMEM: begin
         MEM_WB_forward_Data = MEM_WB_DMout_data;
       end
       `WDSel_FromPC: begin
-        EX_MEM_forward_Data = EX_MEM_PC + 4;
+        //EX_MEM_forward_Data = EX_MEM_PC + 4;
         MEM_WB_forward_Data = MEM_WB_Pc + 4;
       end
     endcase

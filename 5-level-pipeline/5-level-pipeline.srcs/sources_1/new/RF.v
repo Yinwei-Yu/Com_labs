@@ -16,7 +16,7 @@ module RF (
   always @(negedge clk or posedge rst) begin
     if (rst) begin
       for (i = 0; i < 32; i = i + 1) begin
-        rf[i] <= i;
+        rf[i] <= 0;
       end
     end else begin
       if (RFWr) begin
