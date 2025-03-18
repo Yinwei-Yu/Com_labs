@@ -22,7 +22,7 @@ module my_SCPU (
   reg [31:0] PC;
   wire [1:0] PCSel;
   wire i_jalr;
-  reg [10:0] cycles;
+  reg [31:0] cycles;
   wire MEM_PC = EX_MEM_data_out[132:101];  //PC
   wire MEM_i_jalr = EX_MEM_data_out[167];  //i_jalr
   wire MEM_ALUout = EX_MEM_data_out[63:32];  //ALUout

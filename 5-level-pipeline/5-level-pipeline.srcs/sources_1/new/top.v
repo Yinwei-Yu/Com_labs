@@ -127,9 +127,9 @@ module top (
   my_dm_controller U3_dm_controller (
       .mem_w(mem_w),
       .Addr_in(Addr_in),
-      .Data_write(Data_out/*Data_write*/), 
+      .Data_write(/*Data_out*/Data_write), 
       .dm_ctrl(dm_ctrl),
-      .Data_read_from_dm(douta/*Data_read_from_dm*/),
+      .Data_read_from_dm(/*douta*/Data_read_from_dm),
       .Data_read(Data_read),
       .Data_write_to_dm(Data_write_to_dm),
       .wea_mem(wea_mem)
@@ -142,7 +142,7 @@ module top (
   wire [3:0] wea = wea_mem;
 
   RAM_B U4_RAM_B (
-      .addra(Addr_out/*addra*/),
+      .addra(/*Addr_out*/addra),
       .clka (clka),
       .dina (dina),
       .wea  (wea),
