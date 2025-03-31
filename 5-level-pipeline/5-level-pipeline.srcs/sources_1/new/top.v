@@ -7,7 +7,8 @@ module top (
     input [15:0] sw_i,
     input [4:0] btn_i,
     output [7:0] disp_seg_o,
-    output [7:0] disp_an_o
+    output [7:0] disp_an_o,
+    output [13:0] VGA
 );
 
   wire rst = !rstn;
@@ -31,7 +32,8 @@ module top (
       .rst(rst),
       .SW2(SW_out[2]),
       .clkdiv(clkdiv),
-      .Clk_CPU(Clk_CPU)
+      .Clk_CPU(Clk_CPU),
+      .clk_25MHz (clk_25MHz)
   );
 
   //SPIO
@@ -121,15 +123,15 @@ module top (
   wire [31:0] Data_read;
   wire [31:0] Data_write_to_dm;
   wire [3:0] wea_mem;
-    wire [31:0] douta;
-    //如需下板,将括号内/**/注释内容和非注释内容反过来
-    //如需调试,保持现状
+  wire [31:0] douta;
+  //如需下板,将括号内/**/注释内容和非注释内容反过来
+  //如需调试,保持现状
   my_dm_controller U3_dm_controller (
       .mem_w(mem_w),
       .Addr_in(Addr_in),
-      .Data_write(/*Data_out*/Data_write), 
+      .Data_write(  /*Data_out*/ Data_write),
       .dm_ctrl(dm_ctrl),
-      .Data_read_from_dm(/*douta*/Data_read_from_dm),
+      .Data_read_from_dm(  /*douta*/ Data_read_from_dm),
       .Data_read(Data_read),
       .Data_write_to_dm(Data_write_to_dm),
       .wea_mem(wea_mem)
@@ -137,12 +139,12 @@ module top (
 
   //RAM_B
   wire [9:0] addra = ram_addr;
-  wire clka = !clk;//mind this
+  wire clka = !clk;  //mind this
   wire [31:0] dina = Data_write_to_dm;
   wire [3:0] wea = wea_mem;
 
   RAM_B U4_RAM_B (
-      .addra(/*Addr_out*/addra),
+      .addra(  /*Addr_out*/ addra),
       .clka (clka),
       .dina (dina),
       .wea  (wea),
@@ -167,7 +169,16 @@ module top (
   wire [31:0] Peripheral_in;
   wire [9:0] ram_addr;
   wire [31:0] ram_data_in;
-  MIO_BUS U4_MIO_BUS (
+
+  // 显存信号
+  wire [11:0] vram_cpu_data_out;  // 从显存读出到CPU的数据
+  wire [11:0] vram_cpu_data_in;  // 从CPU写入显存的数据
+  wire [18:0] vram_cpu_addr;  // CPU访问显存的地址
+  wire vram_cpu_we;  // CPU写显存使能
+  wire [11:0] vram_vga_data_out;  // 从显存读出到VGA的数据
+  wire [18:0] vram_vga_addr;  // VGA读取显存的地址
+
+  my_MIO_BUS U4_MIO_BUS (
       .clk(clk),
       .rst(rst),
       .BTN(BTN),
@@ -189,8 +200,14 @@ module top (
       .GPIOf0000000_we(GPIOf0000000_we),
       .GPIOe0000000_we(GPIOe0000000_we),
       .counter_we(counter_we),
-      .Peripheral_in(Peripheral_in)
+      .Peripheral_in(Peripheral_in),
+      .vram_data_out(vram_cpu_data_out),
+      .vram_data_in(vram_cpu_data_in),
+      .vram_addr(vram_cpu_addr),
+      .vram_we(vram_cpu_we)
   );
+
+
 
   //Multi_8CH32
   wire [63:0] LES = 0;
@@ -241,5 +258,49 @@ module top (
       .seg_sout(disp_seg_o)
   );
 
-  //
+
+  vga_display_memory U_VRAM (
+      // CPU端口 (端口A)
+      .clka (clk),               // CPU时钟
+      .wea  (vram_cpu_we),       // CPU写使能
+      .addra(vram_cpu_addr),     // CPU地址
+      .dina (vram_cpu_data_in),  // CPU写入数据
+      .douta(vram_cpu_data_out), // CPU读出数据
+
+      // VGA端口 (端口B)
+      .clkb (clk_25MHz),         // VGA时钟
+      .web  (1'b0),              // VGA只读模式
+      .addrb(vram_vga_addr),     // VGA读取地址
+      .dinb (12'b0),             // VGA无写入数据
+      .doutb(vram_vga_data_out)  // VGA读出数据
+  );
+
+  assign vram_vga_addr = row * 640 + col;
+
+  wire [3:0] Red;
+  wire [3:0] Green;
+  wire [3:0] Blue;
+  wire Hsync;
+  wire Vsync;
+  assign VGA = {Vsync, Hsync, Blue, Green, Red};
+  VGAIO U_VGAIO (
+      .clk(clk),
+      .rst(rst),
+      .VRAMOUT(16'd0),
+      .Pixel(Pixel),
+      .Test(Test),
+      .Din(Din),
+      .Regaddr(Regaddr),
+      .Cursor(Cursor),
+      .Blink(Blink),
+      .row(row),
+      .col(col),
+      .R(Red),
+      .G(Green),
+      .B(Blue),
+      .HSYNC(Hsync),
+      .VSYNC(Vsync),
+      .VRAMA(),
+      .rdn()
+  );
 endmodule

@@ -1,4 +1,4 @@
-module MIO_BUS (
+module my_MIO_BUS (
     input clk,
     input rst,
     input [4:0] BTN,  // 按钮
@@ -13,14 +13,21 @@ module MIO_BUS (
     input counter0_out,  //通道0计数结束输出，来自计数器外设
     input counter1_out,  //通道1计数结束输出，来自计数器外设
     input counter2_out,  //通道2计数结束输出，来自计数器外设
-    output reg [31:0] Cpu_data4bus,//data write to CPU
-    output reg [31:0] ram_data_in,//from CPU write to Memory
-    output reg [9:0] ram_addr,//Memory Address signals
-    output reg data_ram_we,//RAM读写控制，连接到RAM
+
+
+    output reg [31:0] Cpu_data4bus,//从内存中读取的数据,来自于ram_data_out
+    output reg [31:0] ram_data_in,//写入内存的数据,来自于Cpu_data2bus
+    output reg [9:0] ram_addr,//Memory Address signals ,送给RAM
+    output reg data_ram_we,//RAM读写控制，连接到RAM,没有用到
     output reg GPIOf0000000_we,//设备一LED写信号
     output reg GPIOe0000000_we,//设备二7段数码管写信号
     output reg counter_we,//记数器写信号，连接到U10
-    output reg [31:0] Peripheral_in//外部设备写数据总线，连接所有写设备
+    output reg [31:0] Peripheral_in,//外部设备写数据总线，连接所有写设备
+
+    input [11:0] vram_data_out,//显存读出数据
+    output reg [11:0] vram_data_in,//显存写入数据
+    output reg [18:0] vram_addr,//显存地址
+    output reg vram_we//显存写使能
 );
 
 always @ ( * ) begin
@@ -32,16 +39,37 @@ always @ ( * ) begin
     GPIOe0000000_we = 0;
     counter_we = 0;
     Peripheral_in = 0;
-    case (addr_bus[31:28])
+    case (addr_bus[31:28])//通过地址高位划分地址空间
         4'b1111:begin // sw and button Address F0000000~FFFFFFFF
             GPIOe0000000_we = mem_w;
             Peripheral_in = Cpu_data2bus; // 直接把cpu总线数据写到外设
             data_ram_we=0;
             Cpu_data4bus = {11'b00000000000,BTN,SW};//将按钮和开关数据写回CPU
         end
-        //4'b1110:begin // Seg7 Address E0000000~EFFFFFFF
+        4'b1110:begin // Seg7 Address E0000000~EFFFFFFF 写入地址来更改数码管显示
+            GPIOe0000000_we = mem_w;
+            Peripheral_in = Cpu_data2bus; // 这里是把显示数据送给外设
+            ram_data_in = Cpu_data2bus;//因为寻址能力不够,所以外设对应的地址空间的数据本质上没有修改
+            ram_addr = addr_bus[11:2];//4字节对齐
+            //输出设备,不需要写回cpu,所以不需要更新Cpu_data4bus
+        end
+        4'b1100:begin//VRAM显示模块
+            vram_we=mem_w;
+            // 每个32位地址存储2.67个像素，这里简化为每32位存储2个像素(16位/像素)
+            vram_addr = addr_bus[19:2]; // 19位地址空间足够映射640*480/2
             
-        //end
+            // 写入数据处理：将32位CPU数据转换为显存格式
+            if (addr_bus[1]) // 奇数像素
+                vram_data_in = Cpu_data2bus[27:16]; // 高12位
+            else // 偶数像素
+                vram_data_in = Cpu_data2bus[11:0];  // 低12位
+                
+            // 读取数据处理：从显存恢复为32位CPU数据
+            if (addr_bus[1])
+                Cpu_data4bus = {4'b0, vram_data_out, 16'b0}; // 高12位
+            else
+                Cpu_data4bus = {20'b0, vram_data_out};       // 低12位
+        end
         default: begin
             Cpu_data4bus = ram_data_out;//常规地址数据就是RAM数据
             ram_data_in = Cpu_data2bus;//写回RAM数据就是CPU数据

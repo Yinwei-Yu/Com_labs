@@ -4,7 +4,7 @@ module my_SCPU (
     input MIO_ready,
     input [31:0] instr,  //inst_in,instruction
     input [31:0] Data_in,  // 从内存中读取的数据
-    output mem_w,
+    output mem_w, // 是否写内存
     output [31:0] PC_out,
     output [31:0] Addr_out,  // 地址输出
     output [31:0] Data_out,  // 要写入内存的数据 rs2

@@ -65,3 +65,18 @@ set_property -dict { PACKAGE_PIN V10   IOSTANDARD LVCMOS33 } [get_ports { sw_i[1
  set_property -dict { PACKAGE_PIN P18   IOSTANDARD LVCMOS33 } [get_ports { btn_i[2] }]; # DOWN
  set_property -dict { PACKAGE_PIN P17   IOSTANDARD LVCMOS33 } [get_ports { btn_i[3] }]; # LEFT
  set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS33 } [get_ports { btn_i[4] }]; # MID
+
+ set_property -dict { PACKAGE_PIN A3   IOSTANDARD LVCMOS33 } [get_ports { VGA[0] }]; # RED0
+ set_property -dict { PACKAGE_PIN B4   IOSTANDARD LVCMOS33 } [get_ports { VGA[1] }]; # RED1
+ set_property -dict { PACKAGE_PIN C5   IOSTANDARD LVCMOS33 } [get_ports { VGA[2] }]; # RED2
+  set_property -dict { PACKAGE_PIN A4   IOSTANDARD LVCMOS33 } [get_ports { VGA[3] }]; # RED3
+  set_property -dict { PACKAGE_PIN C6   IOSTANDARD LVCMOS33 } [get_ports { VGA[4] }]; # GRN0
+  set_property -dict { PACKAGE_PIN A5   IOSTANDARD LVCMOS33 } [get_ports { VGA[5] }]; # GRN1
+  set_property -dict { PACKAGE_PIN B6   IOSTANDARD LVCMOS33 } [get_ports { VGA[6] }]; # GRN2
+  set_property -dict { PACKAGE_PIN A6   IOSTANDARD LVCMOS33 } [get_ports { VGA[7] }]; # GRN3
+  set_property -dict { PACKAGE_PIN B7   IOSTANDARD LVCMOS33 } [get_ports { VGA[8] }]; # BLU0
+  set_property -dict { PACKAGE_PIN C7   IOSTANDARD LVCMOS33 } [get_ports { VGA[9] }]; # BLU1
+  set_property -dict { PACKAGE_PIN D7   IOSTANDARD LVCMOS33 } [get_ports { VGA[10] }]; # BLU2
+  set_property -dict { PACKAGE_PIN D8   IOSTANDARD LVCMOS33 } [get_ports { VGA[11] }]; # BLU3
+  set_property -dict { PACKAGE_PIN B11   IOSTANDARD LVCMOS33 } [get_ports { VGA[12] }]; # HSYNC
+  set_property -dict { PACKAGE_PIN B12   IOSTANDARD LVCMOS33 } [get_ports { VGA[13] }]; # VSYNC

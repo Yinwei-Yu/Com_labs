@@ -84,14 +84,14 @@ reg[31:0]MODE=32'h40000001;								//缺省状态640*480、文本、8*8字库
 								{7'b0,VRAM_BUF[6:0],row[2:0]} :		//8*8字库
 								{VRAM_BUF[12:0],row[3:0]}; 			//16*16字库	
 								
-	font		Font8(.a(font_addr[10:0]), .spo(Font8out));	//8*8字库发生器ROM访问Font88
+	//font		Font8(.a(font_addr[10:0]), .spo(Font8out));	//8*8字库发生器ROM访问Font88
 							  						
-	Font1616		Font16(clk, font_addr, Font16out);				//16*16字库发生器ROM访问
+	//Font1616		Font16(clk, font_addr, Font16out);				//16*16字库发生器ROM访问
 
-	wire Font8dot  = MODE[6:4]==3'b000 ? Font8out[~col[2:0]] : 1'b0; 			//取当前8*8字符显示点
-	wire Font8Bdot = MODE[6:4]==3'b000 && VRAM_BUF[14:12]!=3'b000 ? 
-										 ~Font8out[~col[2:0]] : 1'b0; 					//取当前8*8字符背景点
-	wire Font16dot = MODE[6:4]==3'b010 ? Font16out[~col[3:0]] : 1'b0;			//取当前16*16字符显示点				
+	wire Font8dot  = 1'b0;//MODE[6:4]==3'b000 ? Font8out[~col[2:0]] : 1'b0; 			//取当前8*8字符显示点
+	wire Font8Bdot = 1'b0;//MODE[6:4]==3'b000 && VRAM_BUF[14:12]!=3'b000 ? 
+										 //~Font8out[~col[2:0]] : 1'b0; 					//取当前8*8字符背景点
+	wire Font16dot = 1'b0;//MODE[6:4]==3'b010 ? Font16out[~col[3:0]] : 1'b0;			//取当前16*16字符显示点				
 
 //字符显示属性(Attributes) 
 //	wire[2:0]Attr8F = VRAM_BUF[10:8];								//8*8字符前景
