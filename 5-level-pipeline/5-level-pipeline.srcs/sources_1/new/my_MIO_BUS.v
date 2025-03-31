@@ -26,7 +26,7 @@ module my_MIO_BUS (
 
     input [11:0] vram_data_out,//显存读出数据
     output reg [11:0] vram_data_in,//显存写入数据
-    output reg [18:0] vram_addr,//显存地址
+    output reg [14:0] vram_addr,//显存地址
     output reg vram_we//显存写使能
 );
 
@@ -55,20 +55,13 @@ always @ ( * ) begin
         end
         4'b1100:begin//VRAM显示模块
             vram_we=mem_w;
-            // 每个32位地址存储2.67个像素，这里简化为每32位存储2个像素(16位/像素)
-            vram_addr = addr_bus[19:2]; // 19位地址空间足够映射640*480/2
+            vram_addr = addr_bus[15:1]; // 15位地址空间
             
             // 写入数据处理：将32位CPU数据转换为显存格式
-            if (addr_bus[1]) // 奇数像素
-                vram_data_in = Cpu_data2bus[27:16]; // 高12位
-            else // 偶数像素
-                vram_data_in = Cpu_data2bus[11:0];  // 低12位
+            vram_data_in = Cpu_data2bus[11:0];
                 
             // 读取数据处理：从显存恢复为32位CPU数据
-            if (addr_bus[1])
-                Cpu_data4bus = {4'b0, vram_data_out, 16'b0}; // 高12位
-            else
-                Cpu_data4bus = {20'b0, vram_data_out};       // 低12位
+            Cpu_data4bus = {20'b0, vram_data_out};
         end
         default: begin
             Cpu_data4bus = ram_data_out;//常规地址数据就是RAM数据

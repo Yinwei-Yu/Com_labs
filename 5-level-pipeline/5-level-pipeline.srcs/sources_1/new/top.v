@@ -33,7 +33,7 @@ module top (
       .SW2(SW_out[2]),
       .clkdiv(clkdiv),
       .Clk_CPU(Clk_CPU),
-      .clk_25MHz (clk_25MHz)
+      .clk_25MHz(clk_25MHz)
   );
 
   //SPIO
@@ -171,12 +171,11 @@ module top (
   wire [31:0] ram_data_in;
 
   // 显存信号
-  wire [11:0] vram_cpu_data_out;  // 从显存读出到CPU的数据
-  wire [11:0] vram_cpu_data_in;  // 从CPU写入显存的数据
-  wire [18:0] vram_cpu_addr;  // CPU访问显存的地址
-  wire vram_cpu_we;  // CPU写显存使能
-  wire [11:0] vram_vga_data_out;  // 从显存读出到VGA的数据
-  wire [18:0] vram_vga_addr;  // VGA读取显存的地址
+  wire [15:0] vram_out;  // 显存读出的数据
+  wire [11:0] vram_in;  // 写入显存的数据
+  wire [14:0] vram_addr;  // 访问显存的地址
+  wire vram_we;  // 写显存使能
+
 
   my_MIO_BUS U4_MIO_BUS (
       .clk(clk),
@@ -201,10 +200,10 @@ module top (
       .GPIOe0000000_we(GPIOe0000000_we),
       .counter_we(counter_we),
       .Peripheral_in(Peripheral_in),
-      .vram_data_out(vram_cpu_data_out),
-      .vram_data_in(vram_cpu_data_in),
-      .vram_addr(vram_cpu_addr),
-      .vram_we(vram_cpu_we)
+      .vram_data_out(vram_out),
+      .vram_data_in(vram_in),
+      .vram_addr(vram_addr),
+      .vram_we(vram_we)
   );
 
 
@@ -261,22 +260,15 @@ module top (
 
   vga_display_memory U_VRAM (
       // CPU端口 (端口A)
-      .clka (clk),               // CPU时钟
-      .wea  (vram_cpu_we),       // CPU写使能
-      .addra(vram_cpu_addr),     // CPU地址
-      .dina (vram_cpu_data_in),  // CPU写入数据
-      .douta(vram_cpu_data_out), // CPU读出数据
-
-      // VGA端口 (端口B)
-      .clkb (clk_25MHz),         // VGA时钟
-      .web  (1'b0),              // VGA只读模式
-      .addrb(vram_vga_addr),     // VGA读取地址
-      .dinb (12'b0),             // VGA无写入数据
-      .doutb(vram_vga_data_out)  // VGA读出数据
+      .clka (clk),                       // CPU时钟
+      .wea  (vram_we),               // 显存写使能
+      .addra(vram_addr),             // CPU操作显存地址
+      .dina ({4'b0, vram_in}),  // 显存写入数据
+      .douta(vram_out)          // 显存读出数据
   );
 
-  assign vram_vga_addr = row * 640 + col;
-
+  //assign vram_vga_addr = row * 640 + col;
+  wire [12:0] Pixel = {1'b1, vram_out[11:0]};
   wire [3:0] Red;
   wire [3:0] Green;
   wire [3:0] Blue;
