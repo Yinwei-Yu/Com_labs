@@ -261,7 +261,7 @@ module top (
   wire [15:0] Pixel;
   wire [8:0] row;
   wire [8:0] col;
-  wire [17:0] vram_vga_addr = (row * 400 + col) % 262144;  //送给显存的地址
+  wire [17:0] vram_vga_addr = (row * 512 + col) % 262144;  //送给显存的地址
   vga_display_memory U_VRAM (
       // CPU端口 (端口A)
       .clka (clk),              // CPU时钟
