@@ -19,8 +19,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module VGA_Scan(input clk, rst, 					//25MHz
-					 output[8:0]row, 				// pixel Screen address, 640 x 480 
-					 output[9:0]col,
+					 output [8:0] row, 				// pixel Screen address, 640 x 480 
+					 output [8:0] col,
 //					 output [18:0]addr,
 					 output Active, 					// read VRAM RAM (active_low)
 					 output reg HSYNC, 				// horizontal synchronization
@@ -31,7 +31,7 @@ reg[9:0]HCount;						//VGA horizontal counter (0-799): pixels
 reg[9:0]VCount;						//VGA vertical   counter (0-524): lines
 reg HActive=0, VActive=0;
 wire[8:0]row;
-wire[9:0]col;
+wire[8:0]col;
 
 localparam HSC = 10'd95, HBP = 10'd143, HACT = 10'd783, HFP = 10'd799;
     always@(posedge clk or posedge rst) begin

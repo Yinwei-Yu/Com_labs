@@ -26,7 +26,7 @@ module my_MIO_BUS (
 
     input [11:0] vram_data_out,//显存读出数据
     output reg [11:0] vram_data_in,//显存写入数据
-    output reg [14:0] vram_addr,//显存地址
+    output reg [17:0] vram_addr,//显存地址
     output reg vram_we//显存写使能
 );
 
@@ -39,6 +39,9 @@ always @ ( * ) begin
     GPIOe0000000_we = 0;
     counter_we = 0;
     Peripheral_in = 0;
+    vram_data_in = 0;
+    vram_addr = 0;
+    vram_we = 0;
     case (addr_bus[31:28])//通过地址高位划分地址空间
         4'b1111:begin // sw and button Address F0000000~FFFFFFFF
             GPIOe0000000_we = mem_w;
@@ -55,11 +58,9 @@ always @ ( * ) begin
         end
         4'b1100:begin//VRAM显示模块
             vram_we=mem_w;
-            vram_addr = addr_bus[15:1]; // 15位地址空间
-            
+            vram_addr = addr_bus[18:1]; // 18位地址空间
             // 写入数据处理：将32位CPU数据转换为显存格式
             vram_data_in = Cpu_data2bus[11:0];
-                
             // 读取数据处理：从显存恢复为32位CPU数据
             Cpu_data4bus = {20'b0, vram_data_out};
         end

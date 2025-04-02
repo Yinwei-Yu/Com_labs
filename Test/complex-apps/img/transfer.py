@@ -1,55 +1,72 @@
 from PIL import Image
 import numpy as np
+import os
 
-def convert_image_to_32bit_coe(input_path, output_path):
-    # 打开图片并转换为RGB格式
-    img = Image.open(input_path).convert("RGB")
-    pixels = np.array(img)
-    height, width, _ = pixels.shape
-
-    # 生成COE文件头
-    coe_content = [
-        "memory_initialization_radix=16;",
-        "memory_initialization_vector="
-    ]
-
-    # 像素处理缓冲区
-    hex_words = []
-
-    # 遍历每个像素行
-    for y in range(height):
-        # 遍历每对像素（每2个像素打包为一个32位字）
-        for x in range(0, width, 2):
-            # 第一个像素（x, y）
-            r1, g1, b1 = pixels[y, x][:3]
-            pixel1 = ((r1 >> 4) << 8) | ((g1 >> 4) << 4) | (b1 >> 4)
-
-            # 第二个像素（x+1, y），若超出宽度则补零
-            if x+1 < width:
-                r2, g2, b2 = pixels[y, x+1][:3]
-                pixel2 = ((r2 >> 4) << 8) | ((g2 >> 4) << 4) | (b2 >> 4)
-            else:
-                pixel2 = 0
-
-            # 组合为32位字（pixel2在16-27位，pixel1在0-11位）
-            word = (pixel2 << 16) | pixel1
-            hex_words.append(f"{word:08X}")
-
-    # 格式化输出内容
-    if hex_words:
-        # 所有条目用逗号分隔
-        formatted = [f"{word}," for word in hex_words[:-1]]
-        formatted.append(f"{hex_words[-1]};")  # 最后条目用分号
-        coe_content += formatted
-    else:
-        coe_content.append(";")  # 空文件处理
-
-    # 写入文件
-    with open(output_path, "w") as f:
-        f.write("\n".join(coe_content))
+def convert_image_to_coe(input_image, output_coe, target_width=400, target_height=300):
+    """
+    将图像转换为12位RGB COE文件(4位R + 4位G + 4位B)
+    - 数据位宽：12位，符合16位限制
+    - 存储深度：控制在2^18以内
+    """
+    # 检查像素总数限制
+    total_pixels = target_width * target_height
+    if total_pixels > 2**18:
+        print(f"警告：图像像素总数 {total_pixels} 超过了2^18 (262144)的限制")
+        # 自动调整大小以符合限制
+        scale = (2**18 / total_pixels) ** 0.5
+        target_width = int(target_width * scale)
+        target_height = int(target_height * scale)
+        print(f"自动调整分辨率为 {target_width}x{target_height}")
+    
+    # 打开并调整图像大小
+    img = Image.open(input_image)
+    img = img.resize((target_width, target_height), Image.Resampling.LANCZOS)
+    
+    # 确保图像是RGB模式
+    if img.mode != 'RGB':
+        img = img.convert('RGB')
+    
+    # 转换为numpy数组
+    img_array = np.array(img)
+    
+    # 创建COE文件
+    with open(output_coe, 'w') as f:
+        # 写入COE文件头
+        f.write("memory_initialization_radix=16;\n")
+        f.write("memory_initialization_vector=\n")
+        
+        # 写入像素数据
+        for y in range(target_height):
+            for x in range(target_width):
+                # 获取RGB值
+                r, g, b = img_array[y, x]
+                
+                # 将8位RGB通道转换为4位（0-255 -> 0-15）
+                r4 = r >> 4
+                g4 = g >> 4
+                b4 = b >> 4
+                
+                # 组合为12位值: [rrrr][gggg][bbbb]
+                rgb_12bit = (r4 << 8) | (g4 << 4) | b4
+                
+                # 写入16进制表示 (最多3位十六进制数)
+                f.write(f"{rgb_12bit:03x}")
+                
+                # 添加逗号或分号
+                if y == target_height-1 and x == target_width-1:
+                    f.write(";\n")
+                else:
+                    f.write(",\n")
+        
+    print(f"已成功创建COE文件：{output_coe}")
+    print(f"图像分辨率：{target_width}x{target_height}")
+    print(f"总像素数：{target_width * target_height}")
+    print(f"每个像素：12位 (R:4位 G:4位 B:4位)")
 
 if __name__ == "__main__":
-    input_image = "input.jpg"    # 输入图片路径
-    output_file = "output.coe"   # 输出文件路径
-    convert_image_to_32bit_coe(input_image, output_file)
-    print(f"转换完成！生成文件：{output_file}")
+    input_image = input("输入图片路径: ")
+    output_coe = input("输出COE文件路径 (默认为output.coe): ") or "output.coe"
+    width = int(input("目标宽度 (默认为400): ") or "400")
+    height = int(input("目标高度 (默认为300): ") or "300")
+    
+    convert_image_to_coe(input_image, output_coe, width, height)

@@ -173,7 +173,7 @@ module top (
   // 显存信号
   wire [15:0] vram_out;  // 显存读出的数据
   wire [11:0] vram_in;  // 写入显存的数据
-  wire [14:0] vram_addr;  // 访问显存的地址
+  wire [17:0] vram_addr;  // 访问显存的地址
   wire vram_we;  // 写显存使能
 
 
@@ -200,7 +200,7 @@ module top (
       .GPIOe0000000_we(GPIOe0000000_we),
       .counter_we(counter_we),
       .Peripheral_in(Peripheral_in),
-      .vram_data_out(vram_out),
+      .vram_data_out(vram_out[11:0]),
       .vram_data_in(vram_in),
       .vram_addr(vram_addr),
       .vram_we(vram_we)
@@ -258,33 +258,37 @@ module top (
   );
 
 
+  wire [15:0] Pixel;
+  wire [8:0] row;
+  wire [8:0] col;
+  wire [17:0] vram_vga_addr = (row * 400 + col) % 262144;  //送给显存的地址
   vga_display_memory U_VRAM (
       // CPU端口 (端口A)
-      .clka (clk),                       // CPU时钟
-      .wea  (vram_we),               // 显存写使能
-      .addra(vram_addr),             // CPU操作显存地址
+      .clka (clk),              // CPU时钟
+      .wea  (vram_we),          // 显存写使能
+      .addra(vram_addr),        // CPU操作显存地址
       .dina ({4'b0, vram_in}),  // 显存写入数据
-      .douta(vram_out)          // 显存读出数据
+      .douta(vram_out),         // 显存读出数据
+      //显存端口
+      .clkb (clk),
+      .web  (1'b0),             //只读
+      .addrb(vram_vga_addr),    //vga扫描地址
+      .dinb (16'b0),            //不需要写入
+      .doutb(Pixel)             //向vga输出的像素
   );
 
-  //assign vram_vga_addr = row * 640 + col;
-  wire [12:0] Pixel = {1'b1, vram_out[11:0]};
+
   wire [3:0] Red;
   wire [3:0] Green;
   wire [3:0] Blue;
   wire Hsync;
   wire Vsync;
   assign VGA = {Vsync, Hsync, Blue, Green, Red};
+
   VGAIO U_VGAIO (
       .clk(clk),
       .rst(rst),
-      .VRAMOUT(16'd0),
-      .Pixel(Pixel),
-      .Test(Test),
-      .Din(Din),
-      .Regaddr(Regaddr),
-      .Cursor(Cursor),
-      .Blink(Blink),
+      .Pixel(Pixel[11:0]),
       .row(row),
       .col(col),
       .R(Red),
@@ -295,4 +299,6 @@ module top (
       .VRAMA(),
       .rdn()
   );
+
+
 endmodule
