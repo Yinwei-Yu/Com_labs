@@ -9,11 +9,11 @@ module audio_controller (
     input  [31:0] audio_length,  // 音频长度(样本数)
     
     // 与音频存储器接口
-    output reg [17:0] ram_addr,  // 当前读取地址
-    input  [15:0] ram_data,      // 音频数据
+    output reg [16:0] ram_addr,  // 当前读取地址
+    input  [7:0] ram_data,      // 音频数据
     
     // DAC输出
-    output [15:0] audio_out      // 输出到PWM的音频数据
+    output [7:0] audio_out      // 输出到PWM的音频数据
 );
     reg [31:0] sample_counter = 0;
     reg [31:0] addr_offset = 0;
@@ -25,7 +25,7 @@ module audio_controller (
             sample_counter <= 0;
             addr_offset <= 0;
             playing <= 0;
-            ram_addr <= audio_start[17:0];
+            ram_addr <= audio_start[16:0];
         end
         else begin
             if (play_enable && !playing)
@@ -43,7 +43,7 @@ module audio_controller (
                     else
                         addr_offset <= 0; // 循环播放
                         
-                    ram_addr <= audio_start[17:0] + addr_offset;
+                    ram_addr <= audio_start[16:0] + addr_offset;
                 end
                 else begin
                     sample_counter <= sample_counter + 1;
@@ -52,5 +52,5 @@ module audio_controller (
         end
     end
     
-    assign audio_out = playing ? ram_data : 16'h8000; // 不播放时输出中点电平
+    assign audio_out = playing ? ram_data : 8'h80; // 不播放时输出中点电平
 endmodule

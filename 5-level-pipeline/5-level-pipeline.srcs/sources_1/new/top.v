@@ -178,37 +178,6 @@ module top (
   wire vram_we;  // 写显存使能
 
 
-  my_MIO_BUS U4_MIO_BUS (
-      .clk(clk),
-      .rst(rst),
-      .BTN(BTN),
-      .SW(SW),
-      .PC(PC_out),
-      .mem_w(mem_w),
-      .Cpu_data2bus(Cpu_data2bus),
-      .addr_bus(addr_bus),
-      .ram_data_out(ram_data_out),
-      .led_out(led_out),
-      .counter_out(counter_out),
-      .counter0_out(counter0_out),
-      .counter1_out(counter1_out),
-      .counter2_out(counter2_out),
-      .Cpu_data4bus(Cpu_data4bus),
-      .ram_data_in(ram_data_in),
-      .ram_addr(ram_addr),
-      .data_ram_we(data_ram_we),
-      .GPIOf0000000_we(GPIOf0000000_we),
-      .GPIOe0000000_we(GPIOe0000000_we),
-      .counter_we(counter_we),
-      .Peripheral_in(Peripheral_in),
-      .vram_data_out(vram_out[11:0]),
-      .vram_data_in(vram_in),
-      .vram_addr(vram_addr),
-      .vram_we(vram_we)
-  );
-
-
-
   //Multi_8CH32
   wire [63:0] LES = 0;
   wire [2:0] Switch = SW_out[7:5];
@@ -302,50 +271,84 @@ module top (
   );
 
 
-// 添加音频控制相关接口
-wire        audio_we;         // 音频内存写使能
-wire [17:0] audio_addr;       // 音频内存地址
-wire [15:0] audio_data_in;    // 写入音频内存数据
-wire [15:0] audio_data_out;   // 读出音频内存数据
+  // 添加音频控制相关接口
+  wire audio_we;  // 音频内存写使能
+  wire [16:0] audio_addr;  // 音频内存地址
+  wire [7:0] audio_data_in;  // 写入音频内存数据
+  wire [7:0] audio_data_out;  // 读出音频内存数据
 
-// 实例化音频存储器
-wire [17:0] audio_ram_addr; // 音频存储器地址
-wire [15:0] audio_ram_data; // 音频存储器数据
-wire [15:0] audio_to_pwm;  // 音频数据输出
-wire play_enable = sw_i[3];  // 使用开关控制播放
-wire [31:0] sample_rate_div = 32'd6250;  // 48kHz @ 100MHz时钟 (可调)
-audio_ram U_AudioRAM (
-    .clka(clk),
-    .wea(audio_we),
-    .addra(audio_addr),
-    .dina(audio_data_in),
-    .douta(audio_data_out),
-    
-    .clkb(clk),
-    .web(1'b0),
-    .addrb(audio_ram_addr),
-    .dinb(16'b0),
-    .doutb(audio_ram_data)
-);
+  // 实例化音频存储器
+  wire [16:0] audio_ram_addr;  // 音频存储器地址
+  wire [7:0] audio_ram_data;  // 音频存储器数据
+  wire [7:0] audio_to_pwm;  // 音频数据输出
+  wire play_enable = sw_i[3];  // 使用开关控制播放
+  wire [31:0] sample_rate_div = 32'd5460;  // 8kHz @ 100MHz时钟 (可调)
+  audio_ram U_AudioRAM (
+      .clka (clk),
+      .wea  (audio_we),
+      .addra(audio_addr),
+      .dina (audio_data_in),
+      .douta(audio_data_out),
 
-audio_controller U_AUDIO_CTRL (
-    .clk(clk),
-    .rst(rst),
-    .play_enable(play_enable),
-    .sample_rate_div(sample_rate_div),
-    .audio_start(32'h00000000),
-    .audio_length(32'h0000FFFF),
-    .ram_addr(audio_ram_addr),
-    .ram_data(audio_ram_data),
-    .audio_out(audio_to_pwm)
-);
+      .clkb (clk),
+      .web  (1'b0),
+      .addrb(audio_ram_addr),
+      .dinb (16'b0),
+      .doutb(audio_ram_data)
+  );
 
-// 开漏PWM DAC
-open_drain_pwm_dac U_PWM_DAC (
-    .clk(clk),
-    .rst(rst),
-    .audio_in(audio_to_pwm),
-    .pwm_out(AUD_PWM)  // 连接到A11引脚
-);
+  audio_controller U_AUDIO_CTRL (
+      .clk(clk),
+      .rst(rst),
+      .play_enable(play_enable),
+      .sample_rate_div(sample_rate_div),
+      .audio_start(32'h00000000),
+      .audio_length(32'h00014000),
+      .ram_addr(audio_ram_addr),
+      .ram_data(audio_ram_data),
+      .audio_out(audio_to_pwm)
+  );
+
+  // 开漏PWM DAC
+  open_drain_pwm_dac U_PWM_DAC (
+      .clk(clk),
+      .rst(rst),
+      .audio_in(audio_to_pwm),
+      .pwm_out(AUD_PWM)  // 连接到A11引脚
+  );
+
+
+  my_MIO_BUS U4_MIO_BUS (
+      .clk(clk),
+      .rst(rst),
+      .BTN(BTN),
+      .SW(SW),
+      .PC(PC_out),
+      .mem_w(mem_w),
+      .Cpu_data2bus(Cpu_data2bus),
+      .addr_bus(addr_bus),
+      .ram_data_out(ram_data_out),
+      .led_out(led_out),
+      .counter_out(counter_out),
+      .counter0_out(counter0_out),
+      .counter1_out(counter1_out),
+      .counter2_out(counter2_out),
+      .Cpu_data4bus(Cpu_data4bus),
+      .ram_data_in(ram_data_in),
+      .ram_addr(ram_addr),
+      .data_ram_we(data_ram_we),
+      .GPIOf0000000_we(GPIOf0000000_we),
+      .GPIOe0000000_we(GPIOe0000000_we),
+      .counter_we(counter_we),
+      .Peripheral_in(Peripheral_in),
+      .vram_data_out(vram_out[11:0]),
+      .vram_data_in(vram_in),
+      .vram_addr(vram_addr),
+      .vram_we(vram_we),
+      .audio_data_out(audio_data_out),
+      .audio_data_in(audio_data_in),
+      .audio_addr(audio_addr),
+      .audio_we(audio_we)
+  );
 
 endmodule

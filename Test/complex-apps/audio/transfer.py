@@ -5,19 +5,20 @@ from pydub import AudioSegment
 import math
 
 def audio_to_coe(input_file="input.mp3", output_file="output.coe", 
-                 max_duration_sec=10, sample_rate=16000, bit_width=16, max_samples=160000):
+                 max_duration_sec=10, sample_rate=8000, bit_width=8, max_samples=80000):
     """
     将任意音频文件转换为COE文件
     
     参数:
     input_file: 输入音频文件路径
     output_file: 输出COE文件路径
-    max_duration_sec: 最大音频长度(秒)，如果为None则使用整个音频
-    sample_rate: 目标采样率（默认16kHz）
-    bit_width: 位宽度（默认16位）
-    max_samples: 最大样本数量，默认160000（16kHz下10秒）
+    max_duration_sec: 最大音频长度(秒)
+    sample_rate: 目标采样率（默认8kHz）
+    bit_width: 位宽度（默认8位）
+    max_samples: 最大样本数量，默认80000（8kHz下10秒）
     """
     print(f"正在处理: {input_file}")
+    print(f"目标参数: 采样率={sample_rate}Hz, 位宽={bit_width}位, 最大样本数={max_samples}")
     
     # 加载音频文件（支持多种格式）
     audio = AudioSegment.from_file(input_file)
@@ -66,13 +67,19 @@ def audio_to_coe(input_file="input.mp3", output_file="output.coe",
         coe_file.write("memory_initialization_radix=16;\n")
         coe_file.write("memory_initialization_vector=\n")
         
-        # 写入16位十六进制值
+        # 写入十六进制值 - 根据位宽确定格式
         for i, sample in enumerate(samples):
-            # 确保数据在有符号16位范围内
-            sample = max(min(sample, 32767), -32768)
-            
-            # 转换为无符号16位十六进制表示
-            hex_value = format(sample & 0xFFFF, '04x')
+            # 根据位宽确定掩码和格式
+            if bit_width == 8:
+                # 8位数据处理 - 使用2位十六进制格式
+                # 确保数据在8位有符号范围内(-128到127)
+                sample = max(min(sample, 127), -128)
+                hex_value = format(sample & 0xFF, '02x')
+            else:  # 16位
+                # 16位数据处理 - 使用4位十六进制格式
+                # 确保数据在16位有符号范围内(-32768到32767)
+                sample = max(min(sample, 32767), -32768)
+                hex_value = format(sample & 0xFFFF, '04x')
             
             # 写入COE文件
             if i == len(samples) - 1:
@@ -90,9 +97,9 @@ def main():
     parser.add_argument('input_file', nargs='?', default="input.mp3", help='输入音频文件路径 (默认: input.mp3)')
     parser.add_argument('-o', '--output', default="output.coe", help='输出COE文件路径 (默认: output.coe)')
     parser.add_argument('-d', '--duration', type=float, default=10, help='最大音频时长(秒) (默认: 10秒)')
-    parser.add_argument('-s', '--sample_rate', type=int, default=16000, help='采样率(Hz) (默认: 16000)')
-    parser.add_argument('-b', '--bit_width', type=int, default=16, choices=[8, 16], help='位宽度(8或16位) (默认: 16)')
-    parser.add_argument('-m', '--max_samples', type=int, default=160000, help='最大样本数 (默认: 160000)')
+    parser.add_argument('-s', '--sample_rate', type=int, default=8000, help='采样率(Hz) (默认: 8000)')
+    parser.add_argument('-b', '--bit_width', type=int, default=8, choices=[8, 16], help='位宽度(8或16位) (默认: 8)')
+    parser.add_argument('-m', '--max_samples', type=int, default=80000, help='最大样本数 (默认: 80000)')
     
     args = parser.parse_args()
     

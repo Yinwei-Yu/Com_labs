@@ -27,7 +27,13 @@ module my_MIO_BUS (
     input [11:0] vram_data_out,//显存读出数据
     output reg [11:0] vram_data_in,//显存写入数据
     output reg [17:0] vram_addr,//显存地址
-    output reg vram_we//显存写使能
+    output reg vram_we,//显存写使能
+
+    input [7:0] audio_data_out ,//音频输出数据
+    output reg [7:0] audio_data_in,//音频输入数据
+    output reg [16:0] audio_addr,//音频地址
+    output reg audio_we//音频写使能
+
 );
 
 always @ ( * ) begin
@@ -42,6 +48,9 @@ always @ ( * ) begin
     vram_data_in = 0;
     vram_addr = 0;
     vram_we = 0;
+    audio_data_in = 0;
+    audio_addr = 0;
+    audio_we = 0;
     case (addr_bus[31:28])//通过地址高位划分地址空间
         4'b1111:begin // sw and button Address F0000000~FFFFFFFF
             GPIOe0000000_we = mem_w;
@@ -63,6 +72,12 @@ always @ ( * ) begin
             vram_data_in = Cpu_data2bus[11:0];
             // 读取数据处理：从显存恢复为32位CPU数据
             Cpu_data4bus = {20'b0, vram_data_out};
+        end
+        4'b1010:begin
+            audio_we = mem_w;
+            audio_addr = addr_bus[17:1];
+            audio_data_in = Cpu_data2bus[7:0];
+            Cpu_data4bus = {24'b0, audio_data_out};
         end
         default: begin
             Cpu_data4bus = ram_data_out;//常规地址数据就是RAM数据

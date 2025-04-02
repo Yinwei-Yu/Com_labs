@@ -1,10 +1,10 @@
 module open_drain_pwm_dac (
     input         clk,       // 系统时钟
     input         rst,
-    input  [15:0] audio_in,  // 16位音频输入
+    input  [7:0] audio_in,  // 16位音频输入
     output        pwm_out    // 开漏PWM输出
 );
-    reg [15:0] counter = 0;
+    reg [7:0] counter = 0;
     wire pwm_active;
     
     // 生成PWM信号
