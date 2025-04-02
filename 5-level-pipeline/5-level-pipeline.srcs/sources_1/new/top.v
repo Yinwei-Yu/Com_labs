@@ -8,7 +8,8 @@ module top (
     input [4:0] btn_i,
     output [7:0] disp_seg_o,
     output [7:0] disp_an_o,
-    output [13:0] VGA
+    output [13:0] VGA,
+    output AUD_PWM
 );
 
   wire rst = !rstn;
@@ -300,5 +301,51 @@ module top (
       .rdn()
   );
 
+
+// 添加音频控制相关接口
+wire        audio_we;         // 音频内存写使能
+wire [17:0] audio_addr;       // 音频内存地址
+wire [15:0] audio_data_in;    // 写入音频内存数据
+wire [15:0] audio_data_out;   // 读出音频内存数据
+
+// 实例化音频存储器
+wire [17:0] audio_ram_addr; // 音频存储器地址
+wire [15:0] audio_ram_data; // 音频存储器数据
+wire [15:0] audio_to_pwm;  // 音频数据输出
+wire play_enable = sw_i[3];  // 使用开关控制播放
+wire [31:0] sample_rate_div = 32'd6250;  // 48kHz @ 100MHz时钟 (可调)
+audio_ram U_AudioRAM (
+    .clka(clk),
+    .wea(audio_we),
+    .addra(audio_addr),
+    .dina(audio_data_in),
+    .douta(audio_data_out),
+    
+    .clkb(clk),
+    .web(1'b0),
+    .addrb(audio_ram_addr),
+    .dinb(16'b0),
+    .doutb(audio_ram_data)
+);
+
+audio_controller U_AUDIO_CTRL (
+    .clk(clk),
+    .rst(rst),
+    .play_enable(play_enable),
+    .sample_rate_div(sample_rate_div),
+    .audio_start(32'h00000000),
+    .audio_length(32'h0000FFFF),
+    .ram_addr(audio_ram_addr),
+    .ram_data(audio_ram_data),
+    .audio_out(audio_to_pwm)
+);
+
+// 开漏PWM DAC
+open_drain_pwm_dac U_PWM_DAC (
+    .clk(clk),
+    .rst(rst),
+    .audio_in(audio_to_pwm),
+    .pwm_out(AUD_PWM)  // 连接到A11引脚
+);
 
 endmodule
